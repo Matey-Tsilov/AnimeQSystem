@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeQSystem.Web", "AnimeQSystem.Web\AnimeQSystem.Web.csproj", "{CA28986A-240E-4B37-908C-8B2ABFBBA599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeQSystem.Common", "AnimeQSystem.Common\AnimeQSystem.Common.csproj", "{F0FE3873-0F97-48A6-83E7-D85D2B4105F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeQSystem.Web.Models", "AnimeQSystem.Web.Models\AnimeQSystem.Web.Models.csproj", "{03CA7059-20D4-4D75-A5AC-4B1F2569330C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeQSystem.Data.Models", "AnimeQSystem.Data.Models\AnimeQSystem.Data.Models.csproj", "{B7EDDC5E-BEAC-4AD7-9ADD-0047E9CAA191}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeQSystem.Data", "AnimeQSystem.Data\AnimeQSystem.Data.csproj", "{4CEA326F-3FAF-4FE8-B485-D0ACB9445ED9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeQSystem.Services", "AnimeQSystem.Services\AnimeQSystem.Services.csproj", "{E2881F75-6F2A-4EA6-8140-E1CBF60D807A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA28986A-240E-4B37-908C-8B2ABFBBA599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA28986A-240E-4B37-908C-8B2ABFBBA599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA28986A-240E-4B37-908C-8B2ABFBBA599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA28986A-240E-4B37-908C-8B2ABFBBA599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0FE3873-0F97-48A6-83E7-D85D2B4105F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0FE3873-0F97-48A6-83E7-D85D2B4105F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0FE3873-0F97-48A6-83E7-D85D2B4105F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0FE3873-0F97-48A6-83E7-D85D2B4105F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03CA7059-20D4-4D75-A5AC-4B1F2569330C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03CA7059-20D4-4D75-A5AC-4B1F2569330C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03CA7059-20D4-4D75-A5AC-4B1F2569330C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03CA7059-20D4-4D75-A5AC-4B1F2569330C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7EDDC5E-BEAC-4AD7-9ADD-0047E9CAA191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7EDDC5E-BEAC-4AD7-9ADD-0047E9CAA191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7EDDC5E-BEAC-4AD7-9ADD-0047E9CAA191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7EDDC5E-BEAC-4AD7-9ADD-0047E9CAA191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CEA326F-3FAF-4FE8-B485-D0ACB9445ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CEA326F-3FAF-4FE8-B485-D0ACB9445ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CEA326F-3FAF-4FE8-B485-D0ACB9445ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CEA326F-3FAF-4FE8-B485-D0ACB9445ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2881F75-6F2A-4EA6-8140-E1CBF60D807A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2881F75-6F2A-4EA6-8140-E1CBF60D807A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2881F75-6F2A-4EA6-8140-E1CBF60D807A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2881F75-6F2A-4EA6-8140-E1CBF60D807A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F302AEF1-28CD-4033-86CA-97325DD206D1}
+	EndGlobalSection
+EndGlobal
