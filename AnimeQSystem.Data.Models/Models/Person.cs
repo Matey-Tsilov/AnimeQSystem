@@ -1,9 +1,8 @@
-﻿using AniQu.Models.Enums;
-using AniQu.Models.Interfaces;
+﻿using AnimeQSystem.Data.Models.Enums;
 
-namespace AniQu.Models
+namespace AnimeQSystem.Data.Models
 {
-    public class Person : IPerson
+    public class Person
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string FirstName { get; set; } = null!;

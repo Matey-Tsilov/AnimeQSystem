@@ -1,4 +1,4 @@
-using AnimeQSystem.Web.Data;
+using AnimeQSystem.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

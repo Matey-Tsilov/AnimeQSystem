@@ -1,4 +1,4 @@
-﻿namespace AniQu.Models.AnimeSystem
+﻿namespace AnimeQSystem.Data.Models.AnimeSystem
 {
     public class Character : Person
     {

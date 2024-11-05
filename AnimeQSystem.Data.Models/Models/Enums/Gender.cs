@@ -1,4 +1,4 @@
-﻿namespace AniQu.Models.Enums
+﻿namespace AnimeQSystem.Data.Models.Enums
 {
     public enum Gender
     {

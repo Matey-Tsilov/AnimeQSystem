@@ -1,11 +1,12 @@
-﻿using AniQu.Models.Enums;
+﻿using AnimeQSystem.Data.Models.Enums;
 
-namespace AniQu.Models.QuizSystem
+namespace AnimeQSystem.Data.Models.QuizSystem
 {
     public class QuizQuestion
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Title { get; set; } = null!;
+        public string? Answer { get; set; }
         public QuizType QuizType { get; set; }
         public List<QuizOption> QuizOptions { get; set; } = new List<QuizOption>();
 

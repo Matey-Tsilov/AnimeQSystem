@@ -1,4 +1,4 @@
-﻿namespace AniQu.Models.QuizSystem
+﻿namespace AnimeQSystem.Data.Models.QuizSystem
 {
     public class Quiz
     {

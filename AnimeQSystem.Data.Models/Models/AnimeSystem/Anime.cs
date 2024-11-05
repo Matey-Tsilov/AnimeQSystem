@@ -1,6 +1,6 @@
-﻿using AniQu.Models.Enums;
+﻿using AnimeQSystem.Data.Models.Enums;
 
-namespace AniQu.Models.AnimeSystem
+namespace AnimeQSystem.Data.Models.AnimeSystem
 {
     public class Anime
     {

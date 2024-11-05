@@ -1,9 +1,9 @@
-﻿namespace AniQu.Models.QuizSystem
+﻿namespace AnimeQSystem.Data.Models.QuizSystem
 {
     public class QuizOption
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string OptionText { get; set; } = null!;
+        public string? OptionText { get; set; }
         public bool IsCorrect { get; set; }
 
         // Navigation Properties

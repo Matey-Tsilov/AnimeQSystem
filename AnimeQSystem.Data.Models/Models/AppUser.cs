@@ -1,14 +1,22 @@
-﻿namespace AniQu.Models
+﻿using AnimeQSystem.Data.Models.Enums;
+using Microsoft.AspNetCore.Identity;
+
+namespace AnimeQSystem.Data.Models
 {
-    public class AppUser : Person
+    public class AppUser : IdentityUser<Guid>
     {
+        public AppUser()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public int? Age { get; set; }
+        public Gender? Gender { get; set; }
         public int Points { get; set; }
-        public string UserName { get; set; } = null!;
-        public string Email { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public DateTime LastModified { get; set; }
         public bool IsDeleted { get; set; }
         public string Country { get; set; } = null!;
-        public string? Phone { get; set; }
     }
 }
