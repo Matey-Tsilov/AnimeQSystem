@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AnimeQSystem.Common\AnimeQSystem.Common.csproj" />
     <ProjectReference Include="..\AnimeQSystem.Data.Models\AnimeQSystem.Data.Models.csproj" />
   </ItemGroup>
 

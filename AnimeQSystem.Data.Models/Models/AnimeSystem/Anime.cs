@@ -17,9 +17,8 @@ namespace AnimeQSystem.Data.Models.AnimeSystem
         public virtual Writer Writer { get; set; } = null!;
         public Guid StudioId { get; set; }
         public virtual Studio Studio { get; set; } = null!;
-        public Guid MainCharacterId { get; set; }
-        public virtual Character MainCharacter { get; set; } = null!;
         public Guid GenreId { get; set; }
         public virtual Genre Genre { get; set; } = null!;
+        public virtual List<Character> Characters { get; set; } = new List<Character>();
     }
 }

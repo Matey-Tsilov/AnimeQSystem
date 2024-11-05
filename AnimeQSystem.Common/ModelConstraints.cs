@@ -26,6 +26,9 @@
             public const int AgeMax = 100_000;
 
             public const int HeightMin = 1;
+
+            public const int HairColorMinLength = 3;
+            public const int HairColorMaxLength = 50;
         }
 
         public static class AppUser

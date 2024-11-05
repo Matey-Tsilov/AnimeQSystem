@@ -7,5 +7,8 @@
         public string? Weapon { get; set; }
         public string? Weakness { get; set; }
 
+        // navigation properties
+        public int AnimeId { get; set; }
+        public virtual Anime Anime { get; set; }
     }
 }

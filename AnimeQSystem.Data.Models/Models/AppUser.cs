@@ -14,8 +14,8 @@ namespace AnimeQSystem.Data.Models
         public int? Age { get; set; }
         public Gender? Gender { get; set; }
         public int Points { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime LastModified { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime LastModified { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; }
         public string Country { get; set; } = null!;
     }

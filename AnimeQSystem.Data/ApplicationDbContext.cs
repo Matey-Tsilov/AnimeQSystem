@@ -3,6 +3,7 @@ using AnimeQSystem.Data.Models.AnimeSystem;
 using AnimeQSystem.Data.Models.QuizSystem;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace AnimeQSystem.Data
 {
@@ -18,6 +19,7 @@ namespace AnimeQSystem.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         public DbSet<Anime> Animes { get; set; }
