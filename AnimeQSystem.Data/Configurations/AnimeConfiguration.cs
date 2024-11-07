@@ -19,7 +19,7 @@ namespace AnimeQSystem.Data.Configurations
             builder.HasOne(a => a.Writer)
                 .WithMany(w => w.AnimesWritten)
                 .HasForeignKey(a => a.WriterId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(a => a.Studio)
                 .WithMany(s => s.Animes)

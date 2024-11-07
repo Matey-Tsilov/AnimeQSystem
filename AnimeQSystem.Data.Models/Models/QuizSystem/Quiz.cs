@@ -6,6 +6,6 @@
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public List<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
+        public virtual List<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
     }
 }

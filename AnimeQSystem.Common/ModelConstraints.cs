@@ -31,7 +31,7 @@
             public const int HairColorMaxLength = 50;
         }
 
-        public static class AppUser
+        public static class User
         {
             public const int FirstNameMinLength = 1;
             public const int FirstNameMaxLength = 50;

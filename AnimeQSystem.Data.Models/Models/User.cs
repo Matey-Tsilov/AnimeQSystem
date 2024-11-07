@@ -3,12 +3,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AnimeQSystem.Data.Models
 {
-    public class AppUser : IdentityUser<Guid>
+    public class User
     {
-        public AppUser()
-        {
-            this.Id = Guid.NewGuid();
-        }
+        public Guid Id = Guid.NewGuid();
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public int? Age { get; set; }
@@ -18,5 +15,9 @@ namespace AnimeQSystem.Data.Models
         public DateTime LastModified { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; }
         public string Country { get; set; } = null!;
+
+        // Navigation properties
+        public string IdentityUserId { get; set; } = null!;
+        public virtual IdentityUser IdentityUser { get; set; } = null!;
     }
 }

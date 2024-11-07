@@ -8,7 +8,7 @@ namespace AnimeQSystem.Data.Models.QuizSystem
         public string Title { get; set; } = null!;
         public string? Answer { get; set; }
         public QuizType QuizType { get; set; }
-        public List<QuizOption> QuizOptions { get; set; } = new List<QuizOption>();
+        public virtual List<QuizOption> QuizOptions { get; set; } = new List<QuizOption>();
 
         // Navigation Properties
         public Guid QuizId { get; set; }

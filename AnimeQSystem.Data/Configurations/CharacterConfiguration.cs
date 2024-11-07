@@ -12,6 +12,19 @@ namespace AnimeQSystem.Data.Configurations
             builder
                 .HasKey(a => a.Id);
 
+            builder.Property(x => x.FirstName)
+                .HasMaxLength(ModelConstraints.Person.FirstNameMaxLength)
+                .IsRequired();
+
+            builder.Property(x => x.LastName)
+                .HasMaxLength(ModelConstraints.Person.LastNameMaxLength);
+
+            builder.Property(x => x.Age)
+                .HasMaxLength(ModelConstraints.Person.AgeMax);
+
+            builder.Property(x => x.HairColor)
+                .HasMaxLength(ModelConstraints.Person.HairColorMaxLength);
+
             builder.Property(a => a.Skill)
                 .HasMaxLength(ModelConstraints.Character.SkillMaxLength)
                 .IsRequired();

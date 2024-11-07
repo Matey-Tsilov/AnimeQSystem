@@ -30,7 +30,7 @@ namespace AnimeQSystem.Data
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<QuizQuestion> QuizQuestions { get; set; }
         public DbSet<QuizOption> QuizOptions { get; set; }
-        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }
