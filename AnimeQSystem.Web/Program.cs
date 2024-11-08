@@ -1,4 +1,6 @@
 using AnimeQSystem.Data;
+using AnimeQSystem.Services.AutoMapper;
+using AnimeQSystem.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+// Go around application and collect all mappings into a AutoMapper config (runtime)
+AutoMapperConfig.RegisterMappings(typeof(index).Assembly);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
