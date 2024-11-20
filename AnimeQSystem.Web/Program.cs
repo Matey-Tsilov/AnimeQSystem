@@ -40,6 +40,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Automatic migration and seeding of data
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate();  // Apply any pending migrations
+}
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

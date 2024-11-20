@@ -8,7 +8,7 @@ namespace AnimeQSystem.Data.Models.AnimeSystem
         public string FirstName { get; set; } = null!;
         public string? LastName { get; set; }
         public Gender? Gender { get; set; }
-        public int? Age { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public int? Height { get; set; }
         public string? HairColor { get; set; }
         public virtual List<Anime> AnimesWritten { get; set; } = new List<Anime>();

@@ -20,7 +20,12 @@ namespace AnimeQSystem.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Apply all custom constraints
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            // Seed database if empty
+            DatabaseSeeder.Seed(modelBuilder);
         }
 
         public DbSet<Anime> Animes { get; set; }
