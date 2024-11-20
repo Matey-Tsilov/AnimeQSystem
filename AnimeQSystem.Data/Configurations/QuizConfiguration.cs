@@ -19,6 +19,11 @@ namespace AnimeQSystem.Data.Configurations
             builder.Property(x => x.Description)
                 .HasMaxLength(ModelConstraints.Quiz.DescriptionMaxLength)
                 .IsRequired();
+
+            builder.HasOne(x => x.Creator)
+                .WithMany(x => x.UserCreatedQuizzes)
+                .HasForeignKey(x => x.CreatorId);
+
         }
     }
 }

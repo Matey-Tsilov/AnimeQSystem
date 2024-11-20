@@ -1,5 +1,6 @@
 ﻿using AnimeQSystem.Data.Models;
 using AnimeQSystem.Data.Models.AnimeSystem;
+using AnimeQSystem.Data.Models.Models;
 using AnimeQSystem.Data.Models.QuizSystem;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,8 @@ namespace AnimeQSystem.Data
         public DbSet<QuizQuestion> QuizQuestions { get; set; }
         public DbSet<QuizOption> QuizOptions { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<QuizzesUsers> QuizzesUsers { get; set; }
+
 
     }
 }

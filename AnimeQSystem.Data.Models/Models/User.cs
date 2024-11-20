@@ -1,4 +1,6 @@
 ﻿using AnimeQSystem.Data.Models.Enums;
+using AnimeQSystem.Data.Models.Models;
+using AnimeQSystem.Data.Models.QuizSystem;
 using Microsoft.AspNetCore.Identity;
 
 namespace AnimeQSystem.Data.Models
@@ -19,5 +21,7 @@ namespace AnimeQSystem.Data.Models
         // Navigation properties
         public string IdentityUserId { get; set; } = null!;
         public virtual IdentityUser IdentityUser { get; set; } = null!;
+        public virtual List<QuizzesUsers> UserQuizzes { get; set; } = new List<QuizzesUsers>();
+        public virtual List<Quiz> UserCreatedQuizzes { get; set; } = new List<Quiz>();
     }
 }

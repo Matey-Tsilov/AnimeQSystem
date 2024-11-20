@@ -1,4 +1,6 @@
-﻿namespace AnimeQSystem.Data.Models.QuizSystem
+﻿using AnimeQSystem.Data.Models.Models;
+
+namespace AnimeQSystem.Data.Models.QuizSystem
 {
     public class Quiz
     {
@@ -6,6 +8,11 @@
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        // Navigation properties
+        public Guid CreatorId { get; set; }
+        public virtual User Creator { get; set; } = null!;
+        public virtual List<QuizzesUsers> QuizUsers { get; set; } = new List<QuizzesUsers>();
         public virtual List<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
     }
 }
