@@ -1,4 +1,10 @@
 using AnimeQSystem.Data;
+using AnimeQSystem.Data.Models;
+using AnimeQSystem.Data.Models.AnimeSystem;
+using AnimeQSystem.Data.Models.Models;
+using AnimeQSystem.Data.Models.QuizSystem;
+using AnimeQSystem.Data.Repositories.Interfaces;
+using AnimeQSystem.Data.Repository;
 using AnimeQSystem.Services.AutoMapper;
 using AnimeQSystem.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +21,19 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+#region All repositories
+builder.Services.AddScoped<IRepository<Anime, Guid>, BaseRepository<Anime, Guid>>();
+builder.Services.AddScoped<IRepository<User, Guid>, BaseRepository<User, Guid>>();
+builder.Services.AddScoped<IRepository<Studio, Guid>, BaseRepository<Studio, Guid>>();
+builder.Services.AddScoped<IRepository<Character, Guid>, BaseRepository<Character, Guid>>();
+builder.Services.AddScoped<IRepository<Genre, Guid>, BaseRepository<Genre, Guid>>();
+builder.Services.AddScoped<IRepository<Writer, Guid>, BaseRepository<Writer, Guid>>();
+builder.Services.AddScoped<IRepository<Quiz, Guid>, BaseRepository<Quiz, Guid>>();
+builder.Services.AddScoped<IRepository<QuizQuestion, Guid>, BaseRepository<QuizQuestion, Guid>>();
+builder.Services.AddScoped<IRepository<QuizOption, Guid>, BaseRepository<QuizOption, Guid>>();
+builder.Services.AddScoped<IRepository<QuizzesUsers, object>, BaseRepository<QuizzesUsers, object>>();
+#endregion
 
 var app = builder.Build();
 
