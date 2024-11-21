@@ -13,7 +13,7 @@ namespace AnimeQSystem.Data
         {
 
             #region Seed users
-            var password = "test1234"; // Your plain-text password
+            var password = "Test1234!"; // Your plain-text password
             // Password hasher
             var passwordHasher = new PasswordHasher<IdentityUser>();
             // Creating an empty user object (it doesn't need any properties except for the password itself)
@@ -29,40 +29,40 @@ namespace AnimeQSystem.Data
             Guid janesmithUserId = Guid.NewGuid();
             Guid alexjohnsonUserId = Guid.NewGuid();
 
+            var johndoeUser = new IdentityUser
+            {
+                Id = johndoeIdentityUserId,
+                UserName = "johndoe",
+                NormalizedUserName = "JOHNDOE",
+                Email = "johndoe@example.com",
+                NormalizedEmail = "JOHNDOE@EXAMPLE.COM",
+                EmailConfirmed = true
+            };
+            johndoeUser.PasswordHash = passwordHasher.HashPassword(johndoeUser, password);
 
-            // Seed IdentityUsers (you can change email and username as needed)
-            modelBuilder.Entity<IdentityUser>().HasData(
-                new IdentityUser
-                {
-                    Id = johndoeIdentityUserId,
-                    UserName = "johndoe",
-                    NormalizedUserName = "JOHNDOE",
-                    Email = "johndoe@example.com",
-                    NormalizedEmail = "JOHNDOE@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    PasswordHash = hashedPassword // Prehashed password (you can generate this via UserManager)
-                },
-                new IdentityUser
-                {
-                    Id = janesmithIdentityUserId,
-                    UserName = "janesmith",
-                    NormalizedUserName = "JANESMITH",
-                    Email = "janesmith@example.com",
-                    NormalizedEmail = "JANESMITH@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    PasswordHash = hashedPassword // Prehashed password
-                },
-                new IdentityUser
-                {
-                    Id = alexjohnsonIdentityUserId,
-                    UserName = "alexjohnson",
-                    NormalizedUserName = "ALEXJOHNSON",
-                    Email = "alexjohnson@example.com",
-                    NormalizedEmail = "ALEXJOHNSON@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    PasswordHash = hashedPassword // Prehashed password
-                }
-            );
+            var janesmithUser = new IdentityUser
+            {
+                Id = janesmithIdentityUserId,
+                UserName = "janesmith",
+                NormalizedUserName = "JANESMITH",
+                Email = "janesmith@example.com",
+                NormalizedEmail = "JANESMITH@EXAMPLE.COM",
+                EmailConfirmed = true
+            };
+            janesmithUser.PasswordHash = passwordHasher.HashPassword(janesmithUser, password);
+
+            var alexjohnsonUser = new IdentityUser
+            {
+                Id = alexjohnsonIdentityUserId,
+                UserName = "alexjohnson",
+                NormalizedUserName = "ALEXJOHNSON",
+                Email = "alexjohnson@example.com",
+                NormalizedEmail = "ALEXJOHNSON@EXAMPLE.COM",
+                EmailConfirmed = true
+            };
+            alexjohnsonUser.PasswordHash = passwordHasher.HashPassword(alexjohnsonUser, password);
+
+            modelBuilder.Entity<IdentityUser>().HasData(johndoeUser, janesmithUser, alexjohnsonUser);
 
             // Seed the related Users (if you want the relationship)
             modelBuilder.Entity<User>().HasData(

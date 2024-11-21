@@ -2,13 +2,14 @@
 using AnimeQSystem.Data.Models.AnimeSystem;
 using AnimeQSystem.Data.Models.Models;
 using AnimeQSystem.Data.Models.QuizSystem;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace AnimeQSystem.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public ApplicationDbContext() { }

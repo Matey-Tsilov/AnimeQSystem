@@ -17,7 +17,7 @@ namespace AnimeQSystem.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -73,42 +73,42 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("202e5a57-d1f0-4eeb-ba3d-cadb12c2f046"),
+                            Id = new Guid("d9d68329-bb49-4075-850d-2da01083f6b5"),
                             Episodes = 1,
-                            GenreId = new Guid("6bedbbed-a33c-4734-8f09-7dcbf0e1c5a1"),
+                            GenreId = new Guid("bf17fef6-72a7-41fc-9a9b-5251123b02a0"),
                             Rating = 5,
                             ReleaseDate = new DateTime(2001, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Seasons = 1,
                             StillOngoing = false,
-                            StudioId = new Guid("b722c905-7333-427c-9cb0-9665439a643f"),
+                            StudioId = new Guid("22354271-34e8-42e8-bd32-640f8853d975"),
                             Title = "Spirited Away",
-                            WriterId = new Guid("329233eb-e5b9-4b35-95de-29e9fdcbfbf8")
+                            WriterId = new Guid("bcd3f42d-b7fb-4157-9f82-333f17f5d2ed")
                         },
                         new
                         {
-                            Id = new Guid("d402c974-e9e4-46fb-b37e-2b98f5c11370"),
+                            Id = new Guid("b1ef98c2-eac2-471f-9506-16e213138f64"),
                             Episodes = 1,
-                            GenreId = new Guid("da926f91-813c-429f-93ce-1a610fb18d2b"),
+                            GenreId = new Guid("d613b8c3-6023-4538-8727-9e01403b0a66"),
                             Rating = 4,
                             ReleaseDate = new DateTime(2016, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Seasons = 1,
                             StillOngoing = false,
-                            StudioId = new Guid("fa923d27-c1d3-46cd-927a-e779953f81a7"),
+                            StudioId = new Guid("218784ff-aa54-4439-919f-f05fc3210d40"),
                             Title = "A Silent Voice",
-                            WriterId = new Guid("811e559a-bdb9-4d09-98be-9e39a54f34c6")
+                            WriterId = new Guid("77f46aac-1ba8-480a-9fac-e74c3aa30c01")
                         },
                         new
                         {
-                            Id = new Guid("f603ec70-750b-4104-a644-d6ac5bbc81c5"),
+                            Id = new Guid("0331ffb2-96a8-4eaf-be34-1a4682c1313a"),
                             Episodes = 1,
-                            GenreId = new Guid("eb26586b-2c5c-4779-886a-6f6152e6d4e4"),
+                            GenreId = new Guid("4b399db3-66c9-47c0-bbe4-9938c9c38466"),
                             Rating = 5,
                             ReleaseDate = new DateTime(2016, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Seasons = 1,
                             StillOngoing = false,
-                            StudioId = new Guid("6daec29e-4f30-44d0-920c-1f050636edf4"),
+                            StudioId = new Guid("3d4e1626-e4e9-47ba-be0a-e261a50c7c90"),
                             Title = "Your Name",
-                            WriterId = new Guid("eee1e809-b16b-44a9-a816-34bd6d56b0ec")
+                            WriterId = new Guid("9685aa54-aabf-4c6d-a1b1-bf5941034861")
                         });
                 });
 
@@ -169,8 +169,8 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("93fe7a4a-e5ca-44c3-a216-64e6c1770bd9"),
-                            AnimeId = new Guid("202e5a57-d1f0-4eeb-ba3d-cadb12c2f046"),
+                            Id = new Guid("43dcf69f-8d92-4a95-a38d-fdf28c45c981"),
+                            AnimeId = new Guid("d9d68329-bb49-4075-850d-2da01083f6b5"),
                             FirstName = "Chihiro",
                             IsMainCharacter = false,
                             LastName = "Ogino",
@@ -178,24 +178,24 @@ namespace AnimeQSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2af7c14c-fcad-437c-89ff-ee348d0eedcf"),
-                            AnimeId = new Guid("202e5a57-d1f0-4eeb-ba3d-cadb12c2f046"),
+                            Id = new Guid("19822615-8e5a-40f6-b367-45facb75dae3"),
+                            AnimeId = new Guid("d9d68329-bb49-4075-850d-2da01083f6b5"),
                             FirstName = "Haku",
                             IsMainCharacter = false,
                             Skill = "Turn into Dragon"
                         },
                         new
                         {
-                            Id = new Guid("4f777f86-0ad5-4563-b71f-b9bed5b9a38f"),
-                            AnimeId = new Guid("202e5a57-d1f0-4eeb-ba3d-cadb12c2f046"),
+                            Id = new Guid("98e6230d-f65c-44f4-a135-8f19641abf90"),
+                            AnimeId = new Guid("d9d68329-bb49-4075-850d-2da01083f6b5"),
                             FirstName = "No-Face",
                             IsMainCharacter = false,
                             Skill = "Making gold"
                         },
                         new
                         {
-                            Id = new Guid("cfd97a38-cdd0-4a7b-bad8-2319145b8822"),
-                            AnimeId = new Guid("d402c974-e9e4-46fb-b37e-2b98f5c11370"),
+                            Id = new Guid("2a919956-af57-4f75-90b7-fb816991e5ad"),
+                            AnimeId = new Guid("b1ef98c2-eac2-471f-9506-16e213138f64"),
                             FirstName = "Shoko",
                             IsMainCharacter = false,
                             LastName = "Nishimiya",
@@ -203,8 +203,8 @@ namespace AnimeQSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b6f3ac48-d9c4-49e6-a5f9-b168ed84edd8"),
-                            AnimeId = new Guid("d402c974-e9e4-46fb-b37e-2b98f5c11370"),
+                            Id = new Guid("853d6888-0fb3-4fa1-a4cd-5353d1a44561"),
+                            AnimeId = new Guid("b1ef98c2-eac2-471f-9506-16e213138f64"),
                             FirstName = "Shoya",
                             IsMainCharacter = false,
                             LastName = "Ishida",
@@ -212,8 +212,8 @@ namespace AnimeQSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("242fc014-ef5d-4ed9-83ff-c6e2be90b8b6"),
-                            AnimeId = new Guid("f603ec70-750b-4104-a644-d6ac5bbc81c5"),
+                            Id = new Guid("96ef8413-a427-42d1-9b63-b48ce3cb9491"),
+                            AnimeId = new Guid("0331ffb2-96a8-4eaf-be34-1a4682c1313a"),
                             FirstName = "Mitsuha",
                             IsMainCharacter = false,
                             LastName = "Miyamizu",
@@ -221,8 +221,8 @@ namespace AnimeQSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6dd62844-c8ad-43ca-a2a7-6e1df26bdffa"),
-                            AnimeId = new Guid("f603ec70-750b-4104-a644-d6ac5bbc81c5"),
+                            Id = new Guid("115fb0a9-518c-4346-994c-f50852105731"),
+                            AnimeId = new Guid("0331ffb2-96a8-4eaf-be34-1a4682c1313a"),
                             FirstName = "Taki",
                             IsMainCharacter = false,
                             LastName = "Tachibana",
@@ -253,31 +253,31 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6bedbbed-a33c-4734-8f09-7dcbf0e1c5a1"),
+                            Id = new Guid("bf17fef6-72a7-41fc-9a9b-5251123b02a0"),
                             Description = "Magical worlds and imaginative storytelling.",
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("da926f91-813c-429f-93ce-1a610fb18d2b"),
+                            Id = new Guid("d613b8c3-6023-4538-8727-9e01403b0a66"),
                             Description = "Emotionally intense and story-driven.",
                             Name = "Drama"
                         },
                         new
                         {
-                            Id = new Guid("eb26586b-2c5c-4779-886a-6f6152e6d4e4"),
+                            Id = new Guid("4b399db3-66c9-47c0-bbe4-9938c9c38466"),
                             Description = "Love and relationships.",
                             Name = "Romance"
                         },
                         new
                         {
-                            Id = new Guid("e74499d6-6592-4c1c-a99e-0500c915c028"),
+                            Id = new Guid("76b77f95-a441-4dbd-aa52-1343936236eb"),
                             Description = "Exciting journeys and discoveries.",
                             Name = "Adventure"
                         },
                         new
                         {
-                            Id = new Guid("430f3069-a397-461a-9dce-5cd9fd7ea516"),
+                            Id = new Guid("c861e1a0-3a19-44b8-afc8-2eba56f9c700"),
                             Description = "Everyday life experiences.",
                             Name = "Slice of Life"
                         });
@@ -304,31 +304,31 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b722c905-7333-427c-9cb0-9665439a643f"),
+                            Id = new Guid("22354271-34e8-42e8-bd32-640f8853d975"),
                             DateFounded = new DateTime(1985, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Studio Ghibli"
                         },
                         new
                         {
-                            Id = new Guid("fa923d27-c1d3-46cd-927a-e779953f81a7"),
+                            Id = new Guid("218784ff-aa54-4439-919f-f05fc3210d40"),
                             DateFounded = new DateTime(1981, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Kyoto Animation"
                         },
                         new
                         {
-                            Id = new Guid("6daec29e-4f30-44d0-920c-1f050636edf4"),
+                            Id = new Guid("3d4e1626-e4e9-47ba-be0a-e261a50c7c90"),
                             DateFounded = new DateTime(2007, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "CoMix Wave Films"
                         },
                         new
                         {
-                            Id = new Guid("42c9bc6c-6fbe-4fc0-9143-438047eee4e6"),
+                            Id = new Guid("af2dfa37-e909-4eb2-9d6b-556877691db2"),
                             DateFounded = new DateTime(1956, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Toho Animation"
                         },
                         new
                         {
-                            Id = new Guid("710fbaa2-690e-4331-9a34-8841dfe80dcf"),
+                            Id = new Guid("b21bd6d0-c322-4322-b7f1-4e18a2c3b132"),
                             DateFounded = new DateTime(1972, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Madhouse"
                         });
@@ -374,25 +374,25 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("329233eb-e5b9-4b35-95de-29e9fdcbfbf8"),
+                            Id = new Guid("bcd3f42d-b7fb-4157-9f82-333f17f5d2ed"),
                             DateOfBirth = new DateTime(1941, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FavoriteGenreId = new Guid("6bedbbed-a33c-4734-8f09-7dcbf0e1c5a1"),
+                            FavoriteGenreId = new Guid("bf17fef6-72a7-41fc-9a9b-5251123b02a0"),
                             FirstName = "Hayao",
                             LastName = "Miyazaki"
                         },
                         new
                         {
-                            Id = new Guid("811e559a-bdb9-4d09-98be-9e39a54f34c6"),
+                            Id = new Guid("77f46aac-1ba8-480a-9fac-e74c3aa30c01"),
                             DateOfBirth = new DateTime(1981, 5, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FavoriteGenreId = new Guid("6bedbbed-a33c-4734-8f09-7dcbf0e1c5a1"),
+                            FavoriteGenreId = new Guid("bf17fef6-72a7-41fc-9a9b-5251123b02a0"),
                             FirstName = "Naoko",
                             LastName = "Yamada"
                         },
                         new
                         {
-                            Id = new Guid("eee1e809-b16b-44a9-a816-34bd6d56b0ec"),
+                            Id = new Guid("9685aa54-aabf-4c6d-a1b1-bf5941034861"),
                             DateOfBirth = new DateTime(1973, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FavoriteGenreId = new Guid("eb26586b-2c5c-4779-886a-6f6152e6d4e4"),
+                            FavoriteGenreId = new Guid("4b399db3-66c9-47c0-bbe4-9938c9c38466"),
                             FirstName = "Makoto",
                             LastName = "Shinkai"
                         });
@@ -444,25 +444,25 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7d44ccc0-3135-4b04-91cc-ac7bed491e6d"),
-                            CreatedAt = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(6524),
-                            CreatorId = new Guid("f17ce454-1360-4689-8e5f-9814b0c7a0b1"),
+                            Id = new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"),
+                            CreatedAt = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(5296),
+                            CreatorId = new Guid("501b2641-10d8-473a-8053-dde0487f32e6"),
                             Description = "Test your knowledge about Spirited Away.",
                             Title = "Spirited Away Quiz"
                         },
                         new
                         {
-                            Id = new Guid("5e201ab6-f741-4a27-a323-d301d4beacf8"),
-                            CreatedAt = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(6556),
-                            CreatorId = new Guid("8d8261e0-c672-41c8-b31e-940f838b9c19"),
+                            Id = new Guid("b6ed8a74-be90-424c-b663-18829f5aaf28"),
+                            CreatedAt = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(5351),
+                            CreatorId = new Guid("3d412158-0be7-415e-86fc-e5a6745b5d81"),
                             Description = "Test your knowledge about A Silent Voice.",
                             Title = "A Silent Voice Quiz"
                         },
                         new
                         {
-                            Id = new Guid("6b398fe4-6ef4-442d-87f1-de79ceedc93e"),
-                            CreatedAt = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(6561),
-                            CreatorId = new Guid("bfd1a97f-8330-46c9-9905-bf885a3f76c9"),
+                            Id = new Guid("2415e303-6dbb-4f09-8f81-0ef085101d5f"),
+                            CreatedAt = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(5359),
+                            CreatorId = new Guid("cdef08bf-7968-4e48-8986-a38cbd4bd028"),
                             Description = "Test your knowledge about Your Name.",
                             Title = "Your Name Quiz"
                         });
@@ -493,115 +493,115 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("36d19cf4-281b-43ca-93af-45d6a9984005"),
+                            Id = new Guid("245aecb5-b9a2-4bbf-9c96-6be57ad3842c"),
                             IsCorrect = true,
                             OptionText = "Chihiro Ogino",
-                            QuizQuestionId = new Guid("67cb3af6-fc59-4cd2-9795-14a0e9983c10")
+                            QuizQuestionId = new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa")
                         },
                         new
                         {
-                            Id = new Guid("43ccdfb9-7910-4494-8e6f-9c426d4a67b0"),
+                            Id = new Guid("b6300004-e39d-4eb5-9758-ed1b65620d0a"),
                             IsCorrect = false,
                             OptionText = "Satsuki Kusakabe",
-                            QuizQuestionId = new Guid("67cb3af6-fc59-4cd2-9795-14a0e9983c10")
+                            QuizQuestionId = new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa")
                         },
                         new
                         {
-                            Id = new Guid("afd5b5fa-6e8f-4840-a1f7-d08b2ec43e3e"),
+                            Id = new Guid("b240e627-cb7f-44a8-867b-658dceb3a09f"),
                             IsCorrect = false,
                             OptionText = "Nausicaä",
-                            QuizQuestionId = new Guid("67cb3af6-fc59-4cd2-9795-14a0e9983c10")
+                            QuizQuestionId = new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa")
                         },
                         new
                         {
-                            Id = new Guid("e6d09574-5752-4646-a8e6-7d1235e8287a"),
+                            Id = new Guid("24d6706d-d4bd-4bc8-983d-537d569cd01c"),
                             IsCorrect = false,
                             OptionText = "Sophie Hatter",
-                            QuizQuestionId = new Guid("67cb3af6-fc59-4cd2-9795-14a0e9983c10")
+                            QuizQuestionId = new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa")
                         },
                         new
                         {
-                            Id = new Guid("b3e80635-a50f-43f2-927b-9d0f418fd9a3"),
+                            Id = new Guid("f403fdce-0946-42a8-aa3d-9ca8b7141e87"),
                             IsCorrect = true,
                             OptionText = "Yubaba",
-                            QuizQuestionId = new Guid("5b637830-a893-43c5-8cd1-3416317050e7")
+                            QuizQuestionId = new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57")
                         },
                         new
                         {
-                            Id = new Guid("bef8ab3a-a97c-4304-9b20-0001fc8c35b8"),
+                            Id = new Guid("64432bbe-2135-43cb-93b9-032fea8c7748"),
                             IsCorrect = false,
                             OptionText = "Zeniba",
-                            QuizQuestionId = new Guid("5b637830-a893-43c5-8cd1-3416317050e7")
+                            QuizQuestionId = new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57")
                         },
                         new
                         {
-                            Id = new Guid("2b91d97f-9267-42d3-8cd2-ff5947683d89"),
+                            Id = new Guid("097ec670-a099-465b-8e58-fede9343728c"),
                             IsCorrect = false,
                             OptionText = "Kamaji",
-                            QuizQuestionId = new Guid("5b637830-a893-43c5-8cd1-3416317050e7")
+                            QuizQuestionId = new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57")
                         },
                         new
                         {
-                            Id = new Guid("1a936afb-0f81-4eac-9894-da6e4a2f347e"),
+                            Id = new Guid("7962a535-d683-4c81-9b6b-3100c2f5a2d7"),
                             IsCorrect = false,
                             OptionText = "Haku",
-                            QuizQuestionId = new Guid("5b637830-a893-43c5-8cd1-3416317050e7")
+                            QuizQuestionId = new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57")
                         },
                         new
                         {
-                            Id = new Guid("040c14ad-807d-4ce0-81aa-d247161e9ffb"),
+                            Id = new Guid("b50a5ccd-17fb-494f-b600-38ab9ca960e0"),
                             IsCorrect = true,
                             OptionText = "Shoya Ishida",
-                            QuizQuestionId = new Guid("04b48086-084f-4a1e-af06-2fb7d84a2bae")
+                            QuizQuestionId = new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1")
                         },
                         new
                         {
-                            Id = new Guid("7d8e13dd-72dd-4014-80d3-a3f43c5236e5"),
+                            Id = new Guid("8033a842-348a-4301-93b1-b0bb20ccda8a"),
                             IsCorrect = false,
                             OptionText = "Shoko Nishimiya",
-                            QuizQuestionId = new Guid("04b48086-084f-4a1e-af06-2fb7d84a2bae")
+                            QuizQuestionId = new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1")
                         },
                         new
                         {
-                            Id = new Guid("690788bc-151f-4e13-9e7e-d88a139af425"),
+                            Id = new Guid("7d5a2d4a-6c0b-4f87-869c-bab5fbd8ee4c"),
                             IsCorrect = false,
                             OptionText = "Mitsuha Miyamizu",
-                            QuizQuestionId = new Guid("04b48086-084f-4a1e-af06-2fb7d84a2bae")
+                            QuizQuestionId = new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1")
                         },
                         new
                         {
-                            Id = new Guid("732f203f-0a41-4fe1-9850-cfe28d1855d3"),
+                            Id = new Guid("131d2407-381d-4a67-a4be-02e6dae2b119"),
                             IsCorrect = false,
                             OptionText = "Taki Tachibana",
-                            QuizQuestionId = new Guid("04b48086-084f-4a1e-af06-2fb7d84a2bae")
+                            QuizQuestionId = new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1")
                         },
                         new
                         {
-                            Id = new Guid("d4975182-0427-488f-9fc4-2bd5b7eceda3"),
+                            Id = new Guid("98f2b3dd-6785-494c-80dd-899134476652"),
                             IsCorrect = true,
                             OptionText = "Mitsuha Miyamizu",
-                            QuizQuestionId = new Guid("3248796b-1137-41bc-b3a8-9365073bbd52")
+                            QuizQuestionId = new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc")
                         },
                         new
                         {
-                            Id = new Guid("2ccf121c-ef2a-4fd7-b7ff-ce9be2df2355"),
+                            Id = new Guid("044127ec-193f-4cb5-a994-efd6f51e6c48"),
                             IsCorrect = true,
                             OptionText = "Taki Tachibana",
-                            QuizQuestionId = new Guid("3248796b-1137-41bc-b3a8-9365073bbd52")
+                            QuizQuestionId = new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc")
                         },
                         new
                         {
-                            Id = new Guid("03571285-7761-4bb9-abbe-e0d2fdb2d290"),
+                            Id = new Guid("aacb4c0b-bf9d-4a35-904d-7cfe29c6428d"),
                             IsCorrect = false,
                             OptionText = "Shoya Ishida",
-                            QuizQuestionId = new Guid("3248796b-1137-41bc-b3a8-9365073bbd52")
+                            QuizQuestionId = new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc")
                         },
                         new
                         {
-                            Id = new Guid("3ff05e53-8380-43e2-8a3f-8141cbea4186"),
+                            Id = new Guid("563bb9f1-28aa-48e2-913b-4e49637e2892"),
                             IsCorrect = false,
                             OptionText = "Chihiro Ogino",
-                            QuizQuestionId = new Guid("3248796b-1137-41bc-b3a8-9365073bbd52")
+                            QuizQuestionId = new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc")
                         });
                 });
 
@@ -634,69 +634,69 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("67cb3af6-fc59-4cd2-9795-14a0e9983c10"),
-                            QuizId = new Guid("7d44ccc0-3135-4b04-91cc-ac7bed491e6d"),
+                            Id = new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa"),
+                            QuizId = new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"),
                             QuizType = 1,
                             Title = "What is the name of the main protagonist in Spirited Away?"
                         },
                         new
                         {
-                            Id = new Guid("5b637830-a893-43c5-8cd1-3416317050e7"),
-                            QuizId = new Guid("7d44ccc0-3135-4b04-91cc-ac7bed491e6d"),
+                            Id = new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57"),
+                            QuizId = new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"),
                             QuizType = 1,
                             Title = "Who runs the bathhouse in Spirited Away?"
                         },
                         new
                         {
-                            Id = new Guid("ea3bd8e0-96e6-410a-a13a-bffa23f4ba43"),
+                            Id = new Guid("3961349f-35ed-4cfd-9420-b880c99a9cf4"),
                             Answer = "Her real name",
-                            QuizId = new Guid("7d44ccc0-3135-4b04-91cc-ac7bed491e6d"),
+                            QuizId = new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"),
                             QuizType = 2,
                             Title = "What does Chihiro need to remember to return home?"
                         },
                         new
                         {
-                            Id = new Guid("e80e95e7-d4cd-4cdf-b75d-cdcb20ddb1ef"),
+                            Id = new Guid("ab5a800a-f0aa-4ab5-9e39-e88c3d42cc83"),
                             Answer = "False",
-                            QuizId = new Guid("7d44ccc0-3135-4b04-91cc-ac7bed491e6d"),
+                            QuizId = new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"),
                             QuizType = 0,
                             Title = "True or False: No-Face is a spirit who tries to eat Chihiro."
                         },
                         new
                         {
-                            Id = new Guid("04b48086-084f-4a1e-af06-2fb7d84a2bae"),
-                            QuizId = new Guid("5e201ab6-f741-4a27-a323-d301d4beacf8"),
+                            Id = new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1"),
+                            QuizId = new Guid("b6ed8a74-be90-424c-b663-18829f5aaf28"),
                             QuizType = 1,
                             Title = "What is the name of the main protagonist in A Silent Voice?"
                         },
                         new
                         {
-                            Id = new Guid("50d6b8ef-2ee2-4930-906b-4be181d6ccec"),
+                            Id = new Guid("197bc952-c537-4552-b034-7ebc3f8007fe"),
                             Answer = "True",
-                            QuizId = new Guid("5e201ab6-f741-4a27-a323-d301d4beacf8"),
+                            QuizId = new Guid("b6ed8a74-be90-424c-b663-18829f5aaf28"),
                             QuizType = 0,
                             Title = "True or False: Shoya Ishida is a former bully in A Silent Voice."
                         },
                         new
                         {
-                            Id = new Guid("7a9c3e97-6b5d-41be-ac92-c6079962f6e9"),
+                            Id = new Guid("bee83cbd-697f-4a17-aa52-cc695fbb1e28"),
                             Answer = "Shoko Nishimiya",
-                            QuizId = new Guid("5e201ab6-f741-4a27-a323-d301d4beacf8"),
+                            QuizId = new Guid("b6ed8a74-be90-424c-b663-18829f5aaf28"),
                             QuizType = 2,
                             Title = "Who does Shoya Ishida try to make amends with?"
                         },
                         new
                         {
-                            Id = new Guid("3248796b-1137-41bc-b3a8-9365073bbd52"),
-                            QuizId = new Guid("6b398fe4-6ef4-442d-87f1-de79ceedc93e"),
+                            Id = new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc"),
+                            QuizId = new Guid("2415e303-6dbb-4f09-8f81-0ef085101d5f"),
                             QuizType = 1,
                             Title = "What is the name of the main character in Your Name?"
                         },
                         new
                         {
-                            Id = new Guid("428cdcfb-2d29-4e20-9160-d091ad892e6c"),
+                            Id = new Guid("827b6e6a-81fe-4490-8e49-629fedb5b5b1"),
                             Answer = "True",
-                            QuizId = new Guid("6b398fe4-6ef4-442d-87f1-de79ceedc93e"),
+                            QuizId = new Guid("2415e303-6dbb-4f09-8f81-0ef085101d5f"),
                             QuizType = 0,
                             Title = "True or False: Taki and Mitsuha swap bodies in Your Name."
                         });
@@ -756,43 +756,43 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f17ce454-1360-4689-8e5f-9814b0c7a0b1"),
+                            Id = new Guid("501b2641-10d8-473a-8053-dde0487f32e6"),
                             Age = 25,
                             Country = "USA",
-                            CreatedAt = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(4755),
+                            CreatedAt = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3808),
                             FirstName = "John",
                             Gender = 0,
-                            IdentityUserId = "3157c049-679e-41ba-9269-118d671346b1",
+                            IdentityUserId = "f48ba418-31fc-4cc4-adda-5d6ae18d4ffa",
                             IsDeleted = false,
-                            LastModified = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(4757),
+                            LastModified = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3810),
                             LastName = "Doe",
                             Points = 1200
                         },
                         new
                         {
-                            Id = new Guid("bfd1a97f-8330-46c9-9905-bf885a3f76c9"),
+                            Id = new Guid("cdef08bf-7968-4e48-8986-a38cbd4bd028"),
                             Age = 30,
                             Country = "Canada",
-                            CreatedAt = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(4775),
+                            CreatedAt = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3828),
                             FirstName = "Jane",
                             Gender = 1,
-                            IdentityUserId = "d64e070a-7acd-4290-8f30-a1ad13d465b0",
+                            IdentityUserId = "f0394f41-3421-48a9-bd2d-ee3cf0f706a9",
                             IsDeleted = false,
-                            LastModified = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(4777),
+                            LastModified = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3830),
                             LastName = "Smith",
                             Points = 1500
                         },
                         new
                         {
-                            Id = new Guid("8d8261e0-c672-41c8-b31e-940f838b9c19"),
+                            Id = new Guid("3d412158-0be7-415e-86fc-e5a6745b5d81"),
                             Age = 22,
                             Country = "UK",
-                            CreatedAt = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(4794),
+                            CreatedAt = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3943),
                             FirstName = "Alex",
                             Gender = 2,
-                            IdentityUserId = "afea43d5-db77-40d6-bd23-3d3577c529ee",
+                            IdentityUserId = "6b07025f-873b-4b01-84ed-a1248c27fb2a",
                             IsDeleted = false,
-                            LastModified = new DateTime(2024, 11, 20, 21, 31, 43, 131, DateTimeKind.Local).AddTicks(4796),
+                            LastModified = new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3945),
                             LastName = "Johnson",
                             Points = 800
                         });
@@ -917,49 +917,49 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3157c049-679e-41ba-9269-118d671346b1",
+                            Id = "f48ba418-31fc-4cc4-adda-5d6ae18d4ffa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5daf15e6-291b-46dd-9526-7d6259719492",
+                            ConcurrencyStamp = "a593e0f4-551b-42c8-9b57-781307ee9294",
                             Email = "johndoe@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHNDOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHrJQDTRi1pkqrnAWT5JfOvW1ZVeedEci4G+OZe5+CK+QcXk3//Vkks65LFk8YFVIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDE1sUjqRt0OcnIFr2Gkt6MIxp78Ycfndk6Mjd5x4DmawQlrZG/rnto376IY2ObMlw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "faa2833b-4170-4786-b563-ffd473c1a363",
+                            SecurityStamp = "fad93452-3a87-4309-8776-4d7907f65329",
                             TwoFactorEnabled = false,
                             UserName = "johndoe"
                         },
                         new
                         {
-                            Id = "d64e070a-7acd-4290-8f30-a1ad13d465b0",
+                            Id = "f0394f41-3421-48a9-bd2d-ee3cf0f706a9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc491f98-8dbd-43be-871a-621c0f48d18d",
+                            ConcurrencyStamp = "e4e33082-cd82-48a6-992d-60fa1537fa7b",
                             Email = "janesmith@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "JANESMITH@EXAMPLE.COM",
                             NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHrJQDTRi1pkqrnAWT5JfOvW1ZVeedEci4G+OZe5+CK+QcXk3//Vkks65LFk8YFVIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJUcVHIIOEH72zPaiPAWQn8IZR2BX0QteQgu0rkZxhWElPQ3NO3fRQ87VuOGP1+aNw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a700e63c-9370-4189-88e5-9af8a836b34e",
+                            SecurityStamp = "f18df274-5ba2-44c1-a1f9-ada8f4a7f563",
                             TwoFactorEnabled = false,
                             UserName = "janesmith"
                         },
                         new
                         {
-                            Id = "afea43d5-db77-40d6-bd23-3d3577c529ee",
+                            Id = "6b07025f-873b-4b01-84ed-a1248c27fb2a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cfe24bbc-c574-4e3a-a435-2de8cbd7868f",
+                            ConcurrencyStamp = "224bf35b-ea89-43b0-8100-24c675d866ec",
                             Email = "alexjohnson@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ALEXJOHNSON@EXAMPLE.COM",
                             NormalizedUserName = "ALEXJOHNSON",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHrJQDTRi1pkqrnAWT5JfOvW1ZVeedEci4G+OZe5+CK+QcXk3//Vkks65LFk8YFVIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELHuEOVSAeXgGe6t7FZBDpHZNQ57qibYVLS5tmISUT5+7vytimWyvCTwRqkCpPEWYQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f3f20eef-2e85-4d5d-b682-fa6c0285efa7",
+                            SecurityStamp = "009818cc-0f87-4d96-98cc-31b2e57a1651",
                             TwoFactorEnabled = false,
                             UserName = "alexjohnson"
                         });
@@ -1110,7 +1110,7 @@ namespace AnimeQSystem.Data.Migrations
                     b.HasOne("AnimeQSystem.Data.Models.User", "User")
                         .WithMany("UserQuizzes")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Quiz");

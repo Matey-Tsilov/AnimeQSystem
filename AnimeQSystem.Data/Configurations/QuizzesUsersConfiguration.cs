@@ -15,7 +15,8 @@ namespace AnimeQSystem.Data.Configurations
             // We can check what kind of UserQuizzes were taken by this user
             builder.HasOne(qu => qu.User) // A QuizUser has one User
                 .WithMany(u => u.UserQuizzes) // A User can have many Quizzes taken
-                .HasForeignKey(qu => qu.UserId); // Foreign key for User in the QuizUser table
+                .HasForeignKey(qu => qu.UserId) // Foreign key for User in the QuizUser table
+                .OnDelete(DeleteBehavior.NoAction);
 
             // We can check what kind of QuizUsers have taken this quiz
             builder.HasOne(qu => qu.Quiz) // A QuizUser has one Quiz
