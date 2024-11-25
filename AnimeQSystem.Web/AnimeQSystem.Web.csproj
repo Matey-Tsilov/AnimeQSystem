@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AnimeQSystem.Data\AnimeQSystem.Data.csproj" />
     <ProjectReference Include="..\AnimeQSystem.Services\AnimeQSystem.Services.csproj" />
     <ProjectReference Include="..\AnimeQSystem.Web.Infrastructure\AnimeQSystem.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\AnimeQSystem.Web.Models\AnimeQSystem.Web.Models.csproj" />
