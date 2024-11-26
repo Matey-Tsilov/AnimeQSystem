@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Reflection;
 
-namespace AnimeQSystem.Services.AutoMapper
+namespace AnimeQSystem.Services.Mapping
 {
     public class AutoMapperConfig
     {

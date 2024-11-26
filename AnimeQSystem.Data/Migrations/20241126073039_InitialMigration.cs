@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AnimeQSystem.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class IntialAndSeed : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -243,6 +243,8 @@ namespace AnimeQSystem.Data.Migrations
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RewardPoints = table.Column<int>(type: "int", nullable: false),
                     CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -390,9 +392,9 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6b07025f-873b-4b01-84ed-a1248c27fb2a", 0, "224bf35b-ea89-43b0-8100-24c675d866ec", "alexjohnson@example.com", true, false, null, "ALEXJOHNSON@EXAMPLE.COM", "ALEXJOHNSON", "AQAAAAIAAYagAAAAELHuEOVSAeXgGe6t7FZBDpHZNQ57qibYVLS5tmISUT5+7vytimWyvCTwRqkCpPEWYQ==", null, false, "009818cc-0f87-4d96-98cc-31b2e57a1651", false, "alexjohnson" },
-                    { "f0394f41-3421-48a9-bd2d-ee3cf0f706a9", 0, "e4e33082-cd82-48a6-992d-60fa1537fa7b", "janesmith@example.com", true, false, null, "JANESMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEJUcVHIIOEH72zPaiPAWQn8IZR2BX0QteQgu0rkZxhWElPQ3NO3fRQ87VuOGP1+aNw==", null, false, "f18df274-5ba2-44c1-a1f9-ada8f4a7f563", false, "janesmith" },
-                    { "f48ba418-31fc-4cc4-adda-5d6ae18d4ffa", 0, "a593e0f4-551b-42c8-9b57-781307ee9294", "johndoe@example.com", true, false, null, "JOHNDOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEDE1sUjqRt0OcnIFr2Gkt6MIxp78Ycfndk6Mjd5x4DmawQlrZG/rnto376IY2ObMlw==", null, false, "fad93452-3a87-4309-8776-4d7907f65329", false, "johndoe" }
+                    { "2c975070-77f2-433d-a877-b6dca94eae24", 0, "a7de89d0-808b-4a14-a4ce-5085fa9fc059", "alexjohnson@example.com", true, false, null, "ALEXJOHNSON@EXAMPLE.COM", "ALEXJOHNSON", "AQAAAAIAAYagAAAAEHWVN8ToEC6lRJsTcVq/P4q4dtCmhAalhJQ3WxtCjT0kElVNR1Wcv+fYNyTP5B1AMQ==", null, false, "ac680fe1-6cd3-462d-9cf4-6a3924e78cbc", false, "alexjohnson" },
+                    { "4fe8827a-ec44-4930-84c6-ef1392bc4b15", 0, "2cf0c601-76bf-4a32-9856-f7915283783e", "johndoe@example.com", true, false, null, "JOHNDOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEMavNXV1kv6aXjMOFKtCXBmKHt2FLyGJjrN745oRpFOoAnNkJ6yQdLJuhSMk2J8c7g==", null, false, "f22f2583-a5cc-4155-92c0-9082cf64cdca", false, "johndoe" },
+                    { "f80623e1-5be8-4f52-8995-18610b7a3ac6", 0, "e83ff8fb-f8a5-4d47-9332-471af3998ff3", "janesmith@example.com", true, false, null, "JANESMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEIeF3EwWWdXTUnUHcoC237wRtxUWpzmEKaRpZOh/bkfmwA6EnSsyFYNcVeQIxkd70g==", null, false, "94f7d2f3-70a7-4872-9531-798f30b8ac00", false, "janesmith" }
                 });
 
             migrationBuilder.InsertData(
@@ -400,11 +402,11 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("4b399db3-66c9-47c0-bbe4-9938c9c38466"), "Love and relationships.", "Romance" },
-                    { new Guid("76b77f95-a441-4dbd-aa52-1343936236eb"), "Exciting journeys and discoveries.", "Adventure" },
-                    { new Guid("bf17fef6-72a7-41fc-9a9b-5251123b02a0"), "Magical worlds and imaginative storytelling.", "Fantasy" },
-                    { new Guid("c861e1a0-3a19-44b8-afc8-2eba56f9c700"), "Everyday life experiences.", "Slice of Life" },
-                    { new Guid("d613b8c3-6023-4538-8727-9e01403b0a66"), "Emotionally intense and story-driven.", "Drama" }
+                    { new Guid("58764574-5503-4df2-875c-aabce5c9b812"), "Emotionally intense and story-driven.", "Drama" },
+                    { new Guid("6995299f-a1e8-4a98-a667-6dffa8b7043c"), "Exciting journeys and discoveries.", "Adventure" },
+                    { new Guid("6ad70890-0a8b-4c9b-bb8b-7460ecd82bd2"), "Love and relationships.", "Romance" },
+                    { new Guid("bd178283-ea78-4f9c-bfc9-d89477285329"), "Everyday life experiences.", "Slice of Life" },
+                    { new Guid("cd24a8ef-51e6-41e4-b680-3c805ce7b3fc"), "Magical worlds and imaginative storytelling.", "Fantasy" }
                 });
 
             migrationBuilder.InsertData(
@@ -412,11 +414,11 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "DateFounded", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("218784ff-aa54-4439-919f-f05fc3210d40"), new DateTime(1981, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Kyoto Animation" },
-                    { new Guid("22354271-34e8-42e8-bd32-640f8853d975"), new DateTime(1985, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Studio Ghibli" },
-                    { new Guid("3d4e1626-e4e9-47ba-be0a-e261a50c7c90"), new DateTime(2007, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "CoMix Wave Films" },
-                    { new Guid("af2dfa37-e909-4eb2-9d6b-556877691db2"), new DateTime(1956, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Toho Animation" },
-                    { new Guid("b21bd6d0-c322-4322-b7f1-4e18a2c3b132"), new DateTime(1972, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Madhouse" }
+                    { new Guid("00bf10d5-4e17-41ff-a7a7-fa09ead46725"), new DateTime(1981, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Kyoto Animation" },
+                    { new Guid("25673303-ddf8-436f-891f-f41d60480b93"), new DateTime(2007, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "CoMix Wave Films" },
+                    { new Guid("90dc3d4a-9669-4b79-bbe3-e98ec923d660"), new DateTime(1985, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Studio Ghibli" },
+                    { new Guid("e829851e-a21f-4368-a98f-4c57b6d1756b"), new DateTime(1972, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Madhouse" },
+                    { new Guid("ec20a4c9-cf8c-4513-814f-f0dac802c8e5"), new DateTime(1956, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Toho Animation" }
                 });
 
             migrationBuilder.InsertData(
@@ -424,9 +426,9 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "Age", "Country", "CreatedAt", "FirstName", "Gender", "IdentityUserId", "IsDeleted", "LastModified", "LastName", "Points" },
                 values: new object[,]
                 {
-                    { new Guid("3d412158-0be7-415e-86fc-e5a6745b5d81"), 22, "UK", new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3943), "Alex", 2, "6b07025f-873b-4b01-84ed-a1248c27fb2a", false, new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3945), "Johnson", 800 },
-                    { new Guid("501b2641-10d8-473a-8053-dde0487f32e6"), 25, "USA", new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3808), "John", 0, "f48ba418-31fc-4cc4-adda-5d6ae18d4ffa", false, new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3810), "Doe", 1200 },
-                    { new Guid("cdef08bf-7968-4e48-8986-a38cbd4bd028"), 30, "Canada", new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3828), "Jane", 1, "f0394f41-3421-48a9-bd2d-ee3cf0f706a9", false, new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(3830), "Smith", 1500 }
+                    { new Guid("11a9a1fd-3d87-4959-895f-976676ecaa9e"), 30, "Canada", new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(5467), "Jane", 1, "f80623e1-5be8-4f52-8995-18610b7a3ac6", false, new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(5469), "Smith", 1500 },
+                    { new Guid("1edeaa7d-d8c0-41b3-bc7d-d0024b77e944"), 22, "UK", new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(5486), "Alex", 2, "2c975070-77f2-433d-a877-b6dca94eae24", false, new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(5488), "Johnson", 800 },
+                    { new Guid("e15483f1-feaf-4a27-89a5-c1e6c7c00f3f"), 25, "USA", new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(5448), "John", 0, "4fe8827a-ec44-4930-84c6-ef1392bc4b15", false, new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(5449), "Doe", 1200 }
                 });
 
             migrationBuilder.InsertData(
@@ -434,9 +436,9 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "DateOfBirth", "FavoriteGenreId", "FirstName", "Gender", "HairColor", "Height", "LastName" },
                 values: new object[,]
                 {
-                    { new Guid("77f46aac-1ba8-480a-9fac-e74c3aa30c01"), new DateTime(1981, 5, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("bf17fef6-72a7-41fc-9a9b-5251123b02a0"), "Naoko", null, null, null, "Yamada" },
-                    { new Guid("9685aa54-aabf-4c6d-a1b1-bf5941034861"), new DateTime(1973, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("4b399db3-66c9-47c0-bbe4-9938c9c38466"), "Makoto", null, null, null, "Shinkai" },
-                    { new Guid("bcd3f42d-b7fb-4157-9f82-333f17f5d2ed"), new DateTime(1941, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("bf17fef6-72a7-41fc-9a9b-5251123b02a0"), "Hayao", null, null, null, "Miyazaki" }
+                    { new Guid("4795ae85-3aa5-4ff5-b955-ed23ade08009"), new DateTime(1981, 5, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("cd24a8ef-51e6-41e4-b680-3c805ce7b3fc"), "Naoko", null, null, null, "Yamada" },
+                    { new Guid("9a70d51d-8e5b-49e0-9cdf-59654265fe8e"), new DateTime(1941, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("cd24a8ef-51e6-41e4-b680-3c805ce7b3fc"), "Hayao", null, null, null, "Miyazaki" },
+                    { new Guid("c02e5d86-09b1-4360-b028-0d458eaed72a"), new DateTime(1973, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("6ad70890-0a8b-4c9b-bb8b-7460ecd82bd2"), "Makoto", null, null, null, "Shinkai" }
                 });
 
             migrationBuilder.InsertData(
@@ -444,19 +446,19 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "Episodes", "GenreId", "Rating", "ReleaseDate", "Seasons", "StillOngoing", "StudioId", "Title", "WriterId" },
                 values: new object[,]
                 {
-                    { new Guid("0331ffb2-96a8-4eaf-be34-1a4682c1313a"), 1, new Guid("4b399db3-66c9-47c0-bbe4-9938c9c38466"), 5, new DateTime(2016, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, new Guid("3d4e1626-e4e9-47ba-be0a-e261a50c7c90"), "Your Name", new Guid("9685aa54-aabf-4c6d-a1b1-bf5941034861") },
-                    { new Guid("b1ef98c2-eac2-471f-9506-16e213138f64"), 1, new Guid("d613b8c3-6023-4538-8727-9e01403b0a66"), 4, new DateTime(2016, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, new Guid("218784ff-aa54-4439-919f-f05fc3210d40"), "A Silent Voice", new Guid("77f46aac-1ba8-480a-9fac-e74c3aa30c01") },
-                    { new Guid("d9d68329-bb49-4075-850d-2da01083f6b5"), 1, new Guid("bf17fef6-72a7-41fc-9a9b-5251123b02a0"), 5, new DateTime(2001, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, new Guid("22354271-34e8-42e8-bd32-640f8853d975"), "Spirited Away", new Guid("bcd3f42d-b7fb-4157-9f82-333f17f5d2ed") }
+                    { new Guid("11b19f8e-d2a6-45ac-bff3-b655c79bfe90"), 1, new Guid("cd24a8ef-51e6-41e4-b680-3c805ce7b3fc"), 5, new DateTime(2001, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, new Guid("90dc3d4a-9669-4b79-bbe3-e98ec923d660"), "Spirited Away", new Guid("9a70d51d-8e5b-49e0-9cdf-59654265fe8e") },
+                    { new Guid("68df0528-247a-4576-b1b0-386e5d0c8410"), 1, new Guid("58764574-5503-4df2-875c-aabce5c9b812"), 4, new DateTime(2016, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, new Guid("00bf10d5-4e17-41ff-a7a7-fa09ead46725"), "A Silent Voice", new Guid("4795ae85-3aa5-4ff5-b955-ed23ade08009") },
+                    { new Guid("6b6a5c63-6514-43e2-a1af-ef691d53fdb4"), 1, new Guid("6ad70890-0a8b-4c9b-bb8b-7460ecd82bd2"), 5, new DateTime(2016, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, new Guid("25673303-ddf8-436f-891f-f41d60480b93"), "Your Name", new Guid("c02e5d86-09b1-4360-b028-0d458eaed72a") }
                 });
 
             migrationBuilder.InsertData(
                 table: "Quizzes",
-                columns: new[] { "Id", "CreatedAt", "CreatorId", "Description", "Title" },
+                columns: new[] { "Id", "CreatedAt", "CreatorId", "Description", "ImageUrl", "RewardPoints", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("2415e303-6dbb-4f09-8f81-0ef085101d5f"), new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(5359), new Guid("cdef08bf-7968-4e48-8986-a38cbd4bd028"), "Test your knowledge about Your Name.", "Your Name Quiz" },
-                    { new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"), new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(5296), new Guid("501b2641-10d8-473a-8053-dde0487f32e6"), "Test your knowledge about Spirited Away.", "Spirited Away Quiz" },
-                    { new Guid("b6ed8a74-be90-424c-b663-18829f5aaf28"), new DateTime(2024, 11, 21, 19, 17, 14, 277, DateTimeKind.Local).AddTicks(5351), new Guid("3d412158-0be7-415e-86fc-e5a6745b5d81"), "Test your knowledge about A Silent Voice.", "A Silent Voice Quiz" }
+                    { new Guid("4d6be2f6-2763-4f64-ad00-535b7f3918c3"), new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(7370), new Guid("11a9a1fd-3d87-4959-895f-976676ecaa9e"), "Test your knowledge about Your Name.", "https://images4.alphacoders.com/687/687987.jpg", 100, "Your Name Quiz" },
+                    { new Guid("70bd26b1-9522-4391-844f-3039a0080707"), new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(7325), new Guid("1edeaa7d-d8c0-41b3-bc7d-d0024b77e944"), "Test your knowledge about A Silent Voice.", "https://lwlies.com/wp-content/uploads/2017/03/a-silent-voice.jpg", 100, "A Silent Voice Quiz" },
+                    { new Guid("e5252b94-99cb-4d2c-bdba-730e079f1b46"), new DateTime(2024, 11, 26, 9, 30, 38, 322, DateTimeKind.Local).AddTicks(7300), new Guid("e15483f1-feaf-4a27-89a5-c1e6c7c00f3f"), "Test your knowledge about Spirited Away.", "https://images2.alphacoders.com/131/1311453.jpg", 100, "Spirited Away Quiz" }
                 });
 
             migrationBuilder.InsertData(
@@ -464,13 +466,13 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "Age", "AnimeId", "FirstName", "Gender", "HairColor", "Height", "IsMainCharacter", "LastName", "Skill", "Weakness", "Weapon" },
                 values: new object[,]
                 {
-                    { new Guid("115fb0a9-518c-4346-994c-f50852105731"), null, new Guid("0331ffb2-96a8-4eaf-be34-1a4682c1313a"), "Taki", null, null, null, false, "Tachibana", "Get back in time", null, null },
-                    { new Guid("19822615-8e5a-40f6-b367-45facb75dae3"), null, new Guid("d9d68329-bb49-4075-850d-2da01083f6b5"), "Haku", null, null, null, false, null, "Turn into Dragon", null, null },
-                    { new Guid("2a919956-af57-4f75-90b7-fb816991e5ad"), null, new Guid("b1ef98c2-eac2-471f-9506-16e213138f64"), "Shoko", null, null, null, false, "Nishimiya", "Sign language", null, null },
-                    { new Guid("43dcf69f-8d92-4a95-a38d-fdf28c45c981"), null, new Guid("d9d68329-bb49-4075-850d-2da01083f6b5"), "Chihiro", null, null, null, false, "Ogino", "Being happy", null, null },
-                    { new Guid("853d6888-0fb3-4fa1-a4cd-5353d1a44561"), null, new Guid("b1ef98c2-eac2-471f-9506-16e213138f64"), "Shoya", null, null, null, false, "Ishida", "Cute smile", null, null },
-                    { new Guid("96ef8413-a427-42d1-9b63-b48ce3cb9491"), null, new Guid("0331ffb2-96a8-4eaf-be34-1a4682c1313a"), "Mitsuha", null, null, null, false, "Miyamizu", "Get back in time", null, null },
-                    { new Guid("98e6230d-f65c-44f4-a135-8f19641abf90"), null, new Guid("d9d68329-bb49-4075-850d-2da01083f6b5"), "No-Face", null, null, null, false, null, "Making gold", null, null }
+                    { new Guid("13e5faa2-ff28-4e0f-b4a2-9b820428d315"), null, new Guid("68df0528-247a-4576-b1b0-386e5d0c8410"), "Shoya", null, null, null, false, "Ishida", "Cute smile", null, null },
+                    { new Guid("5a2f88cc-244c-421d-8b7a-01d0e41245e9"), null, new Guid("11b19f8e-d2a6-45ac-bff3-b655c79bfe90"), "Haku", null, null, null, false, null, "Turn into Dragon", null, null },
+                    { new Guid("6f3aa06f-e28f-495e-953d-7ba1db6ccd75"), null, new Guid("11b19f8e-d2a6-45ac-bff3-b655c79bfe90"), "Chihiro", null, null, null, false, "Ogino", "Being happy", null, null },
+                    { new Guid("909323df-3e18-431d-966c-8fbc7e4adf5a"), null, new Guid("6b6a5c63-6514-43e2-a1af-ef691d53fdb4"), "Mitsuha", null, null, null, false, "Miyamizu", "Get back in time", null, null },
+                    { new Guid("a775555a-43ad-4698-aa52-eab4ee3d531f"), null, new Guid("6b6a5c63-6514-43e2-a1af-ef691d53fdb4"), "Taki", null, null, null, false, "Tachibana", "Get back in time", null, null },
+                    { new Guid("b74ff1da-84ea-48da-b1a2-75dd6515ef7e"), null, new Guid("11b19f8e-d2a6-45ac-bff3-b655c79bfe90"), "No-Face", null, null, null, false, null, "Making gold", null, null },
+                    { new Guid("cd719eac-043f-4781-8a2f-c8902440a660"), null, new Guid("68df0528-247a-4576-b1b0-386e5d0c8410"), "Shoko", null, null, null, false, "Nishimiya", "Sign language", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -478,15 +480,15 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "Answer", "QuizId", "QuizType", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("197bc952-c537-4552-b034-7ebc3f8007fe"), "True", new Guid("b6ed8a74-be90-424c-b663-18829f5aaf28"), 0, "True or False: Shoya Ishida is a former bully in A Silent Voice." },
-                    { new Guid("3961349f-35ed-4cfd-9420-b880c99a9cf4"), "Her real name", new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"), 2, "What does Chihiro need to remember to return home?" },
-                    { new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc"), null, new Guid("2415e303-6dbb-4f09-8f81-0ef085101d5f"), 1, "What is the name of the main character in Your Name?" },
-                    { new Guid("827b6e6a-81fe-4490-8e49-629fedb5b5b1"), "True", new Guid("2415e303-6dbb-4f09-8f81-0ef085101d5f"), 0, "True or False: Taki and Mitsuha swap bodies in Your Name." },
-                    { new Guid("ab5a800a-f0aa-4ab5-9e39-e88c3d42cc83"), "False", new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"), 0, "True or False: No-Face is a spirit who tries to eat Chihiro." },
-                    { new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1"), null, new Guid("b6ed8a74-be90-424c-b663-18829f5aaf28"), 1, "What is the name of the main protagonist in A Silent Voice?" },
-                    { new Guid("bee83cbd-697f-4a17-aa52-cc695fbb1e28"), "Shoko Nishimiya", new Guid("b6ed8a74-be90-424c-b663-18829f5aaf28"), 2, "Who does Shoya Ishida try to make amends with?" },
-                    { new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57"), null, new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"), 1, "Who runs the bathhouse in Spirited Away?" },
-                    { new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa"), null, new Guid("4a8a84a9-35da-4e5c-8a73-a36b1149e565"), 1, "What is the name of the main protagonist in Spirited Away?" }
+                    { new Guid("19aad344-5c26-4975-856a-bd140fe59eb6"), null, new Guid("4d6be2f6-2763-4f64-ad00-535b7f3918c3"), 1, "What is the name of the main character in Your Name?" },
+                    { new Guid("33412239-3665-473a-8a31-8993b6757df8"), "Her real name", new Guid("e5252b94-99cb-4d2c-bdba-730e079f1b46"), 2, "What does Chihiro need to remember to return home?" },
+                    { new Guid("4ee65c37-908c-4984-8637-15cf8366c841"), null, new Guid("e5252b94-99cb-4d2c-bdba-730e079f1b46"), 1, "Who runs the bathhouse in Spirited Away?" },
+                    { new Guid("4ff011c9-db76-4b08-be6c-8d2fa5eff019"), null, new Guid("70bd26b1-9522-4391-844f-3039a0080707"), 1, "What is the name of the main protagonist in A Silent Voice?" },
+                    { new Guid("52a5049e-3930-41e6-80b5-7eb2b5cc0c4e"), null, new Guid("e5252b94-99cb-4d2c-bdba-730e079f1b46"), 1, "What is the name of the main protagonist in Spirited Away?" },
+                    { new Guid("9c962226-8435-494e-ba81-86c9c5ac09c1"), "True", new Guid("70bd26b1-9522-4391-844f-3039a0080707"), 0, "True or False: Shoya Ishida is a former bully in A Silent Voice." },
+                    { new Guid("a33498f4-0f90-41b8-b480-f144c2554cca"), "True", new Guid("4d6be2f6-2763-4f64-ad00-535b7f3918c3"), 0, "True or False: Taki and Mitsuha swap bodies in Your Name." },
+                    { new Guid("a782caf2-4528-4bff-9cb9-ae1042381e05"), "Shoko Nishimiya", new Guid("70bd26b1-9522-4391-844f-3039a0080707"), 2, "Who does Shoya Ishida try to make amends with?" },
+                    { new Guid("fee6e0f3-fdb5-4de8-9ee3-8de18062e9a9"), "False", new Guid("e5252b94-99cb-4d2c-bdba-730e079f1b46"), 0, "True or False: No-Face is a spirit who tries to eat Chihiro." }
                 });
 
             migrationBuilder.InsertData(
@@ -494,22 +496,22 @@ namespace AnimeQSystem.Data.Migrations
                 columns: new[] { "Id", "IsCorrect", "OptionText", "QuizQuestionId" },
                 values: new object[,]
                 {
-                    { new Guid("044127ec-193f-4cb5-a994-efd6f51e6c48"), true, "Taki Tachibana", new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc") },
-                    { new Guid("097ec670-a099-465b-8e58-fede9343728c"), false, "Kamaji", new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57") },
-                    { new Guid("131d2407-381d-4a67-a4be-02e6dae2b119"), false, "Taki Tachibana", new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1") },
-                    { new Guid("245aecb5-b9a2-4bbf-9c96-6be57ad3842c"), true, "Chihiro Ogino", new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa") },
-                    { new Guid("24d6706d-d4bd-4bc8-983d-537d569cd01c"), false, "Sophie Hatter", new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa") },
-                    { new Guid("563bb9f1-28aa-48e2-913b-4e49637e2892"), false, "Chihiro Ogino", new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc") },
-                    { new Guid("64432bbe-2135-43cb-93b9-032fea8c7748"), false, "Zeniba", new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57") },
-                    { new Guid("7962a535-d683-4c81-9b6b-3100c2f5a2d7"), false, "Haku", new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57") },
-                    { new Guid("7d5a2d4a-6c0b-4f87-869c-bab5fbd8ee4c"), false, "Mitsuha Miyamizu", new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1") },
-                    { new Guid("8033a842-348a-4301-93b1-b0bb20ccda8a"), false, "Shoko Nishimiya", new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1") },
-                    { new Guid("98f2b3dd-6785-494c-80dd-899134476652"), true, "Mitsuha Miyamizu", new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc") },
-                    { new Guid("aacb4c0b-bf9d-4a35-904d-7cfe29c6428d"), false, "Shoya Ishida", new Guid("6ca2443b-008a-456b-ae28-6576bff2d8dc") },
-                    { new Guid("b240e627-cb7f-44a8-867b-658dceb3a09f"), false, "Nausicaä", new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa") },
-                    { new Guid("b50a5ccd-17fb-494f-b600-38ab9ca960e0"), true, "Shoya Ishida", new Guid("b5d4b633-d6b3-4f7f-b2ac-225c187f45b1") },
-                    { new Guid("b6300004-e39d-4eb5-9758-ed1b65620d0a"), false, "Satsuki Kusakabe", new Guid("eed7f69b-d4a5-4283-b798-5075888da2aa") },
-                    { new Guid("f403fdce-0946-42a8-aa3d-9ca8b7141e87"), true, "Yubaba", new Guid("d33b97ff-9280-4377-9c83-cd361abcfa57") }
+                    { new Guid("1790a652-b190-4505-95e3-d755fbc68d3d"), true, "Chihiro Ogino", new Guid("52a5049e-3930-41e6-80b5-7eb2b5cc0c4e") },
+                    { new Guid("24548a3c-a676-43c8-b95e-3d0aa10088a5"), true, "Yubaba", new Guid("4ee65c37-908c-4984-8637-15cf8366c841") },
+                    { new Guid("283da678-50b2-45b4-b151-2586e0172e8b"), false, "Sophie Hatter", new Guid("52a5049e-3930-41e6-80b5-7eb2b5cc0c4e") },
+                    { new Guid("304a1fac-b68a-438c-a8c8-abcb99edd3a9"), false, "Taki Tachibana", new Guid("4ff011c9-db76-4b08-be6c-8d2fa5eff019") },
+                    { new Guid("4ee6c801-d8b5-4add-bce9-f52b03ea7159"), false, "Haku", new Guid("4ee65c37-908c-4984-8637-15cf8366c841") },
+                    { new Guid("546bb2e1-e801-497d-a560-432310e7e1b8"), false, "Shoya Ishida", new Guid("19aad344-5c26-4975-856a-bd140fe59eb6") },
+                    { new Guid("55c56e9d-d909-4caf-b147-d85ff92c80b9"), false, "Nausicaä", new Guid("52a5049e-3930-41e6-80b5-7eb2b5cc0c4e") },
+                    { new Guid("59d49a7a-45cf-4be4-9986-b889bd260ac3"), true, "Shoya Ishida", new Guid("4ff011c9-db76-4b08-be6c-8d2fa5eff019") },
+                    { new Guid("a3540e4d-ecca-4c8a-a71d-ba6959b4d775"), false, "Zeniba", new Guid("4ee65c37-908c-4984-8637-15cf8366c841") },
+                    { new Guid("ac072177-8960-449d-828c-ecb838fcc0b6"), true, "Mitsuha Miyamizu", new Guid("19aad344-5c26-4975-856a-bd140fe59eb6") },
+                    { new Guid("b4154839-d774-4f63-b306-1982762d2d94"), false, "Chihiro Ogino", new Guid("19aad344-5c26-4975-856a-bd140fe59eb6") },
+                    { new Guid("c0c20d80-14da-4adc-b4f2-9be816aaed3a"), false, "Mitsuha Miyamizu", new Guid("4ff011c9-db76-4b08-be6c-8d2fa5eff019") },
+                    { new Guid("c5fd07cd-8948-4de5-8c93-d862b3f937a7"), false, "Shoko Nishimiya", new Guid("4ff011c9-db76-4b08-be6c-8d2fa5eff019") },
+                    { new Guid("d1f06479-377d-42a3-b787-72945fc54e96"), true, "Taki Tachibana", new Guid("19aad344-5c26-4975-856a-bd140fe59eb6") },
+                    { new Guid("d3ff0d95-4585-4e66-80bb-c69b0ac4f618"), false, "Satsuki Kusakabe", new Guid("52a5049e-3930-41e6-80b5-7eb2b5cc0c4e") },
+                    { new Guid("ddd89920-7a42-4ccd-90e5-e89b81969d50"), false, "Kamaji", new Guid("4ee65c37-908c-4984-8637-15cf8366c841") }
                 });
 
             migrationBuilder.CreateIndex(

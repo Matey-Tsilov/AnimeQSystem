@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeQSystem.Data", "AnimeQ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeQSystem.Services", "AnimeQSystem.Services\AnimeQSystem.Services.csproj", "{E2881F75-6F2A-4EA6-8140-E1CBF60D807A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeQSystem.Web.Infrastructure", "AnimeQSystem.Web.Infrastructure\AnimeQSystem.Web.Infrastructure.csproj", "{FA60DA00-110C-4F68-9B39-C0223B25DB42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeQSystem.Web.Infrastructure", "AnimeQSystem.Web.Infrastructure\AnimeQSystem.Web.Infrastructure.csproj", "{FA60DA00-110C-4F68-9B39-C0223B25DB42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeQSystem.Services.Mapping", "AnimeQSystem.Services.AutoMapper\AnimeQSystem.Services.Mapping.csproj", "{CAA77B1C-DAA7-4F93-94F1-54E9CBE79DA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{FA60DA00-110C-4F68-9B39-C0223B25DB42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA60DA00-110C-4F68-9B39-C0223B25DB42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA60DA00-110C-4F68-9B39-C0223B25DB42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA77B1C-DAA7-4F93-94F1-54E9CBE79DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA77B1C-DAA7-4F93-94F1-54E9CBE79DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA77B1C-DAA7-4F93-94F1-54E9CBE79DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA77B1C-DAA7-4F93-94F1-54E9CBE79DA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

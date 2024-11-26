@@ -1,0 +1,16 @@
+﻿@using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz;
+
+@model QuizCardViewModel
+
+<div class="card" style="width: 18rem;">
+    <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Title Image">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p class="card-text">@Model.Description</p>
+        <a href="#" class="btn btn-primary">Begin</a>
+    </div>
+    <div class="card-footer">
+        <small class="text-body-secondary">@((DateTime.Now - Model.CreatedAt).Days) days ago</small>
+        <small class="text-body-secondary">@Model.RewardPoints Points</small>
+    </div>
+</div>

@@ -8,6 +8,8 @@ namespace AnimeQSystem.Data.Models.QuizSystem
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public string ImageUrl { get; set; } = null!;
+        public int RewardPoints { get; set; }
 
         // Navigation properties
         public Guid CreatorId { get; set; }

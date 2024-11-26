@@ -238,7 +238,9 @@ namespace AnimeQSystem.Data
                     Title = "Spirited Away Quiz",
                     Description = "Test your knowledge about Spirited Away.",
                     CreatedAt = DateTime.Now,
-                    CreatorId = johndoeUserId
+                    CreatorId = johndoeUserId,
+                    RewardPoints = 100,
+                    ImageUrl = "https://images2.alphacoders.com/131/1311453.jpg"
                 },
                 new Quiz
                 {
@@ -246,7 +248,9 @@ namespace AnimeQSystem.Data
                     Title = "A Silent Voice Quiz",
                     Description = "Test your knowledge about A Silent Voice.",
                     CreatedAt = DateTime.Now,
-                    CreatorId = alexjohnsonUserId
+                    CreatorId = alexjohnsonUserId,
+                    RewardPoints = 100,
+                    ImageUrl = "https://lwlies.com/wp-content/uploads/2017/03/a-silent-voice.jpg"
                 },
                 new Quiz
                 {
@@ -254,7 +258,9 @@ namespace AnimeQSystem.Data
                     Title = "Your Name Quiz",
                     Description = "Test your knowledge about Your Name.",
                     CreatedAt = DateTime.Now,
-                    CreatorId = janesmithUserId
+                    CreatorId = janesmithUserId,
+                    RewardPoints = 100,
+                    ImageUrl = "https://images4.alphacoders.com/687/687987.jpg"
                 }
             );
 

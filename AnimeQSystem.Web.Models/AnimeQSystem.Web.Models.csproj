@@ -10,4 +10,9 @@
     <Folder Include="FormModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AnimeQSystem.Data.Models\AnimeQSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\AnimeQSystem.Services.AutoMapper\AnimeQSystem.Services.Mapping.csproj" />
+  </ItemGroup>
+
 </Project>

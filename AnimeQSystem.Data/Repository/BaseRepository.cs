@@ -22,7 +22,7 @@ namespace AnimeQSystem.Data.Repository
 
         public async Task<IEnumerable<TItem>> GetAllAsync() => await _dbSet.ToListAsync();
 
-        public IEnumerable<TItem> GetAllAttached() => _dbSet.AsQueryable();
+        public IQueryable<TItem> GetAllAttached() => _dbSet.AsQueryable();
 
         public void Add(TItem item)
         {

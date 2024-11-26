@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace AnimeQSystem.Services.AutoMapper
+namespace AnimeQSystem.Services.Mapping
 {
     public interface ICustomMapping
     {

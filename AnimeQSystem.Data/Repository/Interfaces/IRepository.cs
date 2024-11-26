@@ -4,7 +4,7 @@
     {
         public IEnumerable<TItem> GetAll();
         public Task<IEnumerable<TItem>> GetAllAsync();
-        public IEnumerable<TItem> GetAllAttached();
+        public IQueryable<TItem> GetAllAttached();
         public TItem? GetById(TId id);
         public Task<TItem?> GetByIdAsync(TId id);
         public void Add(TItem item);

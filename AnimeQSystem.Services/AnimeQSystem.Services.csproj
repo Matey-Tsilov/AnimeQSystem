@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AnimeQSystem.Data.Models\AnimeQSystem.Data.Models.csproj" />
     <ProjectReference Include="..\AnimeQSystem.Data\AnimeQSystem.Data.csproj" />
+    <ProjectReference Include="..\AnimeQSystem.Services.AutoMapper\AnimeQSystem.Services.Mapping.csproj" />
     <ProjectReference Include="..\AnimeQSystem.Web.Models\AnimeQSystem.Web.Models.csproj" />
   </ItemGroup>
 

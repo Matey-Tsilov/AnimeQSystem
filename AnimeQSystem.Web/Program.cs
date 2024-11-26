@@ -1,8 +1,10 @@
 using AnimeQSystem.Data;
 using AnimeQSystem.Data.Models;
-using AnimeQSystem.Services.AutoMapper;
+using AnimeQSystem.Services;
+using AnimeQSystem.Services.Interfaces;
+using AnimeQSystem.Services.Mapping;
 using AnimeQSystem.Web.Infrastructure;
-using AnimeQSystem.Web.Models.ViewModels;
+using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,11 +28,13 @@ builder.Services.AddControllersWithViews();
 // Automatically register all repositories on run
 builder.Services.RegisterRepositories(typeof(User).Assembly);
 
+builder.Services.AddScoped<IQuizService, QuizService>();
+
 // Build the whole application
 var app = builder.Build();
 
 // Go around application and collect all mappings into a AutoMapper config (runtime)
-AutoMapperConfig.RegisterMappings(typeof(index).Assembly);
+AutoMapperConfig.RegisterMappings(typeof(QuizCardViewModel).Assembly);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

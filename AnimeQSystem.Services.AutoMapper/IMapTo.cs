@@ -1,4 +1,4 @@
-﻿namespace AnimeQSystem.Services.AutoMapper
+﻿namespace AnimeQSystem.Services.Mapping
 {
     public interface IMapTo<T>
     {
