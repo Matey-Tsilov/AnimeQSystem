@@ -4,22 +4,23 @@ using AnimeQSystem.Data.Models.Enums;
 using AnimeQSystem.Data.Models.QuizSystem;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AnimeQSystem.Data
 {
     public static class DatabaseSeeder
     {
-        public static void Seed(ModelBuilder modelBuilder)
+        public static async Task MigrateAndSeed(IServiceProvider serviceProvider)
         {
+            using var scope = serviceProvider.CreateScope();
+
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            // Always migrate DB on application start
+            await dbContext.Database.MigrateAsync();
 
             #region Seed users
-            var password = "Test1234!"; // Your plain-text password
-            // Password hasher
-            var passwordHasher = new PasswordHasher<IdentityUser>();
-            // Creating an empty user object (it doesn't need any properties except for the password itself)
-            var dummyUser = new IdentityUser();  // Just a dummy object to satisfy the PasswordHasher
-            // Hash the password
-            var hashedPassword = passwordHasher.HashPassword(dummyUser, password);
 
             string johndoeIdentityUserId = Guid.NewGuid().ToString();
             string janesmithIdentityUserId = Guid.NewGuid().ToString();
@@ -29,198 +30,221 @@ namespace AnimeQSystem.Data
             Guid janesmithUserId = Guid.NewGuid();
             Guid alexjohnsonUserId = Guid.NewGuid();
 
-            var johndoeUser = new IdentityUser
+            if (!userManager.Users.Any())
             {
-                Id = johndoeIdentityUserId,
-                UserName = "johndoe",
-                NormalizedUserName = "JOHNDOE",
-                Email = "johndoe@example.com",
-                NormalizedEmail = "JOHNDOE@EXAMPLE.COM",
-                EmailConfirmed = true
-            };
-            johndoeUser.PasswordHash = passwordHasher.HashPassword(johndoeUser, password);
+                var password = "Test1234!"; // Your plain-text password
 
-            var janesmithUser = new IdentityUser
-            {
-                Id = janesmithIdentityUserId,
-                UserName = "janesmith",
-                NormalizedUserName = "JANESMITH",
-                Email = "janesmith@example.com",
-                NormalizedEmail = "JANESMITH@EXAMPLE.COM",
-                EmailConfirmed = true
-            };
-            janesmithUser.PasswordHash = passwordHasher.HashPassword(janesmithUser, password);
+                var johndoeUser = new IdentityUser
+                {
+                    Id = johndoeIdentityUserId,
+                    UserName = "johndoe",
+                    Email = "johndoe@example.com",
+                    EmailConfirmed = true
+                };
 
-            var alexjohnsonUser = new IdentityUser
-            {
-                Id = alexjohnsonIdentityUserId,
-                UserName = "alexjohnson",
-                NormalizedUserName = "ALEXJOHNSON",
-                Email = "alexjohnson@example.com",
-                NormalizedEmail = "ALEXJOHNSON@EXAMPLE.COM",
-                EmailConfirmed = true
-            };
-            alexjohnsonUser.PasswordHash = passwordHasher.HashPassword(alexjohnsonUser, password);
+                var janesmithUser = new IdentityUser
+                {
+                    Id = janesmithIdentityUserId,
+                    UserName = "janesmith",
+                    Email = "janesmith@example.com",
+                    EmailConfirmed = true
+                };
 
-            modelBuilder.Entity<IdentityUser>().HasData(johndoeUser, janesmithUser, alexjohnsonUser);
+                var alexjohnsonUser = new IdentityUser
+                {
+                    Id = alexjohnsonIdentityUserId,
+                    UserName = "alexjohnson",
+                    Email = "alexjohnson@example.com",
+                    EmailConfirmed = true
+                };
+
+                List<IdentityUser> identityUsers = new List<IdentityUser>()
+                {
+                    johndoeUser,
+                    janesmithUser,
+                    alexjohnsonUser
+                };
+
+                foreach (var user in identityUsers)
+                {
+                    await userManager.CreateAsync(user, password);
+                }
+            }
 
             // Seed the related Users (if you want the relationship)
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    Id = johndoeUserId,
-                    FirstName = "John",
-                    LastName = "Doe",
-                    Age = 25,
-                    Gender = Gender.Male,
-                    Points = 1200,
-                    CreatedAt = DateTime.Now,
-                    LastModified = DateTime.Now,
-                    IsDeleted = false,
-                    Country = "USA",
-                    IdentityUserId = johndoeIdentityUserId
-                },
-                new User
-                {
-                    Id = janesmithUserId,
-                    FirstName = "Jane",
-                    LastName = "Smith",
-                    Age = 30,
-                    Gender = Gender.Female,
-                    Points = 1500,
-                    CreatedAt = DateTime.Now,
-                    LastModified = DateTime.Now,
-                    IsDeleted = false,
-                    Country = "Canada",
-                    IdentityUserId = janesmithIdentityUserId
-                },
-                new User
-                {
-                    Id = alexjohnsonUserId,
-                    FirstName = "Alex",
-                    LastName = "Johnson",
-                    Age = 22,
-                    Gender = Gender.Other,
-                    Points = 800,
-                    CreatedAt = DateTime.Now,
-                    LastModified = DateTime.Now,
-                    IsDeleted = false,
-                    Country = "UK",
-                    IdentityUserId = alexjohnsonIdentityUserId
-                }
-            );
+            if (!dbContext.Users.Any())
+            {
+                await dbContext.Users.AddRangeAsync(
+                    new User
+                    {
+                        Id = johndoeUserId,
+                        FirstName = "John",
+                        LastName = "Doe",
+                        Age = 25,
+                        Gender = Gender.Male,
+                        Points = 1200,
+                        CreatedAt = DateTime.Now,
+                        LastModified = DateTime.Now,
+                        IsDeleted = false,
+                        Country = "USA",
+                        IdentityUserId = johndoeIdentityUserId
+                    },
+                    new User
+                    {
+                        Id = janesmithUserId,
+                        FirstName = "Jane",
+                        LastName = "Smith",
+                        Age = 30,
+                        Gender = Gender.Female,
+                        Points = 1500,
+                        CreatedAt = DateTime.Now,
+                        LastModified = DateTime.Now,
+                        IsDeleted = false,
+                        Country = "Canada",
+                        IdentityUserId = janesmithIdentityUserId
+                    },
+                    new User
+                    {
+                        Id = alexjohnsonUserId,
+                        FirstName = "Alex",
+                        LastName = "Johnson",
+                        Age = 22,
+                        Gender = Gender.Other,
+                        Points = 800,
+                        CreatedAt = DateTime.Now,
+                        LastModified = DateTime.Now,
+                        IsDeleted = false,
+                        Country = "UK",
+                        IdentityUserId = alexjohnsonIdentityUserId
+                    }
+                );
+            }
 
             #endregion
 
             #region Seed other entities
             // Hardcoded GUIDs for genres
-            var fantasyGenreId = Guid.NewGuid();
-            var dramaGenreId = Guid.NewGuid();
-            var romanceGenreId = Guid.NewGuid();
-            var adventureGenreId = Guid.NewGuid();
-            var sliceOfLifeGenreId = Guid.NewGuid();
+            Guid fantasyGenreId = Guid.NewGuid();
+            Guid dramaGenreId = Guid.NewGuid();
+            Guid romanceGenreId = Guid.NewGuid();
+            Guid adventureGenreId = Guid.NewGuid();
+            Guid sliceOfLifeGenreId = Guid.NewGuid();
 
             // Hardcoded GUIDs for studios
-            var studioGhibliId = Guid.NewGuid();
-            var kyotoAnimationId = Guid.NewGuid();
-            var coMixWaveFilmsId = Guid.NewGuid();
-            var tohoAnimationId = Guid.NewGuid();
-            var madhouseId = Guid.NewGuid();
+            Guid studioGhibliId = Guid.NewGuid();
+            Guid kyotoAnimationId = Guid.NewGuid();
+            Guid coMixWaveFilmsId = Guid.NewGuid();
+            Guid tohoAnimationId = Guid.NewGuid();
+            Guid madhouseId = Guid.NewGuid();
 
             // Hardcoded GUIDs for writers
-            var hayaoMiyazakiId = Guid.NewGuid();
-            var naokoYamadaId = Guid.NewGuid();
-            var makotoShinkaiId = Guid.NewGuid();
+            Guid hayaoMiyazakiId = Guid.NewGuid();
+            Guid naokoYamadaId = Guid.NewGuid();
+            Guid makotoShinkaiId = Guid.NewGuid();
 
             // Hardcoded GUIDs for animes
-            var spiritedAwayId = Guid.NewGuid();
-            var silentVoiceId = Guid.NewGuid();
-            var yourNameId = Guid.NewGuid();
+            Guid spiritedAwayId = Guid.NewGuid();
+            Guid silentVoiceId = Guid.NewGuid();
+            Guid yourNameId = Guid.NewGuid();
 
             // Hardcoded GUIDs for quizzes
-            var spiritedAwayQuizId = Guid.NewGuid();
-            var silentVoiceQuizId = Guid.NewGuid();
-            var yourNameQuizId = Guid.NewGuid();
+            Guid spiritedAwayQuizId = Guid.NewGuid();
+            Guid silentVoiceQuizId = Guid.NewGuid();
+            Guid yourNameQuizId = Guid.NewGuid();
 
             // Hardcoded GUIDs for characters
-            var chihiroOginoId = Guid.NewGuid();
-            var shouyaIshidaId = Guid.NewGuid();
-            var mitsuhaMiyamizuId = Guid.NewGuid();
-            var hakuId = Guid.NewGuid();
-            var noFaceId = Guid.NewGuid();
-            var shokoNishimiyaId = Guid.NewGuid();
-            var takiId = Guid.NewGuid();
+            Guid chihiroOginoId = Guid.NewGuid();
+            Guid shouyaIshidaId = Guid.NewGuid();
+            Guid mitsuhaMiyamizuId = Guid.NewGuid();
+            Guid hakuId = Guid.NewGuid();
+            Guid noFaceId = Guid.NewGuid();
+            Guid shokoNishimiyaId = Guid.NewGuid();
+            Guid takiId = Guid.NewGuid();
 
             // Seed genres
-            modelBuilder.Entity<Genre>().HasData(
-                new Genre { Id = fantasyGenreId, Name = "Fantasy", Description = "Magical worlds and imaginative storytelling." },
-                new Genre { Id = dramaGenreId, Name = "Drama", Description = "Emotionally intense and story-driven." },
-                new Genre { Id = romanceGenreId, Name = "Romance", Description = "Love and relationships." },
-                new Genre { Id = adventureGenreId, Name = "Adventure", Description = "Exciting journeys and discoveries." },
-                new Genre { Id = sliceOfLifeGenreId, Name = "Slice of Life", Description = "Everyday life experiences." }
-            );
+            if (!dbContext.Genres.Any())
+            {
+                await dbContext.Genres.AddRangeAsync(
+                    new Genre { Id = fantasyGenreId, Name = "Fantasy", Description = "Magical worlds and imaginative storytelling." },
+                    new Genre { Id = dramaGenreId, Name = "Drama", Description = "Emotionally intense and story-driven." },
+                    new Genre { Id = romanceGenreId, Name = "Romance", Description = "Love and relationships." },
+                    new Genre { Id = adventureGenreId, Name = "Adventure", Description = "Exciting journeys and discoveries." },
+                    new Genre { Id = sliceOfLifeGenreId, Name = "Slice of Life", Description = "Everyday life experiences." }
+                );
+            }
 
             // Seed studios
-            modelBuilder.Entity<Studio>().HasData(
-                new Studio { Id = studioGhibliId, Name = "Studio Ghibli", DateFounded = new DateTime(1985, 6, 15) },
-                new Studio { Id = kyotoAnimationId, Name = "Kyoto Animation", DateFounded = new DateTime(1981, 11, 7) },
-                new Studio { Id = coMixWaveFilmsId, Name = "CoMix Wave Films", DateFounded = new DateTime(2007, 3, 6) },
-                new Studio { Id = tohoAnimationId, Name = "Toho Animation", DateFounded = new DateTime(1956, 1, 1) },
-                new Studio { Id = madhouseId, Name = "Madhouse", DateFounded = new DateTime(1972, 10, 1) }
-            );
+            if (!dbContext.Studios.Any())
+            {
+                await dbContext.Studios.AddRangeAsync(
+                    new Studio { Id = studioGhibliId, Name = "Studio Ghibli", DateFounded = new DateTime(1985, 6, 15) },
+                    new Studio { Id = kyotoAnimationId, Name = "Kyoto Animation", DateFounded = new DateTime(1981, 11, 7) },
+                    new Studio { Id = coMixWaveFilmsId, Name = "CoMix Wave Films", DateFounded = new DateTime(2007, 3, 6) },
+                    new Studio { Id = tohoAnimationId, Name = "Toho Animation", DateFounded = new DateTime(1956, 1, 1) },
+                    new Studio { Id = madhouseId, Name = "Madhouse", DateFounded = new DateTime(1972, 10, 1) }
+                );
+            }
 
             // Seed writers
-            modelBuilder.Entity<Writer>().HasData(
-                new Writer { Id = hayaoMiyazakiId, FirstName = "Hayao", LastName = "Miyazaki", DateOfBirth = new DateTime(1941, 1, 5), FavoriteGenreId = fantasyGenreId },
-                new Writer { Id = naokoYamadaId, FirstName = "Naoko", LastName = "Yamada", DateOfBirth = new DateTime(1981, 5, 3), FavoriteGenreId = fantasyGenreId },
-                new Writer { Id = makotoShinkaiId, FirstName = "Makoto", LastName = "Shinkai", DateOfBirth = new DateTime(1973, 2, 9), FavoriteGenreId = romanceGenreId }
-            );
+            if (!dbContext.Writers.Any())
+            {
+                await dbContext.Writers.AddRangeAsync(
+                    new Writer { Id = hayaoMiyazakiId, FirstName = "Hayao", LastName = "Miyazaki", DateOfBirth = new DateTime(1941, 1, 5), FavoriteGenreId = fantasyGenreId },
+                    new Writer { Id = naokoYamadaId, FirstName = "Naoko", LastName = "Yamada", DateOfBirth = new DateTime(1981, 5, 3), FavoriteGenreId = fantasyGenreId },
+                    new Writer { Id = makotoShinkaiId, FirstName = "Makoto", LastName = "Shinkai", DateOfBirth = new DateTime(1973, 2, 9), FavoriteGenreId = romanceGenreId }
+                );
+            }
 
             // Update Anime Seed to link Writer to Anime
-            modelBuilder.Entity<Anime>().HasData(
-                new Anime
-                {
-                    Id = spiritedAwayId,
-                    Title = "Spirited Away",
-                    Episodes = 1,
-                    Seasons = 1,
-                    ReleaseDate = new DateTime(2001, 7, 20),
-                    StillOngoing = false,
-                    Rating = Rating.Excellent,
-                    WriterId = hayaoMiyazakiId,
-                    StudioId = studioGhibliId,
-                    GenreId = fantasyGenreId
-                },
-                new Anime
-                {
-                    Id = silentVoiceId,
-                    Title = "A Silent Voice",
-                    Episodes = 1,
-                    Seasons = 1,
-                    ReleaseDate = new DateTime(2016, 9, 17),
-                    StillOngoing = false,
-                    Rating = Rating.Great,
-                    WriterId = naokoYamadaId,
-                    StudioId = kyotoAnimationId,
-                    GenreId = dramaGenreId
-                },
-                new Anime
-                {
-                    Id = yourNameId,
-                    Title = "Your Name",
-                    Episodes = 1,
-                    Seasons = 1,
-                    ReleaseDate = new DateTime(2016, 8, 26),
-                    StillOngoing = false,
-                    Rating = Rating.Excellent,
-                    WriterId = makotoShinkaiId,
-                    StudioId = coMixWaveFilmsId,
-                    GenreId = romanceGenreId
-                }
-            );
+            if (!dbContext.Animes.Any())
+            {
+                await dbContext.Animes.AddRangeAsync(
+                    new Anime
+                    {
+                        Id = spiritedAwayId,
+                        Title = "Spirited Away",
+                        Episodes = 1,
+                        Seasons = 1,
+                        ReleaseDate = new DateTime(2001, 7, 20),
+                        StillOngoing = false,
+                        Rating = Rating.Excellent,
+                        WriterId = hayaoMiyazakiId,
+                        StudioId = studioGhibliId,
+                        GenreId = fantasyGenreId
+                    },
+                    new Anime
+                    {
+                        Id = silentVoiceId,
+                        Title = "A Silent Voice",
+                        Episodes = 1,
+                        Seasons = 1,
+                        ReleaseDate = new DateTime(2016, 9, 17),
+                        StillOngoing = false,
+                        Rating = Rating.Great,
+                        WriterId = naokoYamadaId,
+                        StudioId = kyotoAnimationId,
+                        GenreId = dramaGenreId
+                    },
+                    new Anime
+                    {
+                        Id = yourNameId,
+                        Title = "Your Name",
+                        Episodes = 1,
+                        Seasons = 1,
+                        ReleaseDate = new DateTime(2016, 8, 26),
+                        StillOngoing = false,
+                        Rating = Rating.Excellent,
+                        WriterId = makotoShinkaiId,
+                        StudioId = coMixWaveFilmsId,
+                        GenreId = romanceGenreId
+                    }
+                );
+            }
 
             // Seed characters
-            modelBuilder.Entity<Character>().HasData(
+            if (!dbContext.Characters.Any())
+            {
+                await dbContext.Characters.AddRangeAsync(
                 new Character { Id = chihiroOginoId, FirstName = "Chihiro", LastName = "Ogino", AnimeId = spiritedAwayId, Skill = "Being happy" },
                 new Character { Id = hakuId, FirstName = "Haku", AnimeId = spiritedAwayId, Skill = "Turn into Dragon" },
                 new Character { Id = noFaceId, FirstName = "No-Face", AnimeId = spiritedAwayId, Skill = "Making gold" },
@@ -229,40 +253,44 @@ namespace AnimeQSystem.Data
                 new Character { Id = mitsuhaMiyamizuId, FirstName = "Mitsuha", LastName = "Miyamizu", AnimeId = yourNameId, Skill = "Get back in time" },
                 new Character { Id = takiId, FirstName = "Taki", LastName = "Tachibana", AnimeId = yourNameId, Skill = "Get back in time" }
             );
+            }
 
             // Seed quizzes for each anime
-            modelBuilder.Entity<Quiz>().HasData(
-                new Quiz
-                {
-                    Id = spiritedAwayQuizId,
-                    Title = "Spirited Away Quiz",
-                    Description = "Test your knowledge about Spirited Away.",
-                    CreatedAt = DateTime.Now,
-                    CreatorId = johndoeUserId,
-                    RewardPoints = 100,
-                    ImageUrl = "https://images2.alphacoders.com/131/1311453.jpg"
-                },
-                new Quiz
-                {
-                    Id = silentVoiceQuizId,
-                    Title = "A Silent Voice Quiz",
-                    Description = "Test your knowledge about A Silent Voice.",
-                    CreatedAt = DateTime.Now,
-                    CreatorId = alexjohnsonUserId,
-                    RewardPoints = 100,
-                    ImageUrl = "https://lwlies.com/wp-content/uploads/2017/03/a-silent-voice.jpg"
-                },
-                new Quiz
-                {
-                    Id = yourNameQuizId,
-                    Title = "Your Name Quiz",
-                    Description = "Test your knowledge about Your Name.",
-                    CreatedAt = DateTime.Now,
-                    CreatorId = janesmithUserId,
-                    RewardPoints = 100,
-                    ImageUrl = "https://images4.alphacoders.com/687/687987.jpg"
-                }
-            );
+            if (!dbContext.Quizzes.Any())
+            {
+                await dbContext.Quizzes.AddRangeAsync(
+                    new Quiz
+                    {
+                        Id = spiritedAwayQuizId,
+                        Title = "Spirited Away Quiz",
+                        Description = "Test your knowledge about Spirited Away.",
+                        CreatedAt = DateTime.Now,
+                        CreatorId = johndoeUserId,
+                        RewardPoints = 100,
+                        ImageUrl = "https://images2.alphacoders.com/131/1311453.jpg"
+                    },
+                    new Quiz
+                    {
+                        Id = silentVoiceQuizId,
+                        Title = "A Silent Voice Quiz",
+                        Description = "Test your knowledge about A Silent Voice.",
+                        CreatedAt = DateTime.Now,
+                        CreatorId = alexjohnsonUserId,
+                        RewardPoints = 100,
+                        ImageUrl = "https://lwlies.com/wp-content/uploads/2017/03/a-silent-voice.jpg"
+                    },
+                    new Quiz
+                    {
+                        Id = yourNameQuizId,
+                        Title = "Your Name Quiz",
+                        Description = "Test your knowledge about Your Name.",
+                        CreatedAt = DateTime.Now,
+                        CreatorId = janesmithUserId,
+                        RewardPoints = 100,
+                        ImageUrl = "https://images4.alphacoders.com/687/687987.jpg"
+                    }
+                );
+            }
 
             Guid spiritedAwayQuestion1 = Guid.NewGuid();
             Guid spiritedAwayQuestion2 = Guid.NewGuid();
@@ -274,203 +302,211 @@ namespace AnimeQSystem.Data
             Guid yourNameQuestion1 = Guid.NewGuid();
             Guid yourNameQuestion2 = Guid.NewGuid();
 
-            modelBuilder.Entity<QuizQuestion>().HasData(
-                // Spirited Away Quiz Questions
-                new QuizQuestion
-                {
-                    Id = spiritedAwayQuestion1,
-                    Title = "What is the name of the main protagonist in Spirited Away?",
-                    QuizType = QuizType.MultipleChoice,
-                    QuizId = spiritedAwayQuizId
-                },
-                new QuizQuestion
-                {
-                    Id = spiritedAwayQuestion2,
-                    Title = "Who runs the bathhouse in Spirited Away?",
-                    QuizType = QuizType.MultipleChoice,
-                    QuizId = spiritedAwayQuizId
-                },
-                new QuizQuestion
-                {
-                    Id = spiritedAwayQuestion3,
-                    Title = "What does Chihiro need to remember to return home?",
-                    QuizType = QuizType.WriteAnswer,
-                    Answer = "Her real name",
-                    QuizId = spiritedAwayQuizId
-                },
-                new QuizQuestion
-                {
-                    Id = spiritedAwayQuestion4,
-                    Title = "True or False: No-Face is a spirit who tries to eat Chihiro.",
-                    QuizType = QuizType.TrueFalse,
-                    Answer = "False",
-                    QuizId = spiritedAwayQuizId
-                },
+            if (!dbContext.QuizQuestions.Any())
+            {
+                await dbContext.QuizQuestions.AddRangeAsync(
+                    // Spirited Away Quiz Questions
+                    new QuizQuestion
+                    {
+                        Id = spiritedAwayQuestion1,
+                        Title = "What is the name of the main protagonist in Spirited Away?",
+                        QuizType = QuizType.MultipleChoice,
+                        QuizId = spiritedAwayQuizId
+                    },
+                    new QuizQuestion
+                    {
+                        Id = spiritedAwayQuestion2,
+                        Title = "Who runs the bathhouse in Spirited Away?",
+                        QuizType = QuizType.MultipleChoice,
+                        QuizId = spiritedAwayQuizId
+                    },
+                    new QuizQuestion
+                    {
+                        Id = spiritedAwayQuestion3,
+                        Title = "What does Chihiro need to remember to return home?",
+                        QuizType = QuizType.WriteAnswer,
+                        Answer = "Her real name",
+                        QuizId = spiritedAwayQuizId
+                    },
+                    new QuizQuestion
+                    {
+                        Id = spiritedAwayQuestion4,
+                        Title = "True or False: No-Face is a spirit who tries to eat Chihiro.",
+                        QuizType = QuizType.TrueFalse,
+                        Answer = "False",
+                        QuizId = spiritedAwayQuizId
+                    },
 
-                // A Silent Voice Quiz Questions
-                new QuizQuestion
-                {
-                    Id = silentVoiceQuestion1,
-                    Title = "What is the name of the main protagonist in A Silent Voice?",
-                    QuizType = QuizType.MultipleChoice,
-                    QuizId = silentVoiceQuizId
-                },
-                new QuizQuestion
-                {
-                    Id = silentVoiceQuestion2,
-                    Title = "True or False: Shoya Ishida is a former bully in A Silent Voice.",
-                    QuizType = QuizType.TrueFalse,
-                    Answer = "True",
-                    QuizId = silentVoiceQuizId
-                },
-                new QuizQuestion
-                {
-                    Id = silentVoiceQuestion3,
-                    Title = "Who does Shoya Ishida try to make amends with?",
-                    QuizType = QuizType.WriteAnswer,
-                    Answer = "Shoko Nishimiya",
-                    QuizId = silentVoiceQuizId
-                },
+                    // A Silent Voice Quiz Questions
+                    new QuizQuestion
+                    {
+                        Id = silentVoiceQuestion1,
+                        Title = "What is the name of the main protagonist in A Silent Voice?",
+                        QuizType = QuizType.MultipleChoice,
+                        QuizId = silentVoiceQuizId
+                    },
+                    new QuizQuestion
+                    {
+                        Id = silentVoiceQuestion2,
+                        Title = "True or False: Shoya Ishida is a former bully in A Silent Voice.",
+                        QuizType = QuizType.TrueFalse,
+                        Answer = "True",
+                        QuizId = silentVoiceQuizId
+                    },
+                    new QuizQuestion
+                    {
+                        Id = silentVoiceQuestion3,
+                        Title = "Who does Shoya Ishida try to make amends with?",
+                        QuizType = QuizType.WriteAnswer,
+                        Answer = "Shoko Nishimiya",
+                        QuizId = silentVoiceQuizId
+                    },
 
-                // Your Name Quiz Questions
-                new QuizQuestion
-                {
-                    Id = yourNameQuestion1,
-                    Title = "What is the name of the main character in Your Name?",
-                    QuizType = QuizType.MultipleChoice,
-                    QuizId = yourNameQuizId
-                },
-                new QuizQuestion
-                {
-                    Id = yourNameQuestion2,
-                    Title = "True or False: Taki and Mitsuha swap bodies in Your Name.",
-                    QuizType = QuizType.TrueFalse,
-                    Answer = "True",
-                    QuizId = yourNameQuizId
-                }
-            );
+                    // Your Name Quiz Questions
+                    new QuizQuestion
+                    {
+                        Id = yourNameQuestion1,
+                        Title = "What is the name of the main character in Your Name?",
+                        QuizType = QuizType.MultipleChoice,
+                        QuizId = yourNameQuizId
+                    },
+                    new QuizQuestion
+                    {
+                        Id = yourNameQuestion2,
+                        Title = "True or False: Taki and Mitsuha swap bodies in Your Name.",
+                        QuizType = QuizType.TrueFalse,
+                        Answer = "True",
+                        QuizId = yourNameQuizId
+                    }
+                );
+            }
 
-            modelBuilder.Entity<QuizOption>().HasData(
-                // Options for Spirited Away Quiz
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Chihiro Ogino",
-                    IsCorrect = true,
-                    QuizQuestionId = spiritedAwayQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Satsuki Kusakabe",
-                    IsCorrect = false,
-                    QuizQuestionId = spiritedAwayQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Nausicaä",
-                    IsCorrect = false,
-                    QuizQuestionId = spiritedAwayQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Sophie Hatter",
-                    IsCorrect = false,
-                    QuizQuestionId = spiritedAwayQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Yubaba",
-                    IsCorrect = true,
-                    QuizQuestionId = spiritedAwayQuestion2
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Zeniba",
-                    IsCorrect = false,
-                    QuizQuestionId = spiritedAwayQuestion2
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Kamaji",
-                    IsCorrect = false,
-                    QuizQuestionId = spiritedAwayQuestion2
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Haku",
-                    IsCorrect = false,
-                    QuizQuestionId = spiritedAwayQuestion2
-                },
+            if (!dbContext.QuizOptions.Any())
+            {
+                await dbContext.QuizOptions.AddRangeAsync(
+                    // Options for Spirited Away Quiz
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Chihiro Ogino",
+                        IsCorrect = true,
+                        QuizQuestionId = spiritedAwayQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Satsuki Kusakabe",
+                        IsCorrect = false,
+                        QuizQuestionId = spiritedAwayQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Nausicaä",
+                        IsCorrect = false,
+                        QuizQuestionId = spiritedAwayQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Sophie Hatter",
+                        IsCorrect = false,
+                        QuizQuestionId = spiritedAwayQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Yubaba",
+                        IsCorrect = true,
+                        QuizQuestionId = spiritedAwayQuestion2
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Zeniba",
+                        IsCorrect = false,
+                        QuizQuestionId = spiritedAwayQuestion2
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Kamaji",
+                        IsCorrect = false,
+                        QuizQuestionId = spiritedAwayQuestion2
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Haku",
+                        IsCorrect = false,
+                        QuizQuestionId = spiritedAwayQuestion2
+                    },
 
-                // Options for A Silent Voice Quiz
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Shoya Ishida",
-                    IsCorrect = true,
-                    QuizQuestionId = silentVoiceQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Shoko Nishimiya",
-                    IsCorrect = false,
-                    QuizQuestionId = silentVoiceQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Mitsuha Miyamizu",
-                    IsCorrect = false,
-                    QuizQuestionId = silentVoiceQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Taki Tachibana",
-                    IsCorrect = false,
-                    QuizQuestionId = silentVoiceQuestion1
-                },
+                    // Options for A Silent Voice Quiz
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Shoya Ishida",
+                        IsCorrect = true,
+                        QuizQuestionId = silentVoiceQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Shoko Nishimiya",
+                        IsCorrect = false,
+                        QuizQuestionId = silentVoiceQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Mitsuha Miyamizu",
+                        IsCorrect = false,
+                        QuizQuestionId = silentVoiceQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Taki Tachibana",
+                        IsCorrect = false,
+                        QuizQuestionId = silentVoiceQuestion1
+                    },
 
-                // Options for Your Name Quiz
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Mitsuha Miyamizu",
-                    IsCorrect = true,
-                    QuizQuestionId = yourNameQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Taki Tachibana",
-                    IsCorrect = true,
-                    QuizQuestionId = yourNameQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Shoya Ishida",
-                    IsCorrect = false,
-                    QuizQuestionId = yourNameQuestion1
-                },
-                new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    OptionText = "Chihiro Ogino",
-                    IsCorrect = false,
-                    QuizQuestionId = yourNameQuestion1
-                }
-            );
+                    // Options for Your Name Quiz
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Mitsuha Miyamizu",
+                        IsCorrect = true,
+                        QuizQuestionId = yourNameQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Taki Tachibana",
+                        IsCorrect = true,
+                        QuizQuestionId = yourNameQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Shoya Ishida",
+                        IsCorrect = false,
+                        QuizQuestionId = yourNameQuestion1
+                    },
+                    new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        OptionText = "Chihiro Ogino",
+                        IsCorrect = false,
+                        QuizQuestionId = yourNameQuestion1
+                    }
+                );
 
+            }
             #endregion
+
+            await dbContext.SaveChangesAsync();
         }
     }
 }

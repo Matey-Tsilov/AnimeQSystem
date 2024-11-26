@@ -24,9 +24,6 @@ namespace AnimeQSystem.Data
 
             // Apply all custom constraints
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-            // Seed database if empty
-            DatabaseSeeder.Seed(modelBuilder);
         }
 
         public DbSet<Anime> Animes { get; set; }

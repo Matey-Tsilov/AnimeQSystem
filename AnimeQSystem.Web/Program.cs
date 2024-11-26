@@ -49,18 +49,15 @@ else
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
-// Automatic migration and seeding of data
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    dbContext.Database.Migrate();  // Apply any pending migrations
-}
+// Automatic migration and seeding of data if needed
+await DatabaseSeeder.MigrateAndSeed(app.Services);
 
 app.MapControllerRoute(
     name: "default",
