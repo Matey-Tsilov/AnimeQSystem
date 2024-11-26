@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimeQSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241126141910_InitialMigration")]
+    [Migration("20241126143851_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

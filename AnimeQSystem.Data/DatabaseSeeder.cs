@@ -37,7 +37,7 @@ namespace AnimeQSystem.Data
                 var johndoeUser = new IdentityUser
                 {
                     Id = johndoeIdentityUserId,
-                    UserName = "johndoe",
+                    UserName = "johndoe@example.com",
                     Email = "johndoe@example.com",
                     EmailConfirmed = true
                 };
@@ -45,7 +45,7 @@ namespace AnimeQSystem.Data
                 var janesmithUser = new IdentityUser
                 {
                     Id = janesmithIdentityUserId,
-                    UserName = "janesmith",
+                    UserName = "janesmith@example.com",
                     Email = "janesmith@example.com",
                     EmailConfirmed = true
                 };
@@ -53,7 +53,7 @@ namespace AnimeQSystem.Data
                 var alexjohnsonUser = new IdentityUser
                 {
                     Id = alexjohnsonIdentityUserId,
-                    UserName = "alexjohnson",
+                    UserName = "alexjohnson@example.com",
                     Email = "alexjohnson@example.com",
                     EmailConfirmed = true
                 };
