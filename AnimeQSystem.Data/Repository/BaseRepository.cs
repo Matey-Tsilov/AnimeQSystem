@@ -138,5 +138,17 @@ namespace AnimeQSystem.Data.Repository
                 return false;
             }
         }
+
+        public void AddRange(TItem[] items)
+        {
+            _dbSet.AddRange(items);
+            _dbContext.SaveChanges();
+        }
+
+        public async Task AddRangeAsync(TItem[] items)
+        {
+            await _dbSet.AddRangeAsync(items);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
