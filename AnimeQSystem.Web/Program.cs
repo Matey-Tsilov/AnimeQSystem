@@ -1,7 +1,6 @@
 using AnimeQSystem.Data;
 using AnimeQSystem.Data.Models;
 using AnimeQSystem.Services;
-using AnimeQSystem.Services.Interfaces;
 using AnimeQSystem.Services.Mapping;
 using AnimeQSystem.Web.Infrastructure;
 using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz;
@@ -28,7 +27,8 @@ builder.Services.AddControllersWithViews();
 // Automatically register all repositories on run
 builder.Services.RegisterRepositories(typeof(User).Assembly);
 
-builder.Services.AddScoped<IQuizService, QuizService>();
+// Automatically register all services on run
+builder.Services.RegisterServices(typeof(QuizService).Assembly);
 
 // Build the whole application
 var app = builder.Build();

@@ -52,5 +52,31 @@ namespace AnimeQSystem.Web.Infrastructure
             }
 
         }
+
+        public static void RegisterServices(this IServiceCollection services, Assembly servicesAssembly)
+        {
+            Type[] allServiceInterfaces = servicesAssembly
+                .GetTypes()
+                .Where(t => t.IsInterface)
+                .ToArray();
+
+            Type[] allServiceInstances = servicesAssembly
+                .GetTypes()
+                .Where(t => !t.IsInterface && !t.IsAbstract && t.Name.ToLower().EndsWith("service"))
+                .ToArray();
+
+            foreach (var serviceInterface in allServiceInterfaces)
+            {
+                Type? serviceType = allServiceInstances
+                    .SingleOrDefault(si => ("I" + si.Name.ToLower()) == serviceInterface.Name.ToLower());
+
+                if (serviceType == null)
+                {
+                    throw new NullReferenceException($"Service instance - {serviceInterface.Name} - doesn't have a corresponding interface or the opposite");
+                }
+
+                services.AddScoped(serviceInterface, serviceType);
+            }
+        }
     }
 }
