@@ -68,7 +68,7 @@ namespace AnimeQSystem.Web.Infrastructure
             foreach (var serviceInterface in allServiceInterfaces)
             {
                 Type? serviceType = allServiceInstances
-                    .SingleOrDefault(si => ("I" + si.Name.ToLower()) == serviceInterface.Name.ToLower());
+                    .SingleOrDefault(si => ("i" + si.Name.ToLower()) == serviceInterface.Name.ToLower());
 
                 if (serviceType == null)
                 {
