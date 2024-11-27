@@ -16,7 +16,11 @@ namespace AnimeQSystem.Data.Repository
 
         public TItem? GetById(TId id) => _dbSet.Find(id);
 
+        public TItem? GetById(params TId[] compositeId) => _dbSet.Find(compositeId[0], compositeId[1]);
+
         public async Task<TItem?> GetByIdAsync(TId id) => await _dbSet.FindAsync(id);
+
+        public async Task<TItem?> GetByIdAsync(params TId[] compositeId) => await _dbSet.FindAsync(compositeId[0], compositeId[1]);
 
         public IEnumerable<TItem> GetAll() => _dbSet.ToList();
 
@@ -51,9 +55,39 @@ namespace AnimeQSystem.Data.Repository
             return true;
         }
 
+        public bool Delete(params TId[] compositeId)
+        {
+            TItem? item = _dbSet.Find(compositeId[0], compositeId[1]);
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            _dbSet.Remove(item);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
         public async Task<bool> DeleteAsync(TId id)
         {
             TItem? item = await _dbSet.FindAsync(id);
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            _dbSet.Remove(item);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> DeleteAsync(params TId[] compositeId)
+        {
+            TItem? item = await _dbSet.FindAsync(compositeId[0], compositeId[1]);
 
             if (item == null)
             {
@@ -86,9 +120,49 @@ namespace AnimeQSystem.Data.Repository
             return false;
         }
 
+        public bool SoftDelete(params TId[] compositeId)
+        {
+            TItem? item = _dbSet.Find(compositeId[0], compositeId[1]);
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            var isDeletedProperty = typeof(TItem).GetProperty("IsDeleted");
+            if (isDeletedProperty != null && isDeletedProperty.PropertyType == typeof(bool))
+            {
+                isDeletedProperty.SetValue(item, true); // Set IsDeleted to true
+                _dbContext.SaveChanges(); // Persist changes
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<bool> SoftDeleteAsync(TId id)
         {
             TItem? item = await _dbSet.FindAsync(id);
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            var isDeletedProperty = typeof(TItem).GetProperty("IsDeleted");
+            if (isDeletedProperty != null && isDeletedProperty.PropertyType == typeof(bool))
+            {
+                isDeletedProperty.SetValue(item, true); // Set IsDeleted to true
+                await _dbContext.SaveChangesAsync(); // Persist changes
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> SoftDeleteAsync(params TId[] compositeId)
+        {
+            TItem? item = await _dbSet.FindAsync(compositeId[0], compositeId[1]);
 
             if (item == null)
             {
