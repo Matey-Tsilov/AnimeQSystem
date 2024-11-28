@@ -40,6 +40,18 @@ namespace AnimeQSystem.Data.Repository
             await _dbContext.SaveChangesAsync();
         }
 
+        // "Delayed" - without SaveChanges(),
+        // in order to stack them throughout different controllers
+        public async Task AddAsyncDelayed(TItem item)
+        {
+            await _dbSet.AddAsync(item);
+        }
+
+        public async Task AddRangeAsyncDelayed(TItem[] items)
+        {
+            await _dbSet.AddRangeAsync(items);
+        }
+
         public bool Delete(TId id)
         {
             TItem? item = _dbSet.Find(id);

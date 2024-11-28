@@ -1,0 +1,37 @@
+﻿@using AnimeQSystem.Web.Models.FormModels.AnimeQuiz
+@model CreateQuizFormModel;
+
+<div class="row">
+    <div class="col-md-12 d-flex flex-column align-items-center">
+        <h1>Create Quiz</h1>
+        <section>
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                <div class="form-floating mb-3">
+                    <input asp-for="Title" class="form-control" placeholder="Your Name"/>
+                    <label asp-for="Title" class="form-label">Quiz Title</label>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Description" class="form-control" placeholder="This is one of the most successful..."/>
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="ImageUrl" class="form-control" placeholder="https://google.com..."/>
+                    <label asp-for="ImageUrl" class="form-label">Image URL</label>
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="RewardPoints" class="form-control" placeholder="100"/>
+                    <label asp-for="RewardPoints" class="form-label">Reward Points</label>
+                    <span asp-validation-for="RewardPoints" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create Quiz</button>
+            </form>
+        </section>
+    </div>
+</div>

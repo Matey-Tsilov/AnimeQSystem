@@ -30,6 +30,9 @@ builder.Services.RegisterRepositories(typeof(User).Assembly);
 // Automatically register all services on run
 builder.Services.RegisterServices(typeof(QuizService).Assembly);
 
+// Register the AutoMapper as a service to be the same throughout the whole application
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 // Build the whole application
 var app = builder.Build();
 
@@ -62,6 +65,7 @@ await DatabaseSeeder.MigrateAndSeed(app.Services);
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();
