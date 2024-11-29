@@ -28,33 +28,16 @@ namespace AnimeQSystem.Data.Repository
 
         public IQueryable<TItem> GetAllAttached() => _dbSet.AsQueryable();
 
-        public TItem Add(TItem item)
+        public void Add(TItem item)
         {
-
-            var result = _dbSet.Add(item);
+            _dbSet.Add(item);
             _dbContext.SaveChanges();
-            return result.Entity;
-
         }
 
-        public async Task<TItem> AddAsync(TItem item)
+        public async Task AddAsync(TItem item)
         {
-            var result = await _dbSet.AddAsync(item);
+            await _dbSet.AddAsync(item);
             await _dbContext.SaveChangesAsync();
-            return result.Entity;
-        }
-
-        // "Delayed" - without SaveChanges(),
-        // in order to stack them throughout different controllers
-        public async Task<TItem> AddAsyncDelayed(TItem item)
-        {
-            var result = await _dbSet.AddAsync(item);
-            return result.Entity;
-        }
-
-        public async Task AddRangeAsyncDelayed(TItem[] items)
-        {
-            await _dbSet.AddRangeAsync(items);
         }
 
         public bool Delete(TId id)

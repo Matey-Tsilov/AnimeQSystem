@@ -9,12 +9,10 @@
         public TItem? GetById(params TId[] compositeId);
         public Task<TItem?> GetByIdAsync(TId id);
         public Task<TItem?> GetByIdAsync(params TId[] compositeId);
-        public TItem Add(TItem item);
-        public Task<TItem> AddAsync(TItem item);
-        public Task<TItem> AddAsyncDelayed(TItem item);
+        public void Add(TItem item);
+        public Task AddAsync(TItem item);
         public void AddRange(TItem[] items);
         public Task AddRangeAsync(TItem[] items);
-        public Task AddRangeAsyncDelayed(TItem[] items);
         public bool Update(TItem item);
         public Task<bool> UpdateAsync(TItem item);
         public bool Delete(TId id);

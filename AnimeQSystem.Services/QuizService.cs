@@ -27,15 +27,17 @@ namespace AnimeQSystem.Services
         {
             try
             {
+                // Set current time as creation
                 Quiz quiz = autoMapper.Map<Quiz>(model);
                 quiz.CreatedAt = DateTime.Now;
 
                 // TODO: Really inefficient
+                // Get the creator's Id
                 User? loggedInUser = _userRepo.GetAll().FirstOrDefault(u => u.IdentityUser.UserName == user.Identity?.Name);
                 if (loggedInUser is null) throw new NullReferenceException("Invalid logged-in user");
                 quiz.CreatorId = loggedInUser.Id;
 
-                await _quizRepo.AddAsyncDelayed(quiz);
+                await _quizRepo.AddAsync(quiz);
                 return true;
             }
             catch (Exception ex)

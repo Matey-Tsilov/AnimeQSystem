@@ -26,14 +26,14 @@ namespace AnimeQSystem.Web.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult CreateQuiz()
         {
             return View();
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create(CreateQuizFormModel formModel)
+        public async Task<IActionResult> CreateQuiz(CreateQuizFormModel formModel)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +42,8 @@ namespace AnimeQSystem.Web.Controllers
 
             await _quizService.CreateQuiz(formModel, User);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(All));
         }
+
     }
 }
