@@ -4,34 +4,75 @@
 <div class="row">
     <div class="col-md-12 d-flex flex-column align-items-center">
         <h1>Create Quiz</h1>
-        <section>
-            <form asp-action="Create" method="post" class="needs-validation" novalidate>
-                <div class="form-floating mb-3">
-                    <input asp-for="Title" class="form-control" placeholder="Your Name"/>
-                    <label asp-for="Title" class="form-label">Quiz Title</label>
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
+         <form asp-action="CreateQuiz" method="post" class="needs-validation" novalidate>
+            <section id="createQuizInputsContainer" class="d-flex g-2">
+                <section id="quizCreation">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Title" class="form-control" placeholder="Your Name" />
+                        <label asp-for="Title" class="form-label">Quiz Title</label>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Description" class="form-control" placeholder="This is one of the most successful..."/>
-                    <label asp-for="Description" class="form-label">Description</label>
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Description" class="form-control" placeholder="This is one of the most successful..." />
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
 
-                <div class="form-floating mb-3">
-                    <input asp-for="ImageUrl" class="form-control" placeholder="https://google.com..."/>
-                    <label asp-for="ImageUrl" class="form-label">Image URL</label>
-                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="ImageUrl" class="form-control" placeholder="https://google.com..." />
+                        <label asp-for="ImageUrl" class="form-label">Image URL</label>
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
 
-                <div class="form-floating mb-3">
-                    <input asp-for="RewardPoints" class="form-control" placeholder="100"/>
-                    <label asp-for="RewardPoints" class="form-label">Reward Points</label>
-                    <span asp-validation-for="RewardPoints" class="text-danger"></span>
-                </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="RewardPoints" class="form-control" placeholder="100" />
+                        <label asp-for="RewardPoints" class="form-label">Reward Points</label>
+                        <span asp-validation-for="RewardPoints" class="text-danger"></span>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Create Quiz</button>
-            </form>
-        </section>
+                </section>
+
+                <div class="separator-line"></div>
+
+                <section id="quizQuestionCreation">
+
+                    <div id="question_0" class="question-container position-relative">
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="QuizQuestions[0].Title" class="form-control" placeholder="Why did Ellen start..." />
+                            <label asp-for="QuizQuestions[0].Title" class="form-label">Question Title</label>
+                            <span asp-validation-for="QuizQuestions[0].Title" class="text-danger"></span>
+                        </div>
+                    
+                        <div class="form-input">
+                            <select asp-for="QuizQuestions[0].QuizType" class="form-select" aria-label="Quiz question select">
+                                <option value="" selected>-- Select a quiz question type --</option>
+                                <option value="0">True or False</option>
+                                <option value="1">Multiple choice</option>
+                                <option value="2">Write answer</option>
+                            </select>
+                            <span asp-validation-for="QuizQuestions[0].QuizType" class="text-danger"></span>
+                        </div>
+
+                        <div class="sideways quizOptionHelper d-none"></div>
+
+                    </div>
+
+                    <div class="centeredWithTopMargin">
+                        <button id="createAnotherQuestion" class="btn btn-warning" type="button">Add question</button>
+                        <button id="createQuizBtn" type="submit" class="btn btn-primary">Create quiz</button>
+                    </div>
+                </section>
+            </section>
+           
+         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script type="module"> 
+        import module from "/js/Quiz/create.js";
+        module.init();
+    </script>
+}

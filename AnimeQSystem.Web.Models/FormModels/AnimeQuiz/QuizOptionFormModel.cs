@@ -9,7 +9,7 @@ namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
         [MaxLength(ModelConstraints.QuizOption.OptionTextMaxLength)]
         public string? OptionText { get; set; }
 
-        [Required]
-        public bool IsCorrect { get; set; }
+        [Required(ErrorMessage = "At least one true option must be selected")]
+        public bool IsCorrect { get; set; } = false;
     }
 }

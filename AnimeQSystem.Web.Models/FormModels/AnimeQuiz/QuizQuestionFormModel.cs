@@ -1,5 +1,4 @@
 ﻿using AnimeQSystem.Common;
-using AnimeQSystem.Data.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
@@ -15,7 +14,7 @@ namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
         public string? Answer { get; set; }
 
         [Required]
-        public QuizType QuizType { get; set; }
+        public int QuizType { get; set; }
 
         public virtual List<QuizOptionFormModel> QuizOptions { get; set; } = new List<QuizOptionFormModel>();
     }

@@ -25,3 +25,39 @@ body {
     max-width: 1920px;
     margin: 0 auto;
 }
+
+/* Custom CSS rules */
+h1{
+    margin-block: 1em;
+}
+
+.separator-line {
+    border-left: 1px solid black;
+    height: 350px;
+    margin: 0 20px;
+}
+
+#quizCreation, #quizQuestionCreation {
+    margin-bottom: 20px;
+}
+
+.centeredWithTopMargin{
+    margin-top: 1em;
+    text-align: center
+}
+
+.sideways {
+    position: absolute;
+    top: 50%; 
+    left: 105%;
+    transform: translateY(-50%);
+}
+
+.button-like-input {
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
