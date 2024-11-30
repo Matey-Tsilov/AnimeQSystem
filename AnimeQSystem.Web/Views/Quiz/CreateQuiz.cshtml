@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-12 d-flex flex-column align-items-center">
         <h1>Create Quiz</h1>
-         <form asp-action="CreateQuiz" method="post" class="needs-validation" novalidate>
+        <form asp-action="CreateQuiz" method="post" class="needs-validation" id="createQuizForm" novalidate>
             <section id="createQuizInputsContainer" class="d-flex g-2">
                 <section id="quizCreation">
                     <div class="form-floating mb-3">
@@ -35,31 +35,125 @@
 
                 <div class="separator-line"></div>
 
-                <section id="quizQuestionCreation">
+                <section id="quizQuestionCreation" class="d-flex flex-column gap-4">
 
-                    <div id="question_0" class="question-container position-relative">
+                    @{
+                        if (Model is not null && Model.QuizQuestions.Any())
+                        {
+                            for(int i = 0; i < Model.QuizQuestions.Count(); i++)
+                            {
+                                <div id="question_@i" class="question-container position-relative">
 
-                        <div class="form-floating mb-3">
-                            <input asp-for="QuizQuestions[0].Title" class="form-control" placeholder="Why did Ellen start..." />
-                            <label asp-for="QuizQuestions[0].Title" class="form-label">Question Title</label>
-                            <span asp-validation-for="QuizQuestions[0].Title" class="text-danger"></span>
-                        </div>
-                    
-                        <div class="form-input">
-                            <select asp-for="QuizQuestions[0].QuizType" class="form-select" aria-label="Quiz question select">
-                                <option value="" selected>-- Select a quiz question type --</option>
-                                <option value="0">True or False</option>
-                                <option value="1">Multiple choice</option>
-                                <option value="2">Write answer</option>
-                            </select>
-                            <span asp-validation-for="QuizQuestions[0].QuizType" class="text-danger"></span>
-                        </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="QuizQuestions[@i].Title" class="form-control" placeholder="Why did Ellen start..." required/>
+                                        <label asp-for="QuizQuestions[@i].Title" class="form-label">Question Title</label>
+                                        <span asp-validation-for="QuizQuestions[@i].Title" class="text-danger"></span>
+                                    </div>
 
-                        <div class="sideways quizOptionHelper d-none"></div>
+                                    <div class="form-input">
+                                        <select asp-for="QuizQuestions[@i].QuizType" class="form-select" aria-label="Quiz question select" required>
+                                            <option value="0" selected>-- Select a quiz question type --</option>
+                                            <option value="1">True or False</option>
+                                            <option value="2">Multiple choice</option>
+                                            <option value="3">Write answer</option>
+                                        </select>
+                                        <span asp-validation-for="QuizQuestions[@i].QuizType" class="text-danger"></span>
 
-                    </div>
+                                        @if(i != 0){
+                                            <span id="deleteQuestion_@i" class="text-danger fw-bold sideways-delete-btn" style="font-size: 1.5rem;">&times;</span>
+                                        }
 
-                    <div class="centeredWithTopMargin">
+                                        <input asp-for="QuizQuestions[@i].Answer" class="d-none" required>
+                                    </div>
+
+                                    @{
+                                        switch (Model.QuizQuestions[i].QuizType)
+                                        {
+                                            case 1:
+                                                <div id="question_@(i)_optionHelper" class="sideways-helper-menu">
+                                                    <div class="form-floating d-flex flex-column gap-2">
+                                                        <button class="btn btn-@(Model.QuizQuestions[i].Answer.ToLower() == "false" ? "outline-" : "")success is-true" type="button">True</button>
+                                                        <button class="btn btn-@(Model.QuizQuestions[i].Answer.ToLower() == "true" ? "outline-" : "")danger is-false" type="button">False</button>
+                                                    </div>
+                                                </div>
+                                            break;
+                                            case 2:
+                                                <div id="question_@(i)_optionHelper" class="sideways-helper-menu">
+                                                    <div class="form-floating d-flex gap-2" style="width:300px;">
+                                                        <div class="d-flex flex-column gap-2">
+                                                            <div class="form-floating d-flex gap-1" id="optionText_0">
+                                                                <input name="QuizQuestions[@i].QuizOptions[0].OptionText" class="form-control" placeholder="Option &#8470;1" required @(Model.QuizQuestions[@i].QuizOptions[0].OptionText.Trim() != "" ? $"value={Model.QuizQuestions[@i].QuizOptions[0].OptionText}" : "") />
+                                                                <label for="QuizQuestions[@i].QuizOptions[0].OptionText" class="form-label">Option &#8470;1</label>
+                                                                <input name="QuizQuestions[@i].QuizOptions[0].IsCorrect" type="radio" value="true" @(Model.QuizQuestions[@i].QuizOptions[0].IsCorrect == true ? "checked" : "") />
+                                                            </div>
+                                                            <div class="form-floating d-flex gap-1" id="optionText_1">
+                                                                <input name="QuizQuestions[@i].QuizOptions[1].OptionText" class="form-control" placeholder="Option &#8470;2" required @(Model.QuizQuestions[@i].QuizOptions[1].OptionText.Trim() != "" ? $"value={Model.QuizQuestions[@i].QuizOptions[1].OptionText}" : "") />
+                                                                <label for="QuizQuestions[@i].QuizOptions[1].OptionText" class="form-label">Option &#8470;2</label>
+                                                                <input name="QuizQuestions[@i].QuizOptions[1].IsCorrect" type="radio" value="true" @(Model.QuizQuestions[@i].QuizOptions[1].IsCorrect == true ? "checked" : "") />
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex flex-column gap-2">
+                                                            <div class="form-floating d-flex gap-1" id="optionText_2">
+                                                                <input name="QuizQuestions[@i].QuizOptions[2].OptionText" class="form-control" placeholder="Option &#8470;3" required @(Model.QuizQuestions[@i].QuizOptions[2].OptionText.Trim() != "" ? $"value={Model.QuizQuestions[@i].QuizOptions[2].OptionText}" : "") />
+                                                                <label for="QuizQuestions[@i].QuizOptions[2].OptionText" class="form-label">Option &#8470;3</label>
+                                                                <input name="QuizQuestions[@i].QuizOptions[2].IsCorrect" type="radio" value="true" @(Model.QuizQuestions[@i].QuizOptions[2].IsCorrect == true ? "checked" : "") />
+                                                            </div>
+                                                            <div class="form-floating d-flex gap-1" id="optionText_3">
+                                                                <input name="QuizQuestions[@i].QuizOptions[3].OptionText" class="form-control" placeholder="Option &#8470;4" required @(Model.QuizQuestions[@i].QuizOptions[3].OptionText.Trim() != "" ? $"value={Model.QuizQuestions[@i].QuizOptions[3].OptionText}" : "") />
+                                                                <label for="QuizQuestions[@i].QuizOptions[3].OptionText" class="form-label">Option &#8470;4</label>
+                                                                <input name="QuizQuestions[@i].QuizOptions[3].IsCorrect" type="radio" value="true" @(Model.QuizQuestions[@i].QuizOptions[3].IsCorrect == true ? "checked" : "") />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            break;
+                                            case 3:
+                                                <div id="question_@(i)_optionHelper" class="sideways-helper-menu write-answer">
+                                                    <div class="form-floating" style="width:200px;">
+                                                        <input name="QuizQuestions[@i].QuizOptions[0].OptionText" class="form-control" placeholder="Your Answer" required @(Model.QuizQuestions[@i].QuizOptions[0].OptionText.Trim() != "" ? $"value={Model.QuizQuestions[@i].QuizOptions[0].OptionText}" : "") />
+                                                        <label for="QuizQuestions[@i].QuizOptions[0].OptionText" class="form-label">Your Answer</label>
+                                                        <input name="QuizQuestions[@i].QuizOptions[0].IsCorrect" class="d-none" value="true" checked/>
+                                                    </div>
+                                                </div>
+                                            break;
+                                            default: 
+                                                <div id="question_@(i)_optionHelper" class="sideways-helper-menu d-none"></div> 
+                                            break;
+
+                                        }
+                                    }
+
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div id="question_0" class="question-container position-relative">
+
+                                <div class="form-floating mb-3">
+                                    <input asp-for="QuizQuestions[0].Title" class="form-control" placeholder="Why did Ellen start..." />
+                                    <label asp-for="QuizQuestions[0].Title" class="form-label">Question Title</label>
+                                    <span asp-validation-for="QuizQuestions[0].Title" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-input">
+                                    <select asp-for="QuizQuestions[0].QuizType" class="form-select" aria-label="Quiz question select">
+                                        <option value="0" selected>-- Select a quiz question type --</option>
+                                        <option value="1">True or False</option>
+                                        <option value="2">Multiple choice</option>
+                                        <option value="3">Write answer</option>
+                                    </select>
+                                    <span asp-validation-for="QuizQuestions[0].QuizType" class="text-danger"></span>
+                                    <input asp-for="QuizQuestions[0].Answer" class="d-none">
+                                </div>
+
+                                <div id="question_0_optionHelper" class="sideways-helper-menu d-none"></div>
+
+                            </div>
+                        }
+                    }
+
+                    <div id="addQuestionAndCreateQuizButtons" class="centered">
                         <button id="createAnotherQuestion" class="btn btn-warning" type="button">Add question</button>
                         <button id="createQuizBtn" type="submit" class="btn btn-primary">Create quiz</button>
                     </div>

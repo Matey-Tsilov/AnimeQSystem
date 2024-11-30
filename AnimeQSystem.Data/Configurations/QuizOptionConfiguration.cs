@@ -13,7 +13,8 @@ namespace AnimeQSystem.Data.Configurations
                 .HasKey(a => a.Id);
 
             builder.Property(a => a.OptionText)
-                .HasMaxLength(ModelConstraints.QuizOption.OptionTextMaxLength);
+                .HasMaxLength(ModelConstraints.QuizOption.OptionTextMaxLength)
+                .IsRequired();
 
             builder.HasOne(a => a.QuizQuestion)
                 .WithMany(a => a.QuizOptions)

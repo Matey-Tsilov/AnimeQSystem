@@ -310,6 +310,7 @@ namespace AnimeQSystem.Data
                     {
                         Id = spiritedAwayQuestion1,
                         Title = "What is the name of the main protagonist in Spirited Away?",
+                        Answer = "Chihiro Ogino",
                         QuizType = QuizType.MultipleChoice,
                         QuizId = spiritedAwayQuizId
                     },
@@ -317,6 +318,7 @@ namespace AnimeQSystem.Data
                     {
                         Id = spiritedAwayQuestion2,
                         Title = "Who runs the bathhouse in Spirited Away?",
+                        Answer = "Yubaba",
                         QuizType = QuizType.MultipleChoice,
                         QuizId = spiritedAwayQuizId
                     },
@@ -342,6 +344,7 @@ namespace AnimeQSystem.Data
                     {
                         Id = silentVoiceQuestion1,
                         Title = "What is the name of the main protagonist in A Silent Voice?",
+                        Answer = "Shoya Ishida",
                         QuizType = QuizType.MultipleChoice,
                         QuizId = silentVoiceQuizId
                     },
@@ -368,6 +371,7 @@ namespace AnimeQSystem.Data
                         Id = yourNameQuestion1,
                         Title = "What is the name of the main character in Your Name?",
                         QuizType = QuizType.MultipleChoice,
+                        Answer = "Mitsuha Miyamizu",
                         QuizId = yourNameQuizId
                     },
                     new QuizQuestion

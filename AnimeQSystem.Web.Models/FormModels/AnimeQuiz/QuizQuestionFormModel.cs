@@ -1,17 +1,19 @@
-﻿using AnimeQSystem.Common;
+﻿using AnimeQSystem.Data.Models.QuizSystem;
+using AnimeQSystem.Services.Mapping;
 using System.ComponentModel.DataAnnotations;
+using static AnimeQSystem.Common.ModelConstraints.QuizQuestion;
 
 namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
 {
-    public class QuizQuestionFormModel
+    public class QuizQuestionFormModel : IMapTo<QuizQuestion>
     {
         [Required]
-        [MinLength(ModelConstraints.QuizQuestion.TitleMinLength)]
-        [MaxLength(ModelConstraints.QuizQuestion.TitleMaxLength)]
+        [MinLength(TitleMinLength)]
+        [MaxLength(TitleMaxLength)]
         public string Title { get; set; } = null!;
 
-        [MinLength(ModelConstraints.QuizQuestion.AnswerMinLength)]
-        public string? Answer { get; set; }
+        [MinLength(AnswerMinLength)]
+        public string Answer { get; set; } = null!;
 
         [Required]
         public int QuizType { get; set; }

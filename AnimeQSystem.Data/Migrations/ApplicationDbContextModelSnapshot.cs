@@ -265,6 +265,7 @@ namespace AnimeQSystem.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("OptionText")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -285,6 +286,7 @@ namespace AnimeQSystem.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Answer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("QuizId")

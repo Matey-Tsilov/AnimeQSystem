@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimeQSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241126143851_InitialMigration")]
+    [Migration("20241130165740_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -268,6 +268,7 @@ namespace AnimeQSystem.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("OptionText")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -288,6 +289,7 @@ namespace AnimeQSystem.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Answer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("QuizId")

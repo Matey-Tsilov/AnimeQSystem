@@ -3,7 +3,7 @@
     public class QuizOption
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string? OptionText { get; set; }
+        public string OptionText { get; set; } = null!;
         public bool IsCorrect { get; set; }
 
         // Navigation Properties

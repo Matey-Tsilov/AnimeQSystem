@@ -41,15 +41,25 @@ h1{
     margin-bottom: 20px;
 }
 
-.centeredWithTopMargin{
-    margin-top: 1em;
+.centered{
     text-align: center
 }
 
-.sideways {
+.sideways-delete-btn {
     position: absolute;
     top: 50%; 
     left: 105%;
+    transform: translateY(-50%);
+}
+
+.sideways-delete-btn:hover {
+    cursor: pointer;
+}
+
+.sideways-helper-menu {
+    position: absolute;
+    top: 50%;
+    left: 115%;
     transform: translateY(-50%);
 }
 
@@ -60,4 +70,8 @@ h1{
     padding: 10px;
     text-align: center;
     cursor: pointer;
+}
+
+.is-invalid {
+    border: 1px solid red;
 }

@@ -24,20 +24,18 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 // This configures the MVC pipeline, enabling support for controllers and views in the application.
 builder.Services.AddControllersWithViews();
 
+// Go around application and collect all mappings into a AutoMapper config (runtime)
+AutoMapperConfig.RegisterMappings(typeof(QuizCardViewModel).Assembly);
+
 // Automatically register all repositories on run
 builder.Services.RegisterRepositories(typeof(User).Assembly);
 
 // Automatically register all services on run
 builder.Services.RegisterServices(typeof(QuizService).Assembly);
 
-// Register the AutoMapper as a service to be the same throughout the whole application
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 // Build the whole application
 var app = builder.Build();
 
-// Go around application and collect all mappings into a AutoMapper config (runtime)
-AutoMapperConfig.RegisterMappings(typeof(QuizCardViewModel).Assembly);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

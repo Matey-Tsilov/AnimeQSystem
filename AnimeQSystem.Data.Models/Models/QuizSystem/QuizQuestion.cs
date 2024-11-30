@@ -6,7 +6,7 @@ namespace AnimeQSystem.Data.Models.QuizSystem
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Title { get; set; } = null!;
-        public string? Answer { get; set; }
+        public string Answer { get; set; } = null!;
         public QuizType QuizType { get; set; }
         public virtual List<QuizOption> QuizOptions { get; set; } = new List<QuizOption>();
 

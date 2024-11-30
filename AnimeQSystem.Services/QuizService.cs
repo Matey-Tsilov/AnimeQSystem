@@ -5,7 +5,6 @@ using AnimeQSystem.Services.Interfaces;
 using AnimeQSystem.Services.Mapping;
 using AnimeQSystem.Web.Models.FormModels.AnimeQuiz;
 using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -13,8 +12,8 @@ namespace AnimeQSystem.Services
 {
     public class QuizService(
         IRepository<Quiz, Guid> _quizRepo,
-        IRepository<User, Guid> _userRepo,
-        IMapper autoMapper) : IQuizService
+        IRepository<User, Guid> _userRepo
+        ) : IQuizService
     {
         public async Task<List<QuizCardViewModel>> GetAllQuizzes()
         {
@@ -27,8 +26,8 @@ namespace AnimeQSystem.Services
         {
             try
             {
-                // Set current time as creation
-                Quiz quiz = autoMapper.Map<Quiz>(model);
+                // Map and set current time as creation
+                Quiz quiz = AutoMapperConfig.MapperInstance.Map<Quiz>(model);
                 quiz.CreatedAt = DateTime.Now;
 
                 // TODO: Really inefficient
@@ -42,7 +41,7 @@ namespace AnimeQSystem.Services
             }
             catch (Exception ex)
             {
-                // TODO: Logging
+                // TODO: Logging and redirect to Error page
                 return false;
             }
         }

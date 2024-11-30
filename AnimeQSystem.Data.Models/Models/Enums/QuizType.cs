@@ -2,8 +2,8 @@
 {
     public enum QuizType
     {
-        TrueFalse = 0,
-        MultipleChoice = 1,
-        WriteAnswer = 2
+        TrueFalse = 1,
+        MultipleChoice = 2,
+        WriteAnswer = 3
     }
 }

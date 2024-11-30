@@ -299,7 +299,7 @@ namespace AnimeQSystem.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QuizType = table.Column<int>(type: "int", nullable: false),
                     QuizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -370,7 +370,7 @@ namespace AnimeQSystem.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OptionText = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    OptionText = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsCorrect = table.Column<bool>(type: "bit", nullable: false),
                     QuizQuestionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

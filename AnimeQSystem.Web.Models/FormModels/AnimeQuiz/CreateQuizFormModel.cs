@@ -1,22 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static AnimeQSystem.Common.ModelConstraints;
+﻿using AnimeQSystem.Data.Models.QuizSystem;
+using AnimeQSystem.Services.Mapping;
+using System.ComponentModel.DataAnnotations;
+using static AnimeQSystem.Common.ModelConstraints.Quiz;
 
 namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
 {
-    public class CreateQuizFormModel
+    public class CreateQuizFormModel : IMapTo<Quiz>
     {
         [Required]
-        [MinLength(Quiz.TitleMinLength)]
-        [MaxLength(Quiz.TitleMaxLength)]
+        [MinLength(TitleMinLength)]
+        [MaxLength(TitleMaxLength)]
         public string Title { get; set; } = null!;
 
         [Required]
-        [MinLength(Quiz.DescriptionMinLength)]
-        [MaxLength(Quiz.DescriptionMaxLength)]
+        [MinLength(DescriptionMinLength)]
+        [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
         [Required]
-        [RegularExpression(@"^(https?://)?([\w-]+(\.[\w-]+)+)(/[\w- ./?%&=]*)?\.(jpg|jpeg|png|gif|bmp|webp)$"
+        [RegularExpression(@"^(https?://)?([\w-]+(\.[\w-]+)+)(/[\w- ./?%&=]*)?\.(jpg|jpeg|png|gif|bmp|webp)(\?[\w&=%-]*)?$"
         , ErrorMessage = "Please provide a valid image URL.")]
         public string ImageUrl { get; set; } = null!;
 

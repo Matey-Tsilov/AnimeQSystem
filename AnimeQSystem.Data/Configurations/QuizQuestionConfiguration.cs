@@ -16,6 +16,9 @@ namespace AnimeQSystem.Data.Configurations
                 .HasMaxLength(ModelConstraints.QuizQuestion.TitleMaxLength)
                 .IsRequired();
 
+            builder.Property(a => a.Answer)
+                .IsRequired();
+
             builder.HasOne(a => a.Quiz)
                 .WithMany(a => a.QuizQuestions)
                 .HasForeignKey(a => a.QuizId)
