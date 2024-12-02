@@ -26,7 +26,7 @@ body {
     margin: 0 auto;
 }
 
-/* Custom CSS rules */
+/* Quiz creation CSS rules */
 h1{
     margin-block: 1em;
 }
@@ -74,4 +74,30 @@ h1{
 
 .is-invalid {
     border: 1px solid red;
+}
+
+/* Begin a quest CSS rules */
+label.radio {
+    cursor: pointer;
+}
+
+label.radio span {
+    padding: 4px 0px;
+    border: 1px solid red;
+    display: inline-block;
+    color: red;
+    width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 7px;
+}
+
+label.radio input:checked + span {
+    border-color: red;
+    background-color: red;
+    color: #fff;
+}
+
+.ans {
+    margin-left: 36px !important;
 }

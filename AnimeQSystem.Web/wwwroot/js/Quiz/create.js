@@ -1,4 +1,4 @@
-﻿function init() {
+﻿export default function init() {
     document.getElementById("createAnotherQuestion").addEventListener("click", addQuestion)
     document.getElementById("createQuizForm").addEventListener("submit", validateFields)
 
@@ -13,10 +13,6 @@
     // Add event listeners to multiple choice options, to not be able to select many radio buttons
     const multipleUniqueChoiceQuestions = Array.from(new Set([...document.querySelectorAll('input[type="radio"]')].map(el => el.parentElement.parentElement.parentElement.parentElement)));
     multipleUniqueChoiceQuestions.forEach(q => allowOneRadionButtonSelectedAtATime(q));
-
-    // Add event listeners to all write own answer questions to change the question answer accordingly???????????????
-    const writeOwnAnswerQuestions = Array.from(document.querySelectorAll(".write-answer"));
-    writeOwnAnswerQuestions.forEach(q => q.querySelector(".form-control").addEventListener("change", (e) => q.parentElement.querySelector(`input[name$=".Answer"]`).value = e.target.value))
 
     // Add event listener to all delete buttons which are pre-populated on error return
     const deleteQuestionButtons = Array.from(document.querySelectorAll(".sideways-delete-btn"));
@@ -50,9 +46,6 @@ function addQuestion() {
     newQuestion.querySelector('.form-input span').setAttribute('data-valmsg-for', `QuizQuestions[${questionCount}].QuizType`);
     newQuestion.querySelector('.form-input select').setAttribute('name', `QuizQuestions[${questionCount}].QuizType`);
     newQuestion.querySelector('.form-input select').value = '0'; // Clear the input value
-    // Clear the quiz answer input
-    newQuestion.querySelector('.form-input input').setAttribute('name', `QuizQuestions[${questionCount}].Answer`); 
-    newQuestion.querySelector('.form-input input').value = ''; // Clear the input value
     // Update id of options helper and clear the tab
     newQuestion.querySelector('.sideways-helper-menu').innerHTML = '';
     newQuestion.querySelector('.sideways-helper-menu').id = `question_${questionCount}_optionHelper`;
@@ -91,7 +84,7 @@ function allowOneRadionButtonSelectedAtATime(container) {
             const optionNumber = radio.parentElement.id.split("_")[1];
             const selectedValue = allOptions[optionNumber].value
             const questionNumber = container.parentElement.id.split("_")[1];
-            container.parentElement.querySelector(`[name="QuizQuestions[${questionNumber}].Answer"]`).value = selectedValue;
+            container.querySelector(`[name="QuizQuestions[${questionNumber}].Answer"]`).value = selectedValue;
         });
     });
 }
@@ -137,7 +130,7 @@ function selectCorrectOptionTrueFalse(e) {
     // Assign the same value on button click as the question's Answer
     const questionN = e.target.parentElement.parentElement.id.split("_")[1];
     const answerSelector = `[name="QuizQuestions[${questionN}].Answer"]`;
-    e.target.parentElement.parentElement.parentElement.querySelector(answerSelector).value = e.target.textContent.toLowerCase();
+    e.target.parentElement.parentElement.querySelector(answerSelector).value = e.target.textContent.toLowerCase();
 }
 
 // Responsible for appearing on the left of all options
@@ -153,7 +146,8 @@ function toggleQuestionOptionsHelper(e) {
     <div class="form-floating d-flex flex-column gap-2">
         <button class="btn btn-outline-success is-true" type="button">True</button>
         <button class="btn btn-outline-danger is-false" type="button">False</button>
-    </div>`;
+    </div>
+    <input name="QuizQuestions[${questionNumber}].Answer" class="d-none" required>`;
 
     const optionMultipleChoice = `
     <div class="form-floating d-flex gap-2" style="width:300px;">
@@ -181,13 +175,13 @@ function toggleQuestionOptionsHelper(e) {
                 <input name="QuizQuestions[${questionNumber}].QuizOptions[3].IsCorrect" type="radio" value="true"/>
             </div>
         </div>
-    </div>`;
+    </div>
+    <input name="QuizQuestions[${questionNumber}].Answer" class="d-none" required>`;
 
     const optionWriteAnswer = `
     <div class="form-floating" style="width:200px;">
-        <input name="QuizQuestions[${questionNumber}].QuizOptions[0].OptionText" class="form-control" placeholder="Your Answer" required/>
-        <label for="QuizQuestions[${questionNumber}].QuizOptions[0].OptionText" class="form-label">Your Answer</label>
-        <input name="QuizQuestions[${questionNumber}].QuizOptions[0].IsCorrect" class="d-none" value="True"/>
+        <input name="QuizQuestions[${questionNumber}].Answer" class="form-control" placeholder="Your Answer" required/>
+        <label for="QuizQuestions[${questionNumber}].Answer" class="form-label">Your Answer</label>
     </div>`;
 
     switch (questionTypeSelectValue) {
@@ -211,8 +205,6 @@ function toggleQuestionOptionsHelper(e) {
         case "3":
             questionOptionHelper.classList.remove("d-none");
             questionOptionHelper.innerHTML = optionWriteAnswer;
-            questionOptionHelper.querySelector(".form-control").addEventListener("change",
-                (e) => questionOptionHelper.parentElement.querySelector(`[name="QuizQuestions[${questionNumber}].Answer"]`).value = e.target.value)
             break;
     }
 }
@@ -238,5 +230,3 @@ function validateFields(e) {
         e.preventDefault();
     }
 }
-
-export default { init }

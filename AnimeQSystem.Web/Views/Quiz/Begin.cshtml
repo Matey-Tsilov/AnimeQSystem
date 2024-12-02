@@ -1,0 +1,44 @@
+﻿@using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz;
+@model BeginQuizViewModel
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10 col-lg-10">
+            <div class="border">
+                <form asp-action="Finish" method="post" class="needs-validation" id="finishQuizForm" novalidate>
+                    <div class="bg-white p-3 border-bottom">
+                        <div class="d-flex flex-row justify-content-between align-items-center mcq">
+                            <h4>@Model.Title</h4><span id="questionCounter">(1 of @Model.QuizQuestions.Count())</span>
+                        </div>
+                        <div id="quizProgressBar" class="progress" role="progressbar" aria-label="progress-bar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width: 0%">0%</div>
+                        </div>
+                    </div>
+
+                    @{
+                        for(int i = 0; i < Model.QuizQuestions.Count(); i++)
+                        {
+                            // To avoid single View for all partials, we pass needed params
+                            Model.QuizQuestions[i].Index = i;
+
+                            <div class="question bg-white p-3 border-bottom @(i == 0 ? "" : "d-none")">
+                                <partial name="_QuizQuestion" model="Model.QuizQuestions[i]"/>
+                            </div>
+                        }
+                    }
+                    <div id="quizMoveBtnsSection" class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                        <button id="backBtn" class="btn btn-primary d-flex align-items-center btn-danger d-none" type="button" disabled><i class="fa fa-angle-left mt-1 mr-1"></i>Back</button>
+                        <button id="nextBtn" class="btn btn-primary border-success align-items-center btn-success" type="button">Next<i class="fa fa-angle-right ml-2"></i></button>
+                        <button id="submitBtn" class="btn btn-primary d-flex align-items-center btn-primary d-none" type="submit" disabled>Finish</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="module">
+        import initializeJSForView from "/js/Quiz/begin.js";
+        initializeJSForView();
+    </script>
+}

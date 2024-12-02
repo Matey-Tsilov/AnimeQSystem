@@ -45,5 +45,17 @@ namespace AnimeQSystem.Services
                 return false;
             }
         }
+        public async Task<BeginQuizViewModel> CreateBeginQuizViewModel(Guid quizId)
+        {
+            var quiz = await _quizRepo.GetByIdAsync(quizId);
+
+            if (quiz is null)
+            {
+                throw new NullReferenceException("There is no such quiz, therefore you can't begin it");
+            }
+
+            return AutoMapperConfig.MapperInstance.Map<BeginQuizViewModel>(quiz);
+        }
+
     }
 }

@@ -8,6 +8,6 @@ namespace AnimeQSystem.Services.Interfaces
     {
         Task<List<QuizCardViewModel>> GetAllQuizzes();
         Task<bool> CreateQuiz(CreateQuizFormModel modal, ClaimsPrincipal user);
-
+        Task<BeginQuizViewModel> CreateBeginQuizViewModel(Guid quizId);
     }
 }

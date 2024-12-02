@@ -1,0 +1,9 @@
+﻿@using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz;
+@model BeginQuizOptionViewModel;
+
+<div class="ans ml-2">
+    <label class="radio option">
+        <input name="QuizQuestions[@Model.QuestionIndex].QuizOptions[@Model.OptionIndex]" type="radio" value="true" class="d-none" />
+        <span>@Model.OptionText</span>
+    </label>
+</div> 

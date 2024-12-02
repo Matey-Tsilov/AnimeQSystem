@@ -18,7 +18,7 @@ namespace AnimeQSystem.Web.Controllers
 
             AllQuizzesViewModel model = new AllQuizzesViewModel()
             {
-                AllQuizzes = list
+                AllQuizzes = list.OrderByDescending(i => i.CreatedAt).ToList()
             };
 
             return View(model);
@@ -26,14 +26,37 @@ namespace AnimeQSystem.Web.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult CreateQuiz()
+        public IActionResult Create()
         {
             return View();
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateQuiz(CreateQuizFormModel formModel)
+        public async Task<IActionResult> Create(CreateQuizFormModel formModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(formModel);
+            }
+
+            await _quizService.CreateQuiz(formModel, User);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Begin(Guid quizId)
+        {
+            BeginQuizViewModel viewModel = await _quizService.CreateBeginQuizViewModel(quizId);
+
+            return View(viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Finish(CreateQuizFormModel formModel)
         {
             if (!ModelState.IsValid)
             {

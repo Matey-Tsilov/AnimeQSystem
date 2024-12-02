@@ -8,7 +8,7 @@
         <div class="card-body">
             <h5 class="card-title">@Model.Title</h5>
             <p class="card-text">@Model.Description</p>
-            <a href="#" class="btn btn-primary">Begin</a>
+            <a asp-action="Begin" class="btn btn-primary" asp-route-quizId="@Model.Id">Begin</a>
         </div>
         <div class="card-footer">
             <small class="text-body-secondary">@((DateTime.Now - Model.CreatedAt).Days) days ago</small>
