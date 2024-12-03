@@ -1,6 +1,10 @@
 ﻿export default function init() {
-    document.getElementById("backBtn").addEventListener("click", () => goToPage("back"))
-    document.getElementById("nextBtn").addEventListener("click", () => goToPage("next"))
+    document.getElementById("backBtn").addEventListener("click", () => goToPage("back"));
+    document.getElementById("nextBtn").addEventListener("click", () => goToPage("next"));
+    document.getElementById("submitBtn").addEventListener("submit", validateInput);
+
+    // Attach the changing of the progress bar to each input answer change
+    document.querySelectorAll('input[name$="YourAnswer"]').forEach(ya => ya.addEventListener("change", updateQuestionProgressBar));
 
     // Add event listener to all options inputs to automatically change the question answer input
     document.querySelectorAll('.option input[type="radio"]').forEach(opt => opt.addEventListener("change", changeQuestionAnswerInput));
@@ -28,7 +32,6 @@ function goToPage(direction) {
 
     updateQuestionCounter();
     updateMoveBtnsContainer();
-    updateQuestionProgressBar();
 }
 
 // Responsible for updating the counter on each page change backward or forward
@@ -95,5 +98,20 @@ function changeQuestionAnswerInput(e) {
     const chosenOptionText = e.target.nextElementSibling.textContent;
 
     // Change the corresponding answer value
-    e.target.parentElement.parentElement.parentElement.querySelector('input[type="text"]').value = chosenOptionText;
+    const answerInput = e.target.parentElement.parentElement.parentElement.querySelector('input[type="text"]');
+    answerInput.value = chosenOptionText;
+
+    // Manually trigger the 'change' event
+    const event = new Event('change', { bubbles: true });
+    answerInput.dispatchEvent(event);
+}
+
+// Make some final checks before allowing the user to submit his answers
+function validateInput(e) {
+    const progressbarProcentage = Number(document.querySelector(".progress-bar").textContent.split("%")[0]);
+
+    if (progressbarProcentage != 100) {
+        alert("You first need to give an answer to all questions!");
+        e.preventDefault();
+    }
 }
