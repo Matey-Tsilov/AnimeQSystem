@@ -1,0 +1,35 @@
+﻿@using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz
+@using AnimeQSystem.Web.Models.Enums
+
+@model UserQuizResultViewModel
+
+<div id="feedbackContainer">
+    <input asp-for="UserResult" class="d-none" />
+    
+    @{
+        if(Model.UserResult == UserResult.Perfect)
+        {
+            <h1>Wow, amazing!</h1>
+        }
+        else if(Model.UserResult == UserResult.Success)
+        {
+            <h1>Congratulations</h1>
+        }
+        else
+        {
+            <h1>Better luck next time</h1>
+        }
+    }
+    <h2>You have a score of: @(Model.Points) Points</h2>
+    <p>You answered @(Model.CorrectAnswers) out of @(Model.AllQuestions) questions right.</p>
+    <a asp-action="All" asp-controller="Quiz">Take on another quiz!</a>
+</div>
+
+@section Scripts {
+    @Html.Raw("<script src='https://cdn.jsdelivr.net/npm/tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js'></script>")
+
+    <script type="module">
+        import initializeJSForView from "/js/Quiz/feedback.js";
+        initializeJSForView();
+    </script>
+}

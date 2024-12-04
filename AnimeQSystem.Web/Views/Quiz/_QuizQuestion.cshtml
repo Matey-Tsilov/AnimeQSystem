@@ -5,51 +5,44 @@
     <div class="d-flex flex-row align-items-center question-title">
         <h3 class="text-danger">Q. </h3>
         <h5 class="mt-1 ml-2">@Model.Title</h5>
+        <input asp-for="Title" name="QuizQuestions[@Model.Index].Title" class="d-none" />
     </div>
 
-    @{
-        if (Model.QuizOptions.Any())
-        {
-            <div class="d-flex gap-3">
+    <div class="d-flex gap-3">
+        @{
+            if (Model.QuizType == QuizType.MultipleChoice)
+            {
                 @for (int i = 0; i < Model.QuizOptions.Count(); i++)
                 {
                     // To avoid single View for all partials, we pass needed params
                     Model.QuizOptions[i].QuestionIndex = Model.Index;
-                    Model.QuizOptions[i].OptionIndex = i;
 
                     <partial name="_QuizOption" model="Model.QuizOptions[i]" />
                 }
-                <input name="QuizQuestions[@Model.Index].YourAnswer" type="text" class="d-none" />
-            </div>
-        }
-        else
-        {
-            if (Model.QuizType == QuizType.TrueFalse)
+                <input name="QuizQuestions[@Model.Index].UserAnswer" type="text" class="d-none" />
+            }
+            else if (Model.QuizType == QuizType.TrueFalse)
             {
-            <div class="d-flex gap-3">
-                    <div class="ans ml-2">
-                        <label class="radio">
-                            <input name="QuizQuestions[@Model.Index].YourAnswer" type="radio" value="true" class="d-none" /><span>True</span>
-                        </label>
-                    </div>
-                    <div class="ans ml-2">
-                        <label class="radio">
-                            <input name="QuizQuestions[@Model.Index].YourAnswer" type="radio" value="false" class="d-none" /><span>False</span>
-                        </label>
-                    </div>
+                <div class="ans ml-2">
+                    <label class="radio">
+                        <input name="QuizQuestions[@Model.Index].UserAnswer" type="radio" value="true" class="d-none" /><span>True</span>
+                    </label>
+                </div>
+                <div class="ans ml-2">
+                    <label class="radio">
+                        <input name="QuizQuestions[@Model.Index].UserAnswer" type="radio" value="false" class="d-none" /><span>False</span>
+                    </label>
                 </div>
             }
-            else 
+            else if(Model.QuizType == QuizType.WriteAnswer)
             {
-                <div class="d-flex gap-3">
-                    <div class="ans ml-2">
-                        <div class="form-floating">
-                            <input name="QuizQuestions[@Model.Index].YourAnswer" class="form-control" type="text" placeholder="Your Answer" />
-                            <label name="QuizQuestions[@Model.Index].YourAnswer" class="form-label">Your Answer</label>
-                        </div>
+                <div class="ans ml-2">
+                    <div class="form-floating">
+                        <input name="QuizQuestions[@Model.Index].UserAnswer" class="form-control" type="text" placeholder="Your Answer" />
+                        <label name="QuizQuestions[@Model.Index].UserAnswer" class="form-label">Your Answer</label>
                     </div>
                 </div>
             }
 
         }
-    }
+    </div>

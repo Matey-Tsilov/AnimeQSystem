@@ -7,7 +7,6 @@ namespace AnimeQSystem.Web.Models.ViewModels.AnimeQuiz
     public class BeginQuizOptionViewModel : IMapFrom<QuizOption>, ICustomMapping
     {
         public int QuestionIndex { get; set; }
-        public int OptionIndex { get; set; }
         public string OptionText { get; set; } = null!;
         public bool IsChosen { get; set; }
 
@@ -18,9 +17,6 @@ namespace AnimeQSystem.Web.Models.ViewModels.AnimeQuiz
 
             expression.CreateMap<QuizOption, BeginQuizOptionViewModel>()
                 .ForMember(d => d.QuestionIndex, x => x.Ignore());
-
-            expression.CreateMap<QuizOption, BeginQuizOptionViewModel>()
-                .ForMember(d => d.OptionIndex, x => x.Ignore());
         }
     }
 }

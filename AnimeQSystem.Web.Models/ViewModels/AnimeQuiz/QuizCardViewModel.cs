@@ -2,6 +2,7 @@
 
 namespace AnimeQSystem.Web.Models.ViewModels.AnimeQuiz
 {
+    using AnimeQSystem.Data.Models.Models;
     using AnimeQSystem.Data.Models.QuizSystem;
     public class QuizCardViewModel : IMapFrom<Quiz>
     {
@@ -12,5 +13,6 @@ namespace AnimeQSystem.Web.Models.ViewModels.AnimeQuiz
         public Guid CreatedBy { get; set; }
         public string ImageUrl { get; set; } = null!;
         public int RewardPoints { get; set; }
+        public virtual List<QuizzesUsers> QuizUsers { get; set; } = new List<QuizzesUsers>();
     }
 }

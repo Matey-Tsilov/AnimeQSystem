@@ -4,7 +4,7 @@
     document.getElementById("submitBtn").addEventListener("submit", validateInput);
 
     // Attach the changing of the progress bar to each input answer change
-    document.querySelectorAll('input[name$="YourAnswer"]').forEach(ya => ya.addEventListener("change", updateQuestionProgressBar));
+    document.querySelectorAll('input[name$="UserAnswer"]').forEach(ya => ya.addEventListener("change", updateQuestionProgressBar));
 
     // Add event listener to all options inputs to automatically change the question answer input
     document.querySelectorAll('.option input[type="radio"]').forEach(opt => opt.addEventListener("change", changeQuestionAnswerInput));
@@ -45,7 +45,7 @@ function updateQuestionCounter() {
 function updateQuestionProgressBar() {
 
     // Different types of input have different types of value also so we need a way to check both types' count
-    const allAnsweredMCandWAQuestionsCount = Array.from(document.querySelectorAll(`input[name$=".YourAnswer"]:not([type="radio"])`)).filter(el => el.value.trim() != "").length;
+    const allAnsweredMCandWAQuestionsCount = Array.from(document.querySelectorAll(`input[name$=".UserAnswer"]:not([type="radio"])`)).filter(el => el.value.trim() != "").length;
     const allAnsweredTrueFalseQuestionsCount = Array.from(document.querySelectorAll(`input[name$="Answer"][type="radio"]`)).filter(el => el.checked).length;
     const allAnsweredCount = allAnsweredMCandWAQuestionsCount + allAnsweredTrueFalseQuestionsCount;
 
@@ -53,7 +53,7 @@ function updateQuestionProgressBar() {
     const step = 100 / allQuestions.length
 
     progressBar.style.width = step * allAnsweredCount + '%';
-    progressBar.textContent = step * allAnsweredCount + '%';
+    progressBar.textContent = Math.trunc(step * allAnsweredCount) + '%';
 }
 
 // Responsible for updating the inside of the container with the move buttons

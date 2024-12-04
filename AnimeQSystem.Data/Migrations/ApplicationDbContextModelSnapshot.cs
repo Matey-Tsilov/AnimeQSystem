@@ -212,6 +212,9 @@ namespace AnimeQSystem.Data.Migrations
                     b.Property<Guid>("QuizId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("ResultPoints")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId", "QuizId");
 
                     b.HasIndex("QuizId");

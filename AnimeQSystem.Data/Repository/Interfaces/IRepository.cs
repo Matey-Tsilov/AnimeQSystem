@@ -6,9 +6,7 @@
         public Task<IEnumerable<TItem>> GetAllAsync();
         public IQueryable<TItem> GetAllAttached();
         public TItem? GetById(TId id);
-        public TItem? GetById(params TId[] compositeId);
         public Task<TItem?> GetByIdAsync(TId id);
-        public Task<TItem?> GetByIdAsync(params TId[] compositeId);
         public void Add(TItem item);
         public Task AddAsync(TItem item);
         public void AddRange(TItem[] items);
@@ -23,5 +21,8 @@
         public bool SoftDelete(params TId[] compositeId);
         public Task<bool> SoftDeleteAsync(TId id);
         public Task<bool> SoftDeleteAsync(params TId[] compositeId);
+        public void SaveChanges();
+        public Task SaveChangesAsync();
+
     }
 }

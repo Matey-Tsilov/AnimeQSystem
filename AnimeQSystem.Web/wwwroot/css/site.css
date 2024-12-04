@@ -101,3 +101,11 @@ label.radio input:checked + span {
 .ans {
     margin-left: 36px !important;
 }
+
+/* Quiz user feedback CSS rules */
+#feedbackContainer{
+    margin: 0 auto;
+    background-color: aliceblue;
+    border: black solid 1px;
+    border-radius: 1em;
+}

@@ -14,13 +14,10 @@ namespace AnimeQSystem.Data.Repository
             _dbSet = dbContext.Set<TItem>();
         }
 
+
         public TItem? GetById(TId id) => _dbSet.Find(id);
 
-        public TItem? GetById(params TId[] compositeId) => _dbSet.Find(compositeId[0], compositeId[1]);
-
         public async Task<TItem?> GetByIdAsync(TId id) => await _dbSet.FindAsync(id);
-
-        public async Task<TItem?> GetByIdAsync(params TId[] compositeId) => await _dbSet.FindAsync(compositeId[0], compositeId[1]);
 
         public IEnumerable<TItem> GetAll() => _dbSet.ToList();
 
@@ -222,6 +219,16 @@ namespace AnimeQSystem.Data.Repository
         public async Task AddRangeAsync(TItem[] items)
         {
             await _dbSet.AddRangeAsync(items);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
+
+        public async Task SaveChangesAsync()
+        {
             await _dbContext.SaveChangesAsync();
         }
     }

@@ -12,7 +12,8 @@ namespace AnimeQSystem.Services
 {
     public class QuizService(
         IRepository<Quiz, Guid> _quizRepo,
-        IRepository<User, Guid> _userRepo
+        IUserService _userService,
+        IQuizzesUsersService _quizzesUsersService
         ) : IQuizService
     {
         public async Task<List<QuizCardViewModel>> GetAllQuizzes()
@@ -30,9 +31,8 @@ namespace AnimeQSystem.Services
                 Quiz quiz = AutoMapperConfig.MapperInstance.Map<Quiz>(model);
                 quiz.CreatedAt = DateTime.Now;
 
-                // TODO: Really inefficient
                 // Get the creator's Id
-                User? loggedInUser = _userRepo.GetAll().FirstOrDefault(u => u.IdentityUser.UserName == user.Identity?.Name);
+                User? loggedInUser = await _userService.GetByEmail(user.Identity?.Name);
                 if (loggedInUser is null) throw new NullReferenceException("Invalid logged-in user");
                 quiz.CreatorId = loggedInUser.Id;
 
@@ -57,5 +57,48 @@ namespace AnimeQSystem.Services
             return AutoMapperConfig.MapperInstance.Map<BeginQuizViewModel>(quiz);
         }
 
+        public async Task ValidateUserResult(EndQuizFormModel formModel, ClaimsPrincipal user)
+        {
+            User? loggedInUser = await _userService.GetByEmail(user.Identity?.Name);
+            if (loggedInUser is null) throw new NullReferenceException("Invalid logged-in user");
+
+            Quiz? currentQuiz = await _quizRepo.GetByIdAsync(formModel.QuizId);
+            if (currentQuiz is null) throw new NullReferenceException("No such quiz existing");
+
+            // Calculate user points for the quiz
+            double allAnswers = currentQuiz.QuizQuestions.Count();
+            int correctAnswers = GetUserCorrectAnswers(formModel, currentQuiz);
+            int quizMaxPoints = currentQuiz.RewardPoints;
+            int realResult = (int)Math.Truncate(correctAnswers / allAnswers * quizMaxPoints * 1d);
+
+            // Add the new record to the mapping table
+            await _quizzesUsersService.AddRecord(formModel.QuizId, loggedInUser.Id, realResult);
+
+            // Add the corresponding reward points
+            await _userService.AddRewardPoints(loggedInUser, realResult);
+        }
+
+        private int GetUserCorrectAnswers(EndQuizFormModel userQuiz, Quiz realQuiz)
+        {
+            int correct = 0;
+            int questionsCount = realQuiz.QuizQuestions.Count();
+
+            for (int i = 0; i < questionsCount; i++)
+            {
+                string searchedTitle = realQuiz.QuizQuestions[i].Title;
+                string realAnswer = realQuiz.QuizQuestions[i].Answer;
+
+                string? userAnswer = userQuiz.UserAnswers.FirstOrDefault(x => x.Title == searchedTitle)?.UserAnswer;
+
+                // TODO: Ask AI to decipher answers and say if it is correct or no
+                if (userAnswer?.ToLower() == realAnswer.ToLower())
+                {
+                    correct++;
+                }
+            }
+
+            return correct;
+
+        }
     }
 }

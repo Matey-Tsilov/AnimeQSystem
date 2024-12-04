@@ -8,6 +8,7 @@ namespace AnimeQSystem.Data.Models.Models
         public virtual Quiz Quiz { get; set; } = null!;
         public Guid UserId { get; set; }
         public virtual User User { get; set; } = null!;
+        public int ResultPoints { get; set; }
 
     }
 }
