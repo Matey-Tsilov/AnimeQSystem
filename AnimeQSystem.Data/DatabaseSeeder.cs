@@ -5,6 +5,7 @@ using AnimeQSystem.Data.Models.QuizSystem;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace AnimeQSystem.Data
 {
@@ -12,6 +13,10 @@ namespace AnimeQSystem.Data
     {
         public static async Task MigrateAndSeed(IServiceProvider serviceProvider)
         {
+            var env = serviceProvider.GetRequiredService<IHostEnvironment>();
+            string webRootPath = env.ContentRootPath;  // Path to the root folder, not wwwroot
+            string imagesFolder = Path.Combine(webRootPath, "wwwroot", "images");
+
             using var scope = serviceProvider.CreateScope();
 
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -86,6 +91,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         LastModified = DateTime.Now,
                         IsDeleted = false,
+                        ProfilePic = File.ReadAllBytes(Path.Combine(imagesFolder, "users", "johndoe.jpg")),
                         Country = "USA",
                         IdentityUserId = johndoeIdentityUserId
                     },
@@ -100,6 +106,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         LastModified = DateTime.Now,
                         IsDeleted = false,
+                        ProfilePic = File.ReadAllBytes(Path.Combine(imagesFolder, "users", "janesmith.jpg")),
                         Country = "Canada",
                         IdentityUserId = janesmithIdentityUserId
                     },
@@ -114,6 +121,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         LastModified = DateTime.Now,
                         IsDeleted = false,
+                        ProfilePic = File.ReadAllBytes(Path.Combine(imagesFolder, "users", "alexjohnson.jpg")),
                         Country = "UK",
                         IdentityUserId = alexjohnsonIdentityUserId
                     }
@@ -267,7 +275,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         CreatorId = johndoeUserId,
                         RewardPoints = 100,
-                        ImageUrl = "https://images2.alphacoders.com/131/1311453.jpg"
+                        ImageUrl = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "spiritedaway.jpg"))
                     },
                     new Quiz
                     {
@@ -277,7 +285,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         CreatorId = alexjohnsonUserId,
                         RewardPoints = 100,
-                        ImageUrl = "https://lwlies.com/wp-content/uploads/2017/03/a-silent-voice.jpg"
+                        ImageUrl = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "silentvoice.jpg"))
                     },
                     new Quiz
                     {
@@ -287,7 +295,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         CreatorId = janesmithUserId,
                         RewardPoints = 100,
-                        ImageUrl = "https://images4.alphacoders.com/687/687987.jpg"
+                        ImageUrl = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "yourname.jpg"))
                     }
                 );
             }

@@ -17,6 +17,7 @@ namespace AnimeQSystem.Data.Models
         public DateTime LastModified { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; }
         public string Country { get; set; } = null!;
+        public byte[] ProfilePic { get; set; } = null!;
 
         // Navigation properties
         public string IdentityUserId { get; set; } = null!;
