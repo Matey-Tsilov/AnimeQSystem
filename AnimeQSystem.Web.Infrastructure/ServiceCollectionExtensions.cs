@@ -37,7 +37,7 @@ namespace AnimeQSystem.Web.Infrastructure
                     if (idProp is null)
                     {
                         // For the mapping tables whose id is complex
-                        constructArgs[1] = typeof(object);// TODO: Doesn't work with composite keys!
+                        constructArgs[1] = typeof(object);
                     }
                     else
                     {

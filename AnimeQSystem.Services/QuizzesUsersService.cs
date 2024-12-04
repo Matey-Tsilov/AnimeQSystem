@@ -23,7 +23,7 @@ namespace AnimeQSystem.Services
 
         public async Task<UserQuizResultViewModel> GetUserResultForQuiz(Guid quizId, Guid userId)
         {
-            QuizzesUsers? userResultForQuiz = await _quizzesUsersRepo.GetByIdAsync(quizId, userId);
+            QuizzesUsers? userResultForQuiz = await _quizzesUsersRepo.FirstOrDefaultAsync(qus => qus.QuizId == quizId && qus.UserId == userId);
             if (userResultForQuiz is null) throw new NullReferenceException("Such entry doesn't exist!");
 
             int allAnswers = userResultForQuiz.Quiz.QuizQuestions.Count();
