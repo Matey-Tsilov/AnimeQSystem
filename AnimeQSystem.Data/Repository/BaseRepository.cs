@@ -1,5 +1,6 @@
 ﻿using AnimeQSystem.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace AnimeQSystem.Data.Repository
 {
@@ -14,7 +15,9 @@ namespace AnimeQSystem.Data.Repository
             _dbSet = dbContext.Set<TItem>();
         }
 
+        public TItem? FirstOrDefault(Expression<Func<TItem, bool>> predicate) => _dbSet.FirstOrDefault(predicate);
 
+        public async Task<TItem?> FirstOrDefaultAsync(Expression<Func<TItem, bool>> predicate) => await _dbSet.FirstOrDefaultAsync(predicate);
         public TItem? GetById(TId id) => _dbSet.Find(id);
 
         public async Task<TItem?> GetByIdAsync(TId id) => await _dbSet.FindAsync(id);

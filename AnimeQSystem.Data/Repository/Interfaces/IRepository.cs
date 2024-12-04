@@ -1,8 +1,12 @@
-﻿namespace AnimeQSystem.Data.Repositories.Interfaces
+﻿using System.Linq.Expressions;
+
+namespace AnimeQSystem.Data.Repositories.Interfaces
 {
     public interface IRepository<TItem, TId>
     {
-        public IEnumerable<TItem> GetAll();
+        public TItem FirstOrDefault(Expression<Func<TItem, bool>> predicate);
+        public Task<TItem?> FirstOrDefaultAsync(Expression<Func<TItem, bool>> predicate);
+        public IEnumerable<TItem?> GetAll();
         public Task<IEnumerable<TItem>> GetAllAsync();
         public IQueryable<TItem> GetAllAttached();
         public TItem? GetById(TId id);
