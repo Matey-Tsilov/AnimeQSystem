@@ -108,4 +108,5 @@ label.radio input:checked + span {
     background-color: aliceblue;
     border: black solid 1px;
     border-radius: 1em;
+    padding: 1rem;
 }
