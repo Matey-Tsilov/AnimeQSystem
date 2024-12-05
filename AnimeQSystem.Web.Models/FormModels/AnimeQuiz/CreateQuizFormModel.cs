@@ -21,9 +21,8 @@ namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
-        [Required]
         [MaxFileSize(5 * 1024 * 1024)] //5MB
-        public IFormFile ImageFile { get; set; } = null!;
+        public IFormFile? ImageFile { get; set; }
 
         // This is for post-processing purposes
         public byte[]? Image { get; set; }

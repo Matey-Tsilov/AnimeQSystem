@@ -12,7 +12,7 @@ namespace AnimeQSystem.Web.Models.ViewModels.AnimeQuiz
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
-        public Guid CreatedBy { get; set; }
+        public Guid CreatorId { get; set; }
         public string ImageUrl { get; set; } = null!;
         public int RewardPoints { get; set; }
         public virtual List<QuizzesUsers> QuizUsers { get; set; } = new List<QuizzesUsers>();
