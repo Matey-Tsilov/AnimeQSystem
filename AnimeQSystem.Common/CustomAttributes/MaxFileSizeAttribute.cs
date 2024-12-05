@@ -14,6 +14,12 @@ namespace AnimeQSystem.Common.CustomAttributes
 
         public override bool IsValid(object value)
         {
+            // If there is no uploaded image don't even check it
+            if (value is null)
+            {
+                return true;
+            }
+
             if (value is IFormFile file)
             {
                 return file.Length <= _maxSize;
