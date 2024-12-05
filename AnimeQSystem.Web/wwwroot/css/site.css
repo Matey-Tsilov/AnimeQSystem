@@ -110,3 +110,14 @@ label.radio input:checked + span {
     border-radius: 1em;
     padding: 1rem;
 }
+
+/* User register CSS rules */
+.register-left, .register-right {
+    margin-bottom: 20px;
+}
+
+.separator-line-register {
+    border-left: 1px solid black;
+    height: 230px;
+    margin: 0 20px;
+}

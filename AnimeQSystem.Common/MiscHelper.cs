@@ -7,7 +7,7 @@ namespace AnimeQSystem.Common
     /// </summary>
     public static class MiscHelper
     {
-        public static async Task<byte[]> ConvertOrGetDefaultImage(IFormFile ImageFile, string type)
+        public static async Task<byte[]> ConvertOrGetDefaultImage(IFormFile? ImageFile, string type)
         {
             byte[] ImageData;
             string imagesFolder = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\wwwroot\images"));
@@ -15,7 +15,7 @@ namespace AnimeQSystem.Common
             // If there is not an image, use default one
             if (ImageFile == null)
             {
-                switch (type)
+                switch (type.ToLower())
                 {
                     case "user": ImageData = File.ReadAllBytes(Path.Combine(imagesFolder, "users", "defaultuser.jpg")); break;
                     case "quiz": ImageData = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "defaultquiz.jpg")); break;
