@@ -24,7 +24,7 @@ namespace AnimeQSystem.Data.Configurations
                 .WithMany(x => x.UserCreatedQuizzes)
                 .HasForeignKey(x => x.CreatorId);
 
-            builder.Property(x => x.ImageUrl)
+            builder.Property(x => x.Image)
                 .IsRequired();
 
             builder.Property(x => x.RewardPoints)

@@ -1,4 +1,5 @@
-﻿using AnimeQSystem.Services.Interfaces;
+﻿using AnimeQSystem.Common;
+using AnimeQSystem.Services.Interfaces;
 using AnimeQSystem.Services.Mapping;
 using AnimeQSystem.Web.Models.FormModels.AnimeQuiz;
 using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz;
@@ -47,6 +48,9 @@ namespace AnimeQSystem.Web.Controllers
             {
                 return View(formModel);
             }
+
+            // Convert image to appropriate type
+            formModel.Image = await MiscHelper.ConvertOrGetDefaultImage(formModel.ImageFile, "quiz");
 
             await _quizService.CreateQuiz(formModel, User);
 

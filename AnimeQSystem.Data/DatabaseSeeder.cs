@@ -5,7 +5,6 @@ using AnimeQSystem.Data.Models.QuizSystem;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace AnimeQSystem.Data
 {
@@ -13,9 +12,7 @@ namespace AnimeQSystem.Data
     {
         public static async Task MigrateAndSeed(IServiceProvider serviceProvider)
         {
-            var env = serviceProvider.GetRequiredService<IHostEnvironment>();
-            string webRootPath = env.ContentRootPath;  // Path to the root folder, not wwwroot
-            string imagesFolder = Path.Combine(webRootPath, "wwwroot", "images");
+            string imagesFolder = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\wwwroot\images"));
 
             using var scope = serviceProvider.CreateScope();
 
@@ -275,7 +272,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         CreatorId = johndoeUserId,
                         RewardPoints = 100,
-                        ImageUrl = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "spiritedaway.jpg"))
+                        Image = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "spiritedaway.jpg"))
                     },
                     new Quiz
                     {
@@ -285,7 +282,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         CreatorId = alexjohnsonUserId,
                         RewardPoints = 100,
-                        ImageUrl = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "silentvoice.jpg"))
+                        Image = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "silentvoice.jpg"))
                     },
                     new Quiz
                     {
@@ -295,7 +292,7 @@ namespace AnimeQSystem.Data
                         CreatedAt = DateTime.Now,
                         CreatorId = janesmithUserId,
                         RewardPoints = 100,
-                        ImageUrl = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "yourname.jpg"))
+                        Image = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "yourname.jpg"))
                     }
                 );
             }

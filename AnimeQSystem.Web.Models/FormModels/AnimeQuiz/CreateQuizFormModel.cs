@@ -1,6 +1,10 @@
-﻿using AnimeQSystem.Data.Models.QuizSystem;
+﻿using AnimeQSystem.Common.CustomAttributes;
+using AnimeQSystem.Data.Models.QuizSystem;
 using AnimeQSystem.Services.Mapping;
+
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
+
 using static AnimeQSystem.Common.ModelConstraints.Quiz;
 
 namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
@@ -18,9 +22,11 @@ namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
         public string Description { get; set; } = null!;
 
         [Required]
-        [RegularExpression(@"^(https?://)?([\w-]+(\.[\w-]+)+)(/[\w- ./?%&=]*)?\.(jpg|jpeg|png|gif|bmp|webp)(\?[\w&=%-]*)?$"
-        , ErrorMessage = "Please provide a valid image URL.")]
-        public string ImageUrl { get; set; } = null!;
+        [MaxFileSize(5 * 1024 * 1024)] //5MB
+        public IFormFile ImageFile { get; set; } = null!;
+
+        // This is for post-processing purposes
+        public byte[]? Image { get; set; }
 
         [Required]
         public int RewardPoints { get; set; }

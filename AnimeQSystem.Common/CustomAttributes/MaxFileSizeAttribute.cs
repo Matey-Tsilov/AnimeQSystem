@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace AnimeQSystem.Common.CustomAttributes
 {
@@ -13,16 +14,16 @@ namespace AnimeQSystem.Common.CustomAttributes
 
         public override bool IsValid(object value)
         {
-            if (value is byte[] fileBytes)
+            if (value is IFormFile file)
             {
-                return fileBytes.Length <= _maxSize;
+                return file.Length <= _maxSize;
             }
             return false;
         }
 
         public override string FormatErrorMessage(string name)
         {
-            return $"The file size exceeds the maximum allowed size of {_maxSize} bytes.";
+            return $"The file size exceeds the maximum allowed size of {Math.Round(_maxSize / 1024m / 1024)} MB.";
         }
     }
 }

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AnimeQSystem.Common\AnimeQSystem.Common.csproj" />
     <ProjectReference Include="..\AnimeQSystem.Data.Models\AnimeQSystem.Data.Models.csproj" />
     <ProjectReference Include="..\AnimeQSystem.Services.AutoMapper\AnimeQSystem.Services.Mapping.csproj" />
