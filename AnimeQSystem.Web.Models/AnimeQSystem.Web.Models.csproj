@@ -16,4 +16,8 @@
     <ProjectReference Include="..\AnimeQSystem.Services.AutoMapper\AnimeQSystem.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\User\" />
+  </ItemGroup>
+
 </Project>

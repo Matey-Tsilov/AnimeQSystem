@@ -13,11 +13,6 @@ namespace AnimeQSystem.Services
             return (await _userRepo.GetAllAsync()).FirstOrDefault(u => u.IdentityUser.Email?.ToUpper() == email?.ToUpper());
         }
 
-        public async Task<User?> GetById(Guid id)
-        {
-            return await _userRepo.GetByIdAsync(id);
-        }
-
         public async Task AddRewardPoints(User loggedInUser, int realResult)
         {
             loggedInUser.Points += realResult;
@@ -45,6 +40,15 @@ namespace AnimeQSystem.Services
             };
 
             await _userRepo.AddAsync(appUser);
+        }
+
+        public async Task<User> FindUserByIdentityUserId(string identityUserId)
+        {
+            User? user = await _userRepo.FirstOrDefaultAsync(u => u.IdentityUserId == identityUserId);
+            // TODO: Better error handling
+            if (user is null) throw new NullReferenceException("There isn't a user with this identityUserId");
+
+            return user;
         }
     }
 }
