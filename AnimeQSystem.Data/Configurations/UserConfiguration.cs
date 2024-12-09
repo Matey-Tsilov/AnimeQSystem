@@ -23,7 +23,6 @@ namespace AnimeQSystem.Data.Configurations
                 .HasMaxLength(ModelConstraints.User.AgeMax);
 
             builder.Property(a => a.Country)
-                .HasMaxLength(ModelConstraints.User.CountryMaxLength)
                 .IsRequired();
 
             // One-to-One relationship between IdentityUser (AspNetUsers) and AppUser

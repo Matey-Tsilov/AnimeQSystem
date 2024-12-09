@@ -3,6 +3,7 @@ using AnimeQSystem.Data.Models;
 using AnimeQSystem.Services;
 using AnimeQSystem.Services.Mapping;
 using AnimeQSystem.Web.Infrastructure;
+using AnimeQSystem.Web.Middlewares;
 using AnimeQSystem.Web.Models.ViewModels.AnimeQuiz;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,13 +25,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 // This configures the MVC pipeline, enabling support for controllers and views in the application.
 builder.Services.AddControllersWithViews();
 
-// Go around application and collect all mappings into a AutoMapper config (runtime)
+// Go around application and collect all mappings into a AutoMapper config (runtime).
 AutoMapperConfig.RegisterMappings(typeof(QuizCardViewModel).Assembly);
 
-// Automatically register all repositories on run
+// Automatically register all repositories on run.
 builder.Services.RegisterRepositories(typeof(User).Assembly);
 
-// Automatically register all services on run
+// Automatically register all services on run.
 builder.Services.RegisterServices(typeof(QuizService).Assembly);
 
 // Build the whole application
@@ -56,6 +57,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseMiddleware<UserMiddleware>();
 
 // Automatic migration and seeding of data if needed
 await DatabaseSeeder.MigrateAndSeed(app.Services);

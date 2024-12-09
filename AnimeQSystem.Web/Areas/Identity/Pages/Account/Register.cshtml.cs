@@ -108,8 +108,6 @@ namespace AnimeQSystem.Web.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [MinLength(CountryMinLength)]
-            [MaxLength(CountryMaxLength)]
             public string Country { get; set; }
         }
 

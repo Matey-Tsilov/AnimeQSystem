@@ -22,7 +22,7 @@
             public const int LastNameMinLength = 1;
             public const int LastNameMaxLength = 50;
 
-            public const int AgeMin = 0;
+            public const int AgeMin = 1;
             public const int AgeMax = 100_000;
 
             public const int HeightMin = 1;
@@ -39,10 +39,7 @@
             public const int LastNameMinLength = 1;
             public const int LastNameMaxLength = 50;
 
-            public const int CountryMinLength = 1;
-            public const int CountryMaxLength = 50;
-
-            public const int AgeMin = 0;
+            public const int AgeMin = 1;
             public const int AgeMax = 120;
         }
 

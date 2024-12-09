@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AnimeQSystem.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class InitialMIgration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -195,7 +195,7 @@ namespace AnimeQSystem.Data.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProfilePic = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
