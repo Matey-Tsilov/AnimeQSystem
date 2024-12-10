@@ -4,6 +4,7 @@ using AnimeQSystem.Data.Repositories.Interfaces;
 using AnimeQSystem.Services.Interfaces;
 using AnimeQSystem.Services.Mapping;
 using AnimeQSystem.Web.Models.Mix;
+using AnimeQSystem.Web.Models.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
 
 namespace AnimeQSystem.Services
@@ -76,6 +77,22 @@ namespace AnimeQSystem.Services
 
             // TODO: Better error handling
             if (userIsUpdated is false) throw new InvalidOperationException("User couldn't be updated");
+        }
+
+        public async Task<List<LeaderboardUserViewModel>> GetAllRanked()
+        {
+            List<LeaderboardUserViewModel> allUsers = _userRepo.GetAllAttached()
+                .To<LeaderboardUserViewModel>()
+                .OrderByDescending(x => x.Points)
+                .ToList();
+
+            int count = allUsers.Count();
+            for (int i = 0; i < count; i++)
+            {
+                allUsers[i].Rank = i + 1;
+            }
+
+            return allUsers;
         }
     }
 }

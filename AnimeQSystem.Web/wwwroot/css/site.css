@@ -136,3 +136,13 @@ label.radio input:checked + span {
     object-fit: cover; /* Ensures the image fills the circle */
     border-radius: 50%; /* Makes the image itself circular */
 }
+
+/* CSS rules for the home page */
+.background-page {
+    background-image: url('../images/background.png');
+    background-size: cover; /* Ensure it covers the entire page */
+    background-position: center; /* Centers the background */
+    background-repeat: no-repeat; /* Prevents repeating the background */
+    max-width: none !important;
+    height: 84vh;
+}

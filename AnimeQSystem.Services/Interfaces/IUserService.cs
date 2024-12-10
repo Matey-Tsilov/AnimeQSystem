@@ -1,5 +1,6 @@
 ﻿using AnimeQSystem.Data.Models;
 using AnimeQSystem.Web.Models.Mix;
+using AnimeQSystem.Web.Models.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
 
 namespace AnimeQSystem.Services.Interfaces
@@ -14,5 +15,6 @@ namespace AnimeQSystem.Services.Interfaces
         public Task<User> FindUserByIdentityUserId(string identityUserId);
         public UserDetailsVFModel CreateUserDetailsViewModel(User user);
         public Task UpdateUserDetails(UserDetailsVFModel formModel);
+        public Task<List<LeaderboardUserViewModel>> GetAllRanked();
     }
 }

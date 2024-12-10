@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="FormModels\User\" />
-    <Folder Include="ViewModels\User\" />
   </ItemGroup>
 
 </Project>

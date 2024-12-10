@@ -1,1 +1,19 @@
-﻿
+﻿@section Styles{
+    <link href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-main.css" rel="stylesheet" />
+    <link href="~/css/kendoUiJQuery.css" rel="stylesheet" />
+}
+    
+<div id="example">
+    <div id="grid"></div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.3.914/js/kendo.all.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+
+    <script type="module">
+        import initializeJSForView from "/js/Leaderboard/leaderboard.js";
+        initializeJSForView();
+    </script>
+}

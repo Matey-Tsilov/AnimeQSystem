@@ -6,6 +6,7 @@ namespace AnimeQSystem.Web.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["BodyClass"] = "background-page";
             return View();
         }
     }
