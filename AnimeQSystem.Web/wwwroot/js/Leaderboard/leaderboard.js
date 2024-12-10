@@ -12,6 +12,7 @@
                 model: {
                     fields: {
                         rank: { type: "number" },
+                        identityUserId: { type: "string" },
                         profilePicBase64: { type: "string" },
                         firstName: { type: "string" },
                         lastName: { type: "string" },
@@ -33,10 +34,14 @@
                 filterable: false
             },
             {
+                field: "identityUserId",
+                hidden: true
+            },
+            {
                 field: "profilePicBase64",
                 title: "Profile Picture",
                 width: "184px", // Set width for profile pictures
-                template: `<a href="/Profile/Details?userId=1"><img src='#= profilePicBase64 #' alt='Profile Picture' style='width: 50px; height: 50px; border-radius: 50%;' /></a>`,
+                template: `<a href="/Profile/Details?userId=#= identityUserId #"><img src='#= profilePicBase64 #' alt='Profile Picture' style='width: 50px; height: 50px; border-radius: 50%;' /></a>`,
                 sortable: false,
                 filterable: false
             },

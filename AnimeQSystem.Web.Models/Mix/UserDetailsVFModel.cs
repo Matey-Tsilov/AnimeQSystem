@@ -40,6 +40,8 @@ namespace AnimeQSystem.Web.Models.Mix
         [Required]
         public string Country { get; set; } = null!;
 
+        public bool IsSameUser { get; set; } = false;
+
         public void CreateMappings(IProfileExpression expression)
         {
             expression.CreateMap<Data.Models.User, UserDetailsVFModel>()

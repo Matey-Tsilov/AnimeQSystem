@@ -1,25 +1,30 @@
 ﻿export default function init() {
-    document.getElementById("ProfilePicForm").addEventListener("change", changeImagePreview)
 
-    // Populate country select
-    const select = document.querySelector('#country_select2');
-    const preselectedOption = select.querySelector("option");
-    $(select).select2();
+    // If this is the view opened by the same user who want to edit, then add all edit possibilities
+    const showViewWithActions = document.getElementById("IsSameUser").value
+    if (showViewWithActions) {
+        document.getElementById("ProfilePicForm").addEventListener("change", changeImagePreview)
 
-    fetch('https://restcountries.com/v3.1/all')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(country => {
-                
-                // If the select is pre-populated -> there will be one option already which is the selected one, so we skip it
-                if (preselectedOption && preselectedOption.textContent != country.name.common) {
-                    const option = document.createElement('option');
-                    option.textContent = country.name.common;
-                    option.value = country.name.common;
-                    select.appendChild(option);
-                }
+        // Populate country select
+        const select = document.querySelector('#country_select2');
+        const preselectedOption = select.querySelector("option");
+        $(select).select2();
+
+        fetch('https://restcountries.com/v3.1/all')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(country => {
+
+                    // If the select is pre-populated -> there will be one option already which is the selected one, so we skip it
+                    if (preselectedOption && preselectedOption.textContent != country.name.common) {
+                        const option = document.createElement('option');
+                        option.textContent = country.name.common;
+                        option.value = country.name.common;
+                        select.appendChild(option);
+                    }
+                });
             });
-        });
+    }
 }
 
 // Responsible for changing the image on user select for better UX

@@ -10,73 +10,138 @@
 }
 
 <div class="container mt-4 d-flex flex-column align-items-center">
-    <form asp-action="UpdateUserProfile" method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-md-4 text-center">
-                <label asp-for="ProfilePicForm">
-                    <img id="detailsPreviewImage" src="@($"data:image/jpeg;base64,{Convert.ToBase64String(Model.ProfilePicData ?? currentUser?.ProfilePicData!)}")" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 100%;">
-                </label>
-                <input type="file" asp-for="ProfilePicForm" class="form-control" placeholder="Profile Picture URL" accept="image/*">
-                <span asp-validation-for="ProfilePicForm" class="text-danger"></span>
-                <input asp-for="Id" class="d-none"/>
+    <input type="text" id="IsSameUser" class="d-none" value="@Model.IsSameUser" readonly/>
+    @if (Model.IsSameUser)
+    {
+        <form asp-action="UpdateUserProfile" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <label asp-for="ProfilePicForm">
+                        <img id="detailsPreviewImage" src="@($"data:image/jpeg;base64,{Convert.ToBase64String(Model.ProfilePicData ?? currentUser?.ProfilePicData!)}")" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 100%;">
+                    </label>
+                    <input type="file" asp-for="ProfilePicForm" class="form-control" placeholder="Profile Picture URL" accept="image/*">
+                    <span asp-validation-for="ProfilePicForm" class="text-danger"></span>
+                    <input asp-for="Id" class="d-none" />
+                </div>
+
+                <div class="col-md-8">
+                    <div class="form-floating mt-3 mb-3">
+                        <input asp-for="FirstName" class="form-control" placeholder="Max">
+                        <label asp-for="FirstName" class="form-label">First Name</label>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="LastName" class="form-control" placeholder="Willson">
+                        <label asp-for="LastName" class="form-label">Last Name</label>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Email" class="form-control" readonly>
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 d-flex gap-3">
+                        <div class="d-flex flex-column align-items-start flex-grow-1">
+                            <label asp-for="Age" class="form-label">Age</label>
+                            <input type="number" asp-for="Age" class="form-control" placeholder="18">
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
+                        <div class="d-flex flex-column align-items-start flex-grow-1">
+                            <label asp-for="Gender" class="form-label">Gender</label>
+                            <select asp-for="Gender" class="form-select">
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                                <option value="2">Other</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex">
+                        <div class="d-flex flex-column align-items-start flex-grow-1">
+                            <label asp-for="Country" class="form-label">Country</label>
+                            <select id="country_select2" asp-for="Country" class="form-select">
+                                @if (Model.Country is not null)
+                                {
+                                    <option selected value="@Model.Country">@Model.Country</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <button id="saveChanges" type="submit" class="btn btn-success">Save Changes</button>
+                </div>
             </div>
 
-            <div class="col-md-8">
-                <div class="form-floating mt-3 mb-3">
-                    <input asp-for="FirstName" class="form-control" placeholder="Max">
-                    <label asp-for="FirstName" class="form-label">First Name</label>
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="LastName" class="form-control" placeholder="Willson">
-                    <label asp-for="LastName" class="form-label">Last Name</label>
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Email" class="form-control" readonly>
-                    <label asp-for="Email" class="form-label">Email</label>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="mb-3 d-flex gap-3">
-                    <div class="d-flex flex-column align-items-start flex-grow-1">
-                        <label asp-for="Age" class="form-label">Age</label>
-                        <input type="number" asp-for="Age" class="form-control" placeholder="18">
-                        <span asp-validation-for="Age" class="text-danger"></span>
-                    </div>
-                    <div class="d-flex flex-column align-items-start flex-grow-1">
-                        <label asp-for="Gender" class="form-label">Gender</label>
-                        <select asp-for="Gender" class="form-select">
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
-                            <option value="2">Other</option>
-                        </select>
-                        <span asp-validation-for="Gender" class="text-danger"></span>
+        </form>
+
+        <form class="form-inline mt-2" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    }
+    else
+    {
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Profile Picture Section -->
+                <div class="col-md-4 text-center">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <label asp-for="ProfilePicForm">
+                                <img id="detailsPreviewImage"
+                                     src="@($"data:image/jpeg;base64,{Convert.ToBase64String(Model.ProfilePicData ?? currentUser?.ProfilePicData!)}")"
+                                     alt="Profile Picture"
+                                     class="img-fluid rounded-circle mb-3 shadow-sm"
+                                     style="max-width: 100%;">
+                            </label>
+                            <h5 class="card-title mt-2">@Model.FirstName @Model.LastName</h5>
+                        </div>
                     </div>
                 </div>
-                <div class="mb-3 d-flex">
-                    <div class="d-flex flex-column align-items-start flex-grow-1">
-                        <label asp-for="Country" class="form-label">Country</label>
-                        <select id="country_select2" asp-for="Country" class="form-select">
-                            @if(Model.Country is not null){
-                                <option selected value="@Model.Country">@Model.Country</option>
-                            }
-                        </select>
-                        <span asp-validation-for="Country" class="text-danger"></span>
+
+                <!-- Details Section -->
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-align-center">User Details</h5>
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-end">First Name:</th>
+                                        <td>@Model.FirstName</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-end">Last Name:</th>
+                                        <td>@Model.LastName</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-end">Email:</th>
+                                        <td>@Model.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-end">Age:</th>
+                                        <td>@Model.Age</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-end">Gender:</th>
+                                        <td>@Model.Gender</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-end">Country:</th>
+                                        <td>@Model.Country</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Lower Part: Submit Button -->
-        <div class="row mt-4">
-            <div class="col-12 text-center">
-                <button id="saveChanges" type="submit" class="btn btn-success">Save Changes</button>
-            </div>
-        </div>
-    </form>
-    <form class="form-inline mt-2" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
+    }
 </div>
 
 @section Scripts{

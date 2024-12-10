@@ -16,6 +16,13 @@ namespace AnimeQSystem.Web.Controllers
 
             UserDetailsVFModel viewModel = _userService.CreateUserDetailsViewModel(user);
 
+            // We have this property to change view look based on who is the currently logged in user
+            var currentlyLoggedInUser = HttpContext.Items["CurrentUser"] as UserDetailsVFModel;
+            if (user.Id == currentlyLoggedInUser!.Id)
+            {
+                viewModel.IsSameUser = true;
+            }
+
             return View(viewModel);
         }
 

@@ -5,7 +5,7 @@ namespace AnimeQSystem.Web.Models.ViewModels.User
 {
     public class LeaderboardUserViewModel : IMapFrom<Data.Models.User>, ICustomMapping
     {
-        public Guid Id { get; set; }
+        public string IdentityUserId { get; set; } = null!;
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public int Points { get; set; }

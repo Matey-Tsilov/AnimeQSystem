@@ -26,8 +26,12 @@ body {
     margin: 0 auto;
 }
 
+.text-align-center{
+    text-align: center;
+}
+
 /* Quiz creation CSS rules */
-h1{
+h1 {
     margin-block: 1em;
 }
 
