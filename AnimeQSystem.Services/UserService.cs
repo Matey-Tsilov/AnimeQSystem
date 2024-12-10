@@ -86,12 +86,6 @@ namespace AnimeQSystem.Services
                 .OrderByDescending(x => x.Points)
                 .ToList();
 
-            int count = allUsers.Count();
-            for (int i = 0; i < count; i++)
-            {
-                allUsers[i].Rank = i + 1;
-            }
-
             return allUsers;
         }
     }

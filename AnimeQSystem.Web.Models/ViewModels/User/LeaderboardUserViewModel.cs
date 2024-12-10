@@ -5,7 +5,6 @@ namespace AnimeQSystem.Web.Models.ViewModels.User
 {
     public class LeaderboardUserViewModel : IMapFrom<Data.Models.User>, ICustomMapping
     {
-        public int Rank { get; set; }
         public Guid Id { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
@@ -17,9 +16,6 @@ namespace AnimeQSystem.Web.Models.ViewModels.User
 
         public void CreateMappings(IProfileExpression expression)
         {
-            expression.CreateMap<Data.Models.User, LeaderboardUserViewModel>()
-                .ForMember(d => d.Rank, x => x.Ignore());
-
             expression.CreateMap<Data.Models.User, LeaderboardUserViewModel>()
                 .ForMember(d => d.UserQuizzesCount, x => x.MapFrom(src => src.UserQuizzes.Count()));
 

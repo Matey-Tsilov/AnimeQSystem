@@ -6,7 +6,9 @@ namespace AnimeQSystem.Web.Controllers
     {
         public IActionResult Index()
         {
+            // Used to add the specific background image to the biggest container
             ViewData["BodyClass"] = "background-page";
+
             return View();
         }
     }
