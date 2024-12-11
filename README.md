@@ -9,5 +9,7 @@ How to run the project?
 2. Install VS2020+
 3. Go through all of those popups:
 ![image](https://github.com/user-attachments/assets/fbadcd44-c969-43f4-af98-1872350dd04c)
-4. Hit the run button and it should lunch without a problem!
+5. Ensure that SQL Server is installed and running locally (on the default instance)
+6. Hit the run button and it should lunch without a problem!
+
 
