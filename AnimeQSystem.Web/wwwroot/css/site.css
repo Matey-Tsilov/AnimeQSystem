@@ -158,6 +158,13 @@ label.radio input:checked + span {
     height: 84vh;
 }
 
+.welcome-header{
+    top: 50%;
+    left: 55%;
+    font-size: 6em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
 /* CSS rules for the images on the AllAnimes page */
 .anime-card-link {
     text-decoration: none;
