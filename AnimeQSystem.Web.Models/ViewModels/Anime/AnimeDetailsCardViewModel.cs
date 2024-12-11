@@ -1,11 +1,13 @@
-﻿using AnimeQSystem.Data.Models.Enums;
+﻿using AnimeQSystem.Data.Models.AnimeSystem;
+using AnimeQSystem.Data.Models.Enums;
+using AnimeQSystem.Services.Mapping;
+using AutoMapper;
 
-namespace AnimeQSystem.Data.Models.AnimeSystem
+namespace AnimeQSystem.Web.Models.ViewModels.Anime
 {
-    public class Anime
+    public class AnimeDetailsCardViewModel : IMapFrom<Data.Models.AnimeSystem.Anime>, ICustomMapping
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public byte[] AnimePic { get; set; } = null!;
+        public string AnimePicUrl { get; set; } = null!;
         public string Title { get; set; } = null!;
         public int Episodes { get; set; }
         public int Seasons { get; set; }
@@ -22,5 +24,10 @@ namespace AnimeQSystem.Data.Models.AnimeSystem
         public Guid GenreId { get; set; }
         public virtual Genre Genre { get; set; } = null!;
         public virtual List<Character> Characters { get; set; } = new List<Character>();
+        public void CreateMappings(IProfileExpression expression)
+        {
+            expression.CreateMap<Data.Models.AnimeSystem.Anime, AnimeDetailsCardViewModel>()
+                .ForMember(d => d.AnimePicUrl, x => x.MapFrom(src => $"data:image/jpeg;base64,{Convert.ToBase64String(src.AnimePic)}"));
+        }
     }
 }

@@ -16,6 +16,10 @@ namespace AnimeQSystem.Data.Configurations
                 .HasMaxLength(ModelConstraints.Anime.TitleMaxLength)
                 .IsRequired();
 
+            builder.Property(a => a.Description)
+                .HasMaxLength(ModelConstraints.Anime.DescriptionMaxLength)
+                .IsRequired();
+
             builder.HasOne(a => a.Writer)
                 .WithMany(w => w.AnimesWritten)
                 .HasForeignKey(a => a.WriterId)

@@ -1,0 +1,28 @@
+﻿@using AnimeQSystem.Web.Models.ViewModels.Anime
+
+@model AnimeDetailsCardViewModel;
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="row g-0">
+            <!-- Anime Image Section -->
+            <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
+                <img src="@Model.AnimePicUrl" class="img-fluid rounded-3 shadow-lg p-2" alt="Anime Image">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <p class="card-text"><strong>Genre:</strong> @Model.Genre.Name</p>
+                    <p class="card-text"><strong>Writer:</strong> @Model.Writer.FirstName @Model.Writer.LastName</p>
+                    <p class="card-text"><strong>Studio:</strong> @Model.Studio.Name</p>
+                    <p class="card-text"><strong>Episodes:</strong> @Model.Episodes</p>
+                    <p class="card-text"><strong>Seasons:</strong> @Model.Seasons</p>
+                    <p class="card-text"><strong>Release Date:</strong> @Model.ReleaseDate.ToString("MMMM dd, yyyy")</p>
+                    <p class="card-text"><strong>Status:</strong> @(Model.StillOngoing ? "Ongoing" : "Completed")</p>
+                    <p class="card-text long-description"><strong>Description:</strong> @Model.Description</p>
+                    <p class="card-text"><strong>Rating:</strong><small class="text-muted"> This anime is rated as @Model.Rating anime!</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

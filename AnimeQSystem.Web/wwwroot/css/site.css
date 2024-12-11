@@ -150,3 +150,79 @@ label.radio input:checked + span {
     max-width: none !important;
     height: 84vh;
 }
+
+/* CSS rules for the images on the AllAnimes page */
+.anime-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.anime-card {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.anime-card:hover {
+    border-color: #007bff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+}
+
+/* Fixed widths for alignment */
+.title-container,
+.genre-container,
+.rating-container {
+    width: 150px;
+    max-width: 150px;
+    word-wrap: break-word;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+/* Truncate Description */
+.description-container p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 50ch;
+    color: #333;
+}
+
+.long-description {
+    display: block;
+    white-space: normal; /* Ensures text breaks onto the next line */
+    word-wrap: break-word; /* Breaks long words that overflow */
+    overflow: hidden; /* Hides anything that overflows beyond the defined width */
+    max-width: 75ch;
+}

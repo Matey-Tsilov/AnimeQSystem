@@ -208,6 +208,8 @@ namespace AnimeQSystem.Data
                     {
                         Id = spiritedAwayId,
                         Title = "Spirited Away",
+                        AnimePic = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "spiritedaway.jpg")),
+                        Description = "Chihiro, a young girl, finds herself trapped in a magical realm ruled by spirits and gods. As she fights to rescue her parents and return home, she discovers courage, compassion, and the value of identity.",
                         Episodes = 1,
                         Seasons = 1,
                         ReleaseDate = new DateTime(2001, 7, 20),
@@ -221,6 +223,8 @@ namespace AnimeQSystem.Data
                     {
                         Id = silentVoiceId,
                         Title = "A Silent Voice",
+                        AnimePic = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "silentvoice.jpg")),
+                        Description = "A heartfelt story of redemption and friendship as Shoya, a former bully, seeks forgiveness from Shoko, a deaf girl he tormented. Together, they navigate healing and self-discovery.",
                         Episodes = 1,
                         Seasons = 1,
                         ReleaseDate = new DateTime(2016, 9, 17),
@@ -234,6 +238,8 @@ namespace AnimeQSystem.Data
                     {
                         Id = yourNameId,
                         Title = "Your Name",
+                        AnimePic = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "yourname.jpg")),
+                        Description = "A breathtaking tale of two strangers, Taki and Mitsuha, who mysteriously swap lives. As they traverse through time and distance, they uncover a cosmic connection and a love that transcends worlds.",
                         Episodes = 1,
                         Seasons = 1,
                         ReleaseDate = new DateTime(2016, 8, 26),

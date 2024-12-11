@@ -7,6 +7,9 @@
             public const int TitleMinLength = 1;
             public const int TitleMaxLength = 200;
 
+            public const int DescriptionMinLength = 50;
+            public const int DescriptionMaxLength = 5000;
+
             public const int EpisodesMin = 0;
             public const int EpisodesMax = 10_000;
 
