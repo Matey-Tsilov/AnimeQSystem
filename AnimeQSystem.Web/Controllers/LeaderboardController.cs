@@ -16,7 +16,7 @@ namespace AnimeQSystem.Web.Controllers
         {
             var allUsersWithRanks = await _userService.GetAllRanked();
 
-            return Json(allUsersWithRanks);
+            return Json(allUsersWithRanks.Where(u => !u.IsDeleted));
         }
     }
 }

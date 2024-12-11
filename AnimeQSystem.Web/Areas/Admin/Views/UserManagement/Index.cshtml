@@ -1,0 +1,18 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/lib/kendo/kendo.common.min.css">
+    <link href="~/css/kendoUiJQuery.css" rel="stylesheet" />
+}
+
+<div id="userManagementContainer">
+    <h1 class="text-center">User Management</h1>
+    <div id="grid"></div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/kendo/kendo.2021.3.914.custom.min.js"></script>
+
+    <script type="module">
+        import initializeJSForView from "/js/Admin/userManagement.js";
+        initializeJSForView();
+    </script>
+}

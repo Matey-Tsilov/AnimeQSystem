@@ -11,13 +11,14 @@
 
 <div class="container mt-4 d-flex flex-column align-items-center">
     <input type="text" id="IsSameUser" class="d-none" value="@Model.IsSameUser" readonly/>
-    @if (Model.IsSameUser)
+    <input type="text" id="IsAdmin" class="d-none" value="@User.IsInRole("Admin")" readonly />
+    @if (Model.IsSameUser || User.IsInRole("Admin"))
     {
         <form asp-action="UpdateUserProfile" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4 text-center">
                     <label asp-for="ProfilePicForm">
-                        <img id="detailsPreviewImage" src="@($"data:image/jpeg;base64,{Convert.ToBase64String(Model.ProfilePicData ?? currentUser?.ProfilePicData!)}")" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 100%;">
+                        <img id="detailsPreviewImage" src="@($"data:image/jpeg;base64,{Convert.ToBase64String(Model.ProfilePicData ?? currentUser?.ProfilePicData!)}")" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
                     </label>
                     <input type="file" asp-for="ProfilePicForm" class="form-control" placeholder="Profile Picture URL" accept="image/*">
                     <span asp-validation-for="ProfilePicForm" class="text-danger"></span>
@@ -68,6 +69,19 @@
                             <span asp-validation-for="Country" class="text-danger"></span>
                         </div>
                     </div>
+                    @if (User.IsInRole("Admin") && !Model.IsSameUser)
+                    {
+                        <div class="mb-3 d-flex">
+                            <div class="d-flex flex-column align-items-start flex-grow-1">
+                                <label asp-for="Role" class="form-label">Role</label>
+                                <select asp-for="Role" class="form-select">
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                                <span asp-validation-for="Role" class="text-danger"></span>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
             
@@ -79,9 +93,27 @@
 
         </form>
 
-        <form class="form-inline mt-2" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
+        @if (Model.IsSameUser)
+        {
+            <form class="form-inline mt-2" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        }
+        else if (User.IsInRole("Admin") && !Model.IsSameUser) // We don't want a user to self-delete!
+        {
+            if (Model.IsDeleted)
+            {
+                <form class="form-inline mt-2" asp-area="Admin" asp-controller="UserManagement" asp-action="RecoverUser" asp-route-userId="@Model.Id">
+                    <button type="submit" class="btn btn-primary">Recover</button>
+                </form>
+            }
+            else
+            {
+                <form class="form-inline mt-2" asp-area="Admin" asp-controller="UserManagement" asp-action="SoftDeleteUser" asp-route-userId="@Model.Id">
+                    <button type="submit" class="btn btn-warning">Delete</button>
+                </form>
+            }
+        }
     }
     else
     {

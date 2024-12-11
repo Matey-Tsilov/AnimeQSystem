@@ -1,7 +1,8 @@
 ﻿export default function init() {
 
     // If this is the view opened by the same user who want to edit, then add all edit possibilities
-    const showViewWithActions = document.getElementById("IsSameUser").value
+    const showViewWithActions = document.getElementById("IsSameUser").value || document.getElementById("IsAdmin").value
+
     if (showViewWithActions) {
         document.getElementById("ProfilePicForm").addEventListener("change", changeImagePreview)
 

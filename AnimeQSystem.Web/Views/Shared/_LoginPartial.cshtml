@@ -12,7 +12,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a asp-controller="Profile" asp-action="Details" asp-route-userId="@(User.FindFirstValue(ClaimTypes.NameIdentifier))" class="profile-icon-link">
+        <a asp-area="" asp-controller="Profile" asp-action="Details" asp-route-userId="@(User.FindFirstValue(ClaimTypes.NameIdentifier))" class="profile-icon-link">
             <img src=@(currentUser?.ProfilePicData is not null ? $"data:image/jpeg;base64,{Convert.ToBase64String(currentUser.ProfilePicData)}" : "~/images/users/defaultuser.jpg") alt="User Profile" class="profile-icon">
         </a>
     </li>

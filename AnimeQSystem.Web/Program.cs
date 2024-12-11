@@ -20,7 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // This sets up the default identity system to handle user authentication.
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // This configures the MVC pipeline, enabling support for controllers and views in the application.
 builder.Services.AddControllersWithViews();
@@ -56,12 +58,30 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Redirect middleware for admins
+app.Use((context, next) =>
+{
+    if (context.User.Identity?.IsAuthenticated == true && context.Request.Path == "/")
+    {
+        if (context.User.IsInRole("Admin"))
+        {
+            context.Response.Redirect("/Admin/Home/Index");
+            return Task.CompletedTask;
+        }
+    }
+    return next();
+});
+
 app.UseAuthorization();
 
 app.UseMiddleware<UserMiddleware>();
 
 // Automatic migration and seeding of data if needed
 await DatabaseSeeder.MigrateAndSeed(app.Services);
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

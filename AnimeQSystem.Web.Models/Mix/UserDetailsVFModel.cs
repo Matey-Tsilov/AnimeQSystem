@@ -40,13 +40,18 @@ namespace AnimeQSystem.Web.Models.Mix
         [Required]
         public string Country { get; set; } = null!;
 
+        public bool IsDeleted { get; set; }
+
         public bool IsSameUser { get; set; } = false;
+
+        public string Role { get; set; } = null!;
 
         public void CreateMappings(IProfileExpression expression)
         {
             expression.CreateMap<Data.Models.User, UserDetailsVFModel>()
                 .ForMember(d => d.Email, x => x.MapFrom(src => src.IdentityUser.Email))
-                .ForMember(d => d.ProfilePicData, x => x.MapFrom(src => src.ProfilePic));
+                .ForMember(d => d.ProfilePicData, x => x.MapFrom(src => src.ProfilePic))
+                .ForMember(d => d.Role, x => x.Ignore());
 
             expression.CreateMap<UserDetailsVFModel, Data.Models.User>()
                 .ForMember(d => d.ProfilePic, x => x.MapFrom(src => src.ProfilePicData));

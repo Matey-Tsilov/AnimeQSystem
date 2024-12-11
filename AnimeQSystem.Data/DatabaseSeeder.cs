@@ -15,12 +15,30 @@ namespace AnimeQSystem.Data
             string imagesFolder = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\wwwroot\images"));
 
             using var scope = serviceProvider.CreateScope();
-
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             // Always migrate DB on application start
             await dbContext.Database.MigrateAsync();
+
+            #region Seed roles
+
+            string[] roles = { "Admin", "User" };
+            foreach (var role in roles)
+            {
+                bool roleExists = roleManager.RoleExistsAsync(role).GetAwaiter().GetResult();
+                if (!roleExists)
+                {
+                    var result = roleManager.CreateAsync(new IdentityRole { Name = role }).GetAwaiter().GetResult();
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception($"Failed to create role: {role}");
+                    }
+                }
+            }
+
+            #endregion
 
             #region Seed users
 
@@ -70,6 +88,17 @@ namespace AnimeQSystem.Data
                 foreach (var user in identityUsers)
                 {
                     await userManager.CreateAsync(user, password);
+
+                    // Add John Doe as the Admin
+                    if (user.Id == johndoeIdentityUserId)
+                    {
+                        await userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else
+                    {
+                        await userManager.AddToRoleAsync(user, "User");
+                    }
+
                 }
             }
 

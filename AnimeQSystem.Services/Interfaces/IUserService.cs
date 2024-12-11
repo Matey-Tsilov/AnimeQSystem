@@ -13,8 +13,10 @@ namespace AnimeQSystem.Services.Interfaces
         public Task<bool> UserDidQuiz(string? username, Guid quizId);
         public Task CreateUserBasedOnIdentity(IdentityUser user, string fName, string lName, string country);
         public Task<User> FindUserByIdentityUserId(string identityUserId);
-        public UserDetailsVFModel CreateUserDetailsViewModel(User user);
+        public Task<UserDetailsVFModel> CreateUserDetailsViewModel(User user);
         public Task UpdateUserDetails(UserDetailsVFModel formModel);
         public Task<List<LeaderboardUserViewModel>> GetAllRanked();
+        public Task GetByIdAndSoftDelete(Guid userId);
+        public Task GetByIdAndRecover(Guid userId);
     }
 }

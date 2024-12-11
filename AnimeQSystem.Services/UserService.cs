@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AnimeQSystem.Services
 {
-    public class UserService(IRepository<User, Guid> _userRepo) : IUserService
+    public class UserService(IRepository<User, Guid> _userRepo, UserManager<IdentityUser> _userManager) : IUserService
     {
         public async Task<User?> GetByEmail(string? email)
         {
@@ -59,9 +59,16 @@ namespace AnimeQSystem.Services
             return user;
         }
 
-        public UserDetailsVFModel CreateUserDetailsViewModel(User user)
+        public async Task<UserDetailsVFModel> CreateUserDetailsViewModel(User user)
         {
-            return AutoMapperConfig.MapperInstance.Map<UserDetailsVFModel>(user);
+            var viewModel = AutoMapperConfig.MapperInstance.Map<UserDetailsVFModel>(user);
+
+            var userRoles = await _userManager.GetRolesAsync(user.IdentityUser);
+
+            // Get the role of the user
+            viewModel.Role = userRoles.FirstOrDefault()!;
+
+            return viewModel;
         }
 
         public async Task UpdateUserDetails(UserDetailsVFModel formModel)
@@ -75,18 +82,36 @@ namespace AnimeQSystem.Services
 
             bool userIsUpdated = await _userRepo.UpdateAsync(updatedUser);
 
+            // Update user role, user can have only one role at a time
+            await _userManager.RemoveFromRoleAsync(user.IdentityUser, formModel.Role == "Admin" ? "User" : "Admin");
+            await _userManager.AddToRoleAsync(user.IdentityUser, formModel.Role);
+
             // TODO: Better error handling
             if (userIsUpdated is false) throw new InvalidOperationException("User couldn't be updated");
         }
 
         public async Task<List<LeaderboardUserViewModel>> GetAllRanked()
         {
-            List<LeaderboardUserViewModel> allUsers = _userRepo.GetAllAttached()
+            List<LeaderboardUserViewModel> allUsers = await Task.Run(() => _userRepo.GetAllAttached()
                 .To<LeaderboardUserViewModel>()
                 .OrderByDescending(x => x.Points)
-                .ToList();
+                .ToList());
 
             return allUsers;
+        }
+
+        public async Task GetByIdAndSoftDelete(Guid userId)
+        {
+            await _userRepo.SoftDeleteAsync(userId);
+        }
+
+        public async Task GetByIdAndRecover(Guid userId)
+        {
+            var user = await _userRepo.GetByIdAsync(userId);
+            if (user is null) throw new Exception("Such user doesn't exist!");
+
+            user.IsDeleted = false;
+            await _userRepo.SaveChangesAsync();
         }
     }
 }
