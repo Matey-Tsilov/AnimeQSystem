@@ -35,5 +35,27 @@ namespace AnimeQSystem.Common
 
             return ImageData;
         }
+
+        public static string GetTimeElapsed(DateTime startDate)
+        {
+            // Calculate the time difference between the current time and the start date
+            TimeSpan timeElapsed = DateTime.Now - startDate;
+
+            // Check for minutes
+            if (timeElapsed.TotalMinutes < 60)
+            {
+                return $"{(int)timeElapsed.TotalMinutes} minutes";
+            }
+            // Check for hours
+            else if (timeElapsed.TotalHours < 24)
+            {
+                return $"{(int)timeElapsed.TotalHours} hours";
+            }
+            // Check for days
+            else
+            {
+                return $"{(int)timeElapsed.TotalDays} days";
+            }
+        }
     }
 }

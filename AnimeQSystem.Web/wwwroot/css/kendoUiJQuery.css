@@ -1,3 +1,7 @@
 ﻿td[role="gridcell"]{
     text-align: center;
 }
+
+.k-animation-container{
+    background-color: darkgrey
+}

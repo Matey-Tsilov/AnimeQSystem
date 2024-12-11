@@ -30,6 +30,13 @@ body {
     text-align: center;
 }
 
+/* All Quizzes CSS Rules */
+.card-img {
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+}
+
 /* Quiz creation CSS rules */
 h1 {
     margin-block: 1em;
