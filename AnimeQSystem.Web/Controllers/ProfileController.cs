@@ -12,49 +12,64 @@ namespace AnimeQSystem.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string userId)
         {
-            var user = await _userService.FindUserByIdentityUserId(userId);
-
-            UserDetailsVFModel viewModel = await _userService.CreateUserDetailsViewModel(user);
-
-            // We have this property to change view look based on who is the currently logged in user
-            var currentlyLoggedInUser = HttpContext.Items["CurrentUser"] as UserDetailsVFModel;
-            if (user.Id == currentlyLoggedInUser!.Id)
+            try
             {
-                viewModel.IsSameUser = true;
-            }
+                var user = await _userService.FindUserByIdentityUserId(userId);
 
-            return View(viewModel);
+                UserDetailsVFModel viewModel = await _userService.CreateUserDetailsViewModel(user);
+
+                // We have this property to change view look based on who is the currently logged in user
+                var currentlyLoggedInUser = HttpContext.Items["CurrentUser"] as UserDetailsVFModel;
+                if (user.Id == currentlyLoggedInUser!.Id)
+                {
+                    viewModel.IsSameUser = true;
+                }
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/404.cshtml", ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateUserProfile(UserDetailsVFModel formModel)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(nameof(Details), formModel);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return View(nameof(Details), formModel);
+                }
 
-            // The email should remain unchanged
-            var realUser = await _userService.GetById(formModel.Id);
-            if (realUser!.IdentityUser.Email != formModel.Email)
+                // The email should remain unchanged
+                var realUser = await _userService.GetById(formModel.Id);
+                if (realUser!.IdentityUser.Email != formModel.Email)
+                {
+                    throw new InvalidOperationException("Don't try to change user's email. It should remain the same");
+                }
+
+                // If the image has changed modify it in the DB as well
+                if (formModel.ProfilePicForm is not null)
+                {
+                    formModel.ProfilePicData = await MiscHelper.ConvertOrGetDefaultImage(formModel.ProfilePicForm, "user");
+                }
+                else
+                {
+                    formModel.ProfilePicData = realUser.ProfilePic;
+                }
+
+                // Update the new details for the user
+                await _userService.UpdateUserDetails(formModel);
+
+                return RedirectToAction("Index", "Home");
+
+            }
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Don't try to change user's email. It should remain the same");
+                return View("~/Views/Errors/404.cshtml", ex.Message);
             }
-
-            // If the image has changed modify it in the DB as well
-            if (formModel.ProfilePicForm is not null)
-            {
-                formModel.ProfilePicData = await MiscHelper.ConvertOrGetDefaultImage(formModel.ProfilePicForm, "user");
-            }
-            else
-            {
-                formModel.ProfilePicData = realUser.ProfilePic;
-            }
-
-            // Update the new details for the user
-            await _userService.UpdateUserDetails(formModel);
-
-            return RedirectToAction("Index", "Home");
         }
     }
 }

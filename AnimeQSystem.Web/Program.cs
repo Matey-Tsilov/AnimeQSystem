@@ -39,18 +39,11 @@ builder.Services.RegisterServices(typeof(QuizService).Assembly);
 // Build the whole application
 var app = builder.Build();
 
+// Use a custom error handler for unhandled exceptions
+app.UseExceptionHandler("/Home/Error");
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
-}
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+app.UseHsts();
 
 app.UseHttpsRedirection();
 

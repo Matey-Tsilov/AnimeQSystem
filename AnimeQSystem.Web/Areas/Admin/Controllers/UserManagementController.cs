@@ -25,17 +25,31 @@ namespace AnimeQSystem.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> RecoverUser(Guid userId)
         {
-            await _userService.GetByIdAndRecover(userId);
+            try
+            {
+                await _userService.GetByIdAndRecover(userId);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/400.cshtml", ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> SoftDeleteUser(Guid userId)
         {
-            await _userService.GetByIdAndSoftDelete(userId);
+            try
+            {
+                await _userService.GetByIdAndSoftDelete(userId);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/400.cshtml", ex.Message);
+            }
         }
     }
 }

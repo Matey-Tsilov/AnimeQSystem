@@ -1,0 +1,9 @@
+﻿@model string;
+
+<div class="text-center">
+    <h1 class="display-4 text-danger">400 - Bad Request</h1>
+    <p class="lead text-muted">Sorry, there was an issue with the request you made.</p>
+    <p class="lead text-muted">@Model</p>
+    <p>Check the URL or try again later.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Go to Homepage</a>
+</div>

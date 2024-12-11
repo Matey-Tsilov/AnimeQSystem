@@ -8,6 +8,7 @@ namespace AnimeQSystem.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            throw new Exception("hABIBI");
             return View();
         }
 

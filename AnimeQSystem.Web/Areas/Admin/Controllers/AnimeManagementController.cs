@@ -7,6 +7,7 @@ namespace AnimeQSystem.Web.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class AnimeManagementController : Controller
     {
+        // TODO: Make after the exam
         [HttpGet]
         public IActionResult Index()
         {

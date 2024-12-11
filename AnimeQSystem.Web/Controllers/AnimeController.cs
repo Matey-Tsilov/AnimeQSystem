@@ -14,17 +14,31 @@ namespace AnimeQSystem.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var allAnimes = await _animeService.GetAllAnimes();
+            try
+            {
+                var allAnimes = await _animeService.GetAllAnimes();
 
-            return View(allAnimes);
+                return View(allAnimes);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/404.cshtml", ex.Message);
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(string animeId)
         {
-            var detailedAnime = await _animeService.GetDetailedAnimeInfo(animeId);
+            try
+            {
+                var detailedAnime = await _animeService.GetDetailedAnimeInfo(animeId);
 
-            return View(detailedAnime);
+                return View(detailedAnime);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/404.cshtml", ex.Message);
+            }
         }
     }
 }

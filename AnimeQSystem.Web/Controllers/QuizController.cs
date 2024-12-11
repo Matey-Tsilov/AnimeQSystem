@@ -23,16 +23,23 @@ namespace AnimeQSystem.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
-            var list = await _quizService.GetAllQuizzes();
-
-            ViewBag.CurrentUser = await _userService.GetByEmail(User.Identity?.Name);
-
-            AllQuizzesViewModel model = new AllQuizzesViewModel()
+            try
             {
-                AllQuizzes = list.OrderByDescending(i => i.CreatedAt).ToList()
-            };
+                var list = await _quizService.GetAllQuizzes();
 
-            return View(model);
+                ViewBag.CurrentUser = await _userService.GetByEmail(User.Identity?.Name);
+
+                AllQuizzesViewModel model = new AllQuizzesViewModel()
+                {
+                    AllQuizzes = list.OrderByDescending(i => i.CreatedAt).ToList()
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/404.cshtml", ex.Message);
+            }
         }
 
         [HttpGet]
@@ -44,53 +51,82 @@ namespace AnimeQSystem.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateQuizFormModel formModel)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(formModel);
+
+                if (!ModelState.IsValid)
+                {
+                    return View(formModel);
+                }
+
+                // Convert image to appropriate type
+                formModel.Image = await MiscHelper.ConvertOrGetDefaultImage(formModel.ImageFile, "quiz");
+
+                await _quizService.CreateQuiz(formModel, User);
+
+                return RedirectToAction(nameof(All));
             }
-
-            // Convert image to appropriate type
-            formModel.Image = await MiscHelper.ConvertOrGetDefaultImage(formModel.ImageFile, "quiz");
-
-            await _quizService.CreateQuiz(formModel, User);
-
-            return RedirectToAction(nameof(All));
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/400.cshtml", ex.Message);
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> Begin(Guid quizId)
         {
-            bool userAlreadyDidQuiz = await _userService.UserDidQuiz(User.Identity?.Name, quizId);
-            if (userAlreadyDidQuiz)
+            try
             {
-                return View("/Errors/404");
+                bool userAlreadyDidQuiz = await _userService.UserDidQuiz(User.Identity?.Name, quizId);
+                if (userAlreadyDidQuiz)
+                {
+                    return View("~/Views/Errors/400.cshtml", "User already did the quiz!");
+                }
+
+                BeginQuizViewModel viewModel = await _quizService.CreateBeginQuizViewModel(quizId);
+
+                return View(viewModel);
             }
-
-            BeginQuizViewModel viewModel = await _quizService.CreateBeginQuizViewModel(quizId);
-
-            return View(viewModel);
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/400.cshtml", ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Finish(BeginQuizViewModel viewModel)
         {
-            // TODO: Implement custom model binding
-            EndQuizFormModel formModel = AutoMapperConfig.MapperInstance.Map<EndQuizFormModel>(viewModel);
+            try
+            {
+                // TODO: Implement custom model binding
+                EndQuizFormModel formModel = AutoMapperConfig.MapperInstance.Map<EndQuizFormModel>(viewModel);
 
-            // TODO: Not the right place
-            Guid? loggedInUserId = (await _userService.GetByEmail(User.Identity?.Name))?.Id;
+                // TODO: Not the right place
+                Guid? loggedInUserId = (await _userService.GetByEmail(User.Identity?.Name))?.Id;
 
-            await _quizService.ValidateUserResult(formModel, User);
+                await _quizService.ValidateUserResult(formModel, User);
 
-            return RedirectToAction(nameof(Feedback), new { userId = loggedInUserId, quizId = formModel.QuizId });
+                return RedirectToAction(nameof(Feedback), new { userId = loggedInUserId, quizId = formModel.QuizId });
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/400.cshtml", ex.Message);
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> Feedback(Guid userId, Guid quizId)
         {
-            UserQuizResultViewModel viewModel = await _quizzesUsersService.GetUserResultForQuiz(quizId, userId);
+            try
+            {
+                UserQuizResultViewModel viewModel = await _quizzesUsersService.GetUserResultForQuiz(quizId, userId);
 
-            return View(viewModel);
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Errors/400.cshtml", ex.Message);
+            }
         }
 
     }

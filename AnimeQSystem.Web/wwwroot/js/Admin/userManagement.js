@@ -5,7 +5,7 @@
             transport: {
                 read: {
                     url: "/Admin/UserManagement/GetUserManagementData", // URL to your API
-                    dataType: "json" // Expected data format
+                    dataType: "json"// Expected data format
                 }
             },
             schema: {
