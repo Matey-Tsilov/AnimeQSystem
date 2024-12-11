@@ -3,6 +3,7 @@ using AnimeQSystem.Services.Interfaces;
 using AnimeQSystem.Web.Models.Mix;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Security.Application;
 
 namespace AnimeQSystem.Web.Controllers
 {
@@ -14,7 +15,8 @@ namespace AnimeQSystem.Web.Controllers
         {
             try
             {
-                var user = await _userService.FindUserByIdentityUserId(userId);
+                string userIdSafe = Sanitizer.GetSafeHtmlFragment(userId);
+                var user = await _userService.FindUserByIdentityUserId(userIdSafe);
 
                 UserDetailsVFModel viewModel = await _userService.CreateUserDetailsViewModel(user);
 

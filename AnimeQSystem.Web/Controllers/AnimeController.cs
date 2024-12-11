@@ -1,5 +1,6 @@
 ﻿using AnimeQSystem.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Security.Application;
 
 namespace AnimeQSystem.Web.Controllers
 {
@@ -31,7 +32,8 @@ namespace AnimeQSystem.Web.Controllers
         {
             try
             {
-                var detailedAnime = await _animeService.GetDetailedAnimeInfo(animeId);
+                string animeIdSafe = Sanitizer.GetSafeHtmlFragment(animeId);
+                var detailedAnime = await _animeService.GetDetailedAnimeInfo(animeIdSafe);
 
                 return View(detailedAnime);
             }
