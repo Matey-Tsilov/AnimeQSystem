@@ -5,7 +5,7 @@
             transport: {
                 read: {
                     url: "/Admin/UserManagement/GetUserManagementData", // URL to your API
-                    dataType: "json" // Expected data format
+                    dataType: "json"// Expected data format
                 }
             },
             schema: {
@@ -15,9 +15,7 @@
                         profilePicBase64: { type: "string" },
                         firstName: { type: "string" },
                         lastName: { type: "string" },
-                        country: { type: "string" },
-                        userQuizzesCount: { type: "number" },
-                        points: { type: "number" }
+                        country: { type: "string" }
                     }
                 }
             },
@@ -33,7 +31,7 @@
                 field: "profilePicBase64",
                 title: "Profile Picture",
                 width: "184px", // Set width for profile pictures
-                template: `<a href="/Profile/Details?userId=#= identityUserId #"><img src='#= profilePicBase64 #' alt='Profile Picture' style='width: 50px; height: 50px; border-radius: 50%;' /></a>`,
+                template: `<a href="/Profile/Details?userId=#= identityUserId #"><img src='#= profilePicBase64 #' alt='Profile Picture' style='width: 50px; height: 50px; border-radius: 50%; object-fit: cover;'' /></a>`,
                 sortable: false,
                 filterable: false
             },
@@ -57,28 +55,6 @@
                 width: "184px",// Width for country
                 sortable: false,
                 filterable: true
-            },
-            {
-                field: "userQuizzesCount",
-                title: "Quizzes Made",
-                width: "184px", // Width for quizzes made
-                sortable: true,
-                filterable: {
-                    cell: {
-                        operator: "gte" // Greater than or equal operator
-                    }
-                }
-            },
-            {
-                field: "points",
-                title: "Points",
-                width: "184px", // Width for points
-                sortable: true,
-                filterable: {
-                    cell: {
-                        operator: "gte" // Greater than or equal operator
-                    }
-                }
             }
         ],
         // Set the grid container to take the full width of its parent

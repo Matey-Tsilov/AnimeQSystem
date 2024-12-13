@@ -82,9 +82,12 @@ namespace AnimeQSystem.Services
 
             bool userIsUpdated = await _userRepo.UpdateAsync(updatedUser);
 
-            // Update user role, user can have only one role at a time
-            await _userManager.RemoveFromRoleAsync(user.IdentityUser, formModel.Role == "Admin" ? "User" : "Admin");
-            await _userManager.AddToRoleAsync(user.IdentityUser, formModel.Role);
+            // Update user role, if he is admin, editing his own profile, user can have only one role at a time
+            if (formModel.Role is not null)
+            {
+                await _userManager.RemoveFromRoleAsync(user.IdentityUser, formModel.Role == "Admin" ? "User" : "Admin");
+                await _userManager.AddToRoleAsync(user.IdentityUser, formModel.Role);
+            }
 
             // TODO: Better error handling
             if (userIsUpdated is false) throw new InvalidOperationException("User couldn't be updated");

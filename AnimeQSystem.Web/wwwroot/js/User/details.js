@@ -1,7 +1,7 @@
 ﻿export default function init() {
 
     // If this is the view opened by the same user who want to edit, then add all edit possibilities
-    const showViewWithActions = document.getElementById("IsSameUser").value || document.getElementById("IsAdmin").value
+    const showViewWithActions = document.getElementById("IsSameUser").checked || document.getElementById("IsAdmin").checked
 
     if (showViewWithActions) {
         document.getElementById("ProfilePicForm").addEventListener("change", changeImagePreview)
@@ -17,7 +17,7 @@
                 data.forEach(country => {
 
                     // If the select is pre-populated -> there will be one option already which is the selected one, so we skip it
-                    if (preselectedOption && preselectedOption.textContent != country.name.common) {
+                    if ((preselectedOption && preselectedOption.textContent != country.name.common) || !preselectedOption) {
                         const option = document.createElement('option');
                         option.textContent = country.name.common;
                         option.value = country.name.common;

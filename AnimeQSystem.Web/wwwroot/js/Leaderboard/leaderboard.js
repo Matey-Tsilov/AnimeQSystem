@@ -41,7 +41,7 @@
                 field: "profilePicBase64",
                 title: "Profile Picture",
                 width: "184px", // Set width for profile pictures
-                template: `<a href="/Profile/Details?userId=#= identityUserId #"><img src='#= profilePicBase64 #' alt='Profile Picture' style='width: 50px; height: 50px; border-radius: 50%;' /></a>`,
+                template: `<a href="/Profile/Details?userId=#= identityUserId #"><img src='#= profilePicBase64 #' alt='Profile Picture' style='width: 50px; height: 50px; border-radius: 50%; object-fit: cover;' /></a>`,
                 sortable: false,
                 filterable: false
             },

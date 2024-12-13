@@ -7,25 +7,26 @@
 
 @{
     UserDetailsVFModel? currentUser = Context.Items["CurrentUser"] as UserDetailsVFModel;
+    bool isAdmin = User.IsInRole("Admin");
 }
 
 <div class="container mt-4 d-flex flex-column align-items-center">
-    <input type="text" id="IsSameUser" class="d-none" value="@Model.IsSameUser" readonly/>
-    <input type="text" id="IsAdmin" class="d-none" value="@User.IsInRole("Admin")" readonly />
-    @if (Model.IsSameUser || User.IsInRole("Admin"))
+    <input type="checkbox" class="d-none" id="IsAdmin" name="IsAdmin" value="true" @(isAdmin ? "checked" : "") readonly>
+    @if (Model.IsSameUser || isAdmin)
     {
         <form asp-action="UpdateUserProfile" method="post" enctype="multipart/form-data">
+            <input asp-for="IsSameUser" class="d-none" readonly>
             <div class="row">
-                <div class="col-md-4 text-center">
-                    <label asp-for="ProfilePicForm">
-                        <img id="detailsPreviewImage" src="@($"data:image/jpeg;base64,{Convert.ToBase64String(Model.ProfilePicData ?? currentUser?.ProfilePicData!)}")" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+                <div class="col-md-6 text-center">
+                    <label asp-for="ProfilePicForm" class="d-inline-block" style="width: 300px;">
+                        <img id="detailsPreviewImage" src="@($"data:image/jpeg;base64,{Convert.ToBase64String(Model.ProfilePicData ?? currentUser?.ProfilePicData!)}")" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="width: 100%; height: 300px; object-fit: cover;">
                     </label>
                     <input type="file" asp-for="ProfilePicForm" class="form-control" placeholder="Profile Picture URL" accept="image/*">
                     <span asp-validation-for="ProfilePicForm" class="text-danger"></span>
                     <input asp-for="Id" class="d-none" />
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="form-floating mt-3 mb-3">
                         <input asp-for="FirstName" class="form-control" placeholder="Max">
                         <label asp-for="FirstName" class="form-label">First Name</label>
@@ -69,7 +70,7 @@
                             <span asp-validation-for="Country" class="text-danger"></span>
                         </div>
                     </div>
-                    @if (User.IsInRole("Admin") && !Model.IsSameUser)
+                    @if (isAdmin && !Model.IsSameUser)
                     {
                         <div class="mb-3 d-flex">
                             <div class="d-flex flex-column align-items-start flex-grow-1">
@@ -99,7 +100,7 @@
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
         }
-        else if (User.IsInRole("Admin") && !Model.IsSameUser) // We don't want a user to self-delete!
+        else if (isAdmin && !Model.IsSameUser) // We don't want a user to self-delete!
         {
             if (Model.IsDeleted)
             {
@@ -122,13 +123,13 @@
                 <!-- Profile Picture Section -->
                 <div class="col-md-4 text-center">
                     <div class="card shadow-sm">
-                        <div class="card-body">
-                            <label asp-for="ProfilePicForm">
+                        <div class="card-body text-align-center">
+                            <label asp-for="ProfilePicForm" style="width: 300px">
                                 <img id="detailsPreviewImage"
                                      src="@($"data:image/jpeg;base64,{Convert.ToBase64String(Model.ProfilePicData ?? currentUser?.ProfilePicData!)}")"
                                      alt="Profile Picture"
                                      class="img-fluid rounded-circle mb-3 shadow-sm"
-                                     style="max-width: 100%;">
+                                     style="width: 100%; height: 300px; object-fit: cover;">
                             </label>
                             <h5 class="card-title mt-2">@Model.FirstName @Model.LastName</h5>
                         </div>
@@ -140,6 +141,7 @@
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title text-align-center">User Details</h5>
+                            <input asp-for="IsSameUser" class="d-none" readonly>
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>

@@ -44,7 +44,7 @@ namespace AnimeQSystem.Web.Models.Mix
 
         public bool IsSameUser { get; set; } = false;
 
-        public string Role { get; set; } = null!;
+        public string? Role { get; set; }
 
         public void CreateMappings(IProfileExpression expression)
         {

@@ -24,7 +24,12 @@
                         <span asp-validation-for="Input.LastName" class="text-danger"></span>
                     </div>
                     <div class="mb-3" style="height: 50px;">
-                        <select class="form-control" asp-for="Input.Country" id="country_select2" data-placeholder="Select a country"></select><br/>
+                        <select class="form-control" asp-for="Input.Country" id="country_select2" data-placeholder="Select a country">
+                            @if (Model.Input?.Country is not null)
+                            {
+                                <option selected value="@Model.Input.Country">@Model.Input.Country</option>
+                            }
+                        </select><br/>
                         <span asp-validation-for="Input.Country" class="text-danger"></span>
                     </div>
                 </section>
