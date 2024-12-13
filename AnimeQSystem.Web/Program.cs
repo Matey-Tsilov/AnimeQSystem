@@ -10,8 +10,15 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Get connection string
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+// First tr to get it from the Azure environmental variables
+var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION_STRING_AZURE");
+
+// Get connection string from local appsettings
+if (string.IsNullOrEmpty(connectionString))
+{
+    // Fallback to a default value from appsettings.json
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+}
 
 // This configures the application's DbContext (ApplicationDbContext) to use SQL Server and the connection string retrieved above.
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
