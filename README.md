@@ -4,7 +4,11 @@ Additional libraries used:
 - kendo-ui for JQuery
 - AntiXSS
 
-How to run the project?
+How to open the project?
+Follow this link and enjoi the AnimeQuizSystem!
+https://animeq-gnh8emgzcaewetat.germanywestcentral-01.azurewebsites.net/
+
+How to run the project locally?
 1. Download the zip folder
 2. Install VS2020+
 3. Go through all of those popups:
