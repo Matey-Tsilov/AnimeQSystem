@@ -39,7 +39,7 @@ namespace AnimeQSystem.Common
         public static string GetTimeElapsed(DateTime startDate)
         {
             // Calculate the time difference between the current time and the start date
-            TimeSpan timeElapsed = DateTime.Now - startDate;
+            TimeSpan timeElapsed = DateTime.UtcNow - startDate;
 
             // Check for minutes
             if (timeElapsed.TotalMinutes < 60)
