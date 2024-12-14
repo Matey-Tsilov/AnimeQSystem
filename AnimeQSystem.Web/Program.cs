@@ -13,15 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add Logging to the application
 builder.Logging.AddAzureWebAppDiagnostics();
 
-// First tr to get it from the Azure environmental variables
-var connectionString = Environment.GetEnvironmentVariable("SQLCONNSTR_DEFAULT_CONNECTION_STRING");
-
-// Get connection string from local appsettings
-if (string.IsNullOrEmpty(connectionString))
-{
-    // Fallback to a default value from appsettings.json
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-}
+// Get connection string from local appsettings: first tr to get it from the Azure environmental variables
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 // This configures the application's DbContext (ApplicationDbContext) to use SQL Server and the connection string retrieved above.
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
