@@ -47,7 +47,6 @@ var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
 // Log a message to indicate application startup
 logger.LogInformation("The application has started successfully!");
-logger.LogInformation("Connection string: " + connectionString);
 
 // Use a custom error handler for unhandled exceptions
 app.UseExceptionHandler("/Home/Error");
