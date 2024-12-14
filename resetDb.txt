@@ -1,0 +1,12 @@
+DELETE FROM QuizOptions
+DELETE FROM QuizQuestions
+DELETE FROM Quizzes
+DELETE FROM QuizzesUsers
+DELETE FROM Users
+DELETE FROM AspNetUsers
+DELETE FROM AspNetUserRoles
+DELETE FROM AspNetRoles
+DELETE FROM Genres
+DELETE FROM Characters
+DELETE FROM Studios
+DELETE FROM Writers
