@@ -17,9 +17,6 @@ namespace AnimeQSystem.Web.Models.ViewModels.AnimeQuiz
         {
             expression.CreateMap<QuizQuestion, BeginQuizQuestionViewModel>()
                 .ForMember(d => d.UserAnswer, x => x.Ignore());
-
-            expression.CreateMap<QuizQuestion, BeginQuizQuestionViewModel>()
-                .ForMember(d => d.Index, x => x.Ignore());
         }
     }
 }

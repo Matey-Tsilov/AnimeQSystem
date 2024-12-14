@@ -70,7 +70,7 @@ namespace AnimeQSystem.Services.Tests
                 Id = spiritedAwayQuizId,
                 Title = "Spirited Away Quiz",
                 Description = "Test your knowledge about Spirited Away.",
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 CreatorId = Guid.NewGuid(),
                 RewardPoints = 100,
                 Image = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "spiritedaway.jpg"))
@@ -80,7 +80,7 @@ namespace AnimeQSystem.Services.Tests
                 Id = silentVoiceQuizId,
                 Title = "A Silent Voice Quiz",
                 Description = "Test your knowledge about A Silent Voice.",
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 CreatorId = Guid.NewGuid(),
                 RewardPoints = 100,
                 Image = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "silentvoice.jpg"))
@@ -90,7 +90,7 @@ namespace AnimeQSystem.Services.Tests
                 Id = yourNameQuizId,
                 Title = "Your Name Quiz",
                 Description = "Test your knowledge about Your Name.",
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 CreatorId = Guid.NewGuid(),
                 RewardPoints = 100,
                 Image = File.ReadAllBytes(Path.Combine(imagesFolder, "quizzes", "yourname.jpg"))

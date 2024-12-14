@@ -29,7 +29,7 @@ namespace AnimeQSystem.Services
             {
                 // Map and set current time as creation
                 Quiz quiz = AutoMapperConfig.MapperInstance.Map<Quiz>(model);
-                quiz.CreatedAt = DateTime.Now;
+                quiz.CreatedAt = DateTime.UtcNow;
 
                 // Get the creator's Id
                 User? loggedInUser = await _userService.GetByEmail(user.Identity?.Name);
@@ -54,7 +54,12 @@ namespace AnimeQSystem.Services
                 throw new NullReferenceException("There is no such quiz, therefore you can't begin it");
             }
 
-            return AutoMapperConfig.MapperInstance.Map<BeginQuizViewModel>(quiz);
+            BeginQuizViewModel vm = AutoMapperConfig.MapperInstance.Map<BeginQuizViewModel>(quiz);
+
+            // Order the questions in the originaly created order
+            vm.QuizQuestions.OrderByDescending(q => q.Index);
+
+            return vm;
         }
 
         public async Task ValidateUserResult(EndQuizFormModel formModel, ClaimsPrincipal user)

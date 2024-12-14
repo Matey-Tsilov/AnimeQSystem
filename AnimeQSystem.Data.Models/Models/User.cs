@@ -13,8 +13,8 @@ namespace AnimeQSystem.Data.Models
         public int? Age { get; set; }
         public Gender? Gender { get; set; }
         public int Points { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime LastModified { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime LastModified { get; set; } = DateTime.UtcNow;
         public bool IsDeleted { get; set; }
         public string Country { get; set; } = null!;
         public byte[] ProfilePic { get; set; } = null!;

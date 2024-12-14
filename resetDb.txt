@@ -10,3 +10,4 @@ DELETE FROM Genres
 DELETE FROM Characters
 DELETE FROM Studios
 DELETE FROM Writers
+DELETE FROM __EFMigrationsHistory

@@ -7,7 +7,7 @@ namespace AnimeQSystem.Data.Models.QuizSystem
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public byte[] Image { get; set; } = null!;
         public int RewardPoints { get; set; }
 

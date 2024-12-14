@@ -12,6 +12,9 @@ namespace AnimeQSystem.Web.Models.FormModels.AnimeQuiz
         [MaxLength(TitleMaxLength)]
         public string Title { get; set; } = null!;
 
+        [Required]
+        public int Index { get; set; }
+
         [MinLength(AnswerMinLength)]
         public string Answer { get; set; } = null!;
 

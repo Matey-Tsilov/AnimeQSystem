@@ -349,6 +349,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = spiritedAwayQuestion1,
+                        Index = 0,
                         Title = "What is the name of the main protagonist in Spirited Away?",
                         Answer = "Chihiro Ogino",
                         QuizType = QuizType.MultipleChoice,
@@ -357,6 +358,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = spiritedAwayQuestion2,
+                        Index = 1,
                         Title = "Who runs the bathhouse in Spirited Away?",
                         Answer = "Yubaba",
                         QuizType = QuizType.MultipleChoice,
@@ -365,6 +367,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = spiritedAwayQuestion3,
+                        Index = 2,
                         Title = "What does Chihiro need to remember to return home?",
                         QuizType = QuizType.WriteAnswer,
                         Answer = "Her real name",
@@ -373,6 +376,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = spiritedAwayQuestion4,
+                        Index = 3,
                         Title = "True or False: No-Face is a spirit who tries to eat Chihiro.",
                         QuizType = QuizType.TrueFalse,
                         Answer = "False",
@@ -383,6 +387,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = silentVoiceQuestion1,
+                        Index = 0,
                         Title = "What is the name of the main protagonist in A Silent Voice?",
                         Answer = "Shoya Ishida",
                         QuizType = QuizType.MultipleChoice,
@@ -391,6 +396,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = silentVoiceQuestion2,
+                        Index = 1,
                         Title = "True or False: Shoya Ishida is a former bully in A Silent Voice.",
                         QuizType = QuizType.TrueFalse,
                         Answer = "True",
@@ -399,6 +405,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = silentVoiceQuestion3,
+                        Index = 2,
                         Title = "Who does Shoya Ishida try to make amends with?",
                         QuizType = QuizType.WriteAnswer,
                         Answer = "Shoko Nishimiya",
@@ -409,6 +416,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = yourNameQuestion1,
+                        Index = 0,
                         Title = "What is the name of the main character in Your Name?",
                         QuizType = QuizType.MultipleChoice,
                         Answer = "Mitsuha Miyamizu",
@@ -417,6 +425,7 @@ namespace AnimeQSystem.Data
                     new QuizQuestion
                     {
                         Id = yourNameQuestion2,
+                        Index = 1,
                         Title = "True or False: Taki and Mitsuha swap bodies in Your Name.",
                         QuizType = QuizType.TrueFalse,
                         Answer = "True",

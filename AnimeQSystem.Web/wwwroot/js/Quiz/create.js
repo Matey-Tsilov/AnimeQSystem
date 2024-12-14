@@ -37,6 +37,10 @@ function addQuestion() {
 
     // Update name attributes of the input and others
     newQuestion.id = `question_${questionCount}`;
+    newQuestion.querySelector(`#QuizQuestions_0_Index`).value = questionCount
+    newQuestion.querySelector(`#QuizQuestions_0_Index`).setAttribute('name', `QuizQuestions[${questionCount}].Index`);
+    newQuestion.querySelector(`#QuizQuestions_0_Index`).id = `QuizQuestions_${questionCount}_Index`;
+    // Update the rest of the inputs including the Title and its corresponding inputs
     newQuestion.querySelector('.form-floating label').setAttribute('for', `QuizQuestions[${questionCount}].Title`);
     newQuestion.querySelector('.form-floating input').setAttribute('name', `QuizQuestions[${questionCount}].Title`);
     newQuestion.querySelector('.form-floating span').setAttribute('data-valmsg-for', `QuizQuestions[${questionCount}].Title`);
@@ -187,7 +191,7 @@ function toggleQuestionOptionsHelper(e) {
     switch (questionTypeSelectValue) {
         case "0":
             questionOptionHelper.classList.add("d-none");
-            questionOptionHelper.innerHTML = "";
+            questionOptionHelper.innerHTML = `<input name='QuizQuestions[${questionNumber}].Answer' class='d-none' required value=''>`;
             break;
         case "1":
             questionOptionHelper.classList.remove("d-none");

@@ -43,6 +43,7 @@
                             for(int i = 0; i < Model.QuizQuestions.Count(); i++)
                             {
                                 <div id="question_@i" class="question-container position-relative">
+                                    <input id="QuizQuestions_@(i)_Index" asp-for="QuizQuestions[@i].Index" class="d-none" />
 
                                     <div class="form-floating mb-3">
                                         <input asp-for="QuizQuestions[@i].Title" class="form-control" placeholder="Why did Ellen start..." required/>
@@ -128,6 +129,7 @@
                         else
                         {
                             <div id="question_0" class="question-container position-relative">
+                                <input id="QuizQuestions_0_Index" asp-for="QuizQuestions[0].Index" class="d-none" value="0" />
 
                                 <div class="form-floating mb-3">
                                     <input asp-for="QuizQuestions[0].Title" class="form-control" placeholder="Why did Ellen start..." />

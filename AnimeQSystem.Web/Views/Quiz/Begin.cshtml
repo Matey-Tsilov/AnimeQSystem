@@ -21,8 +21,6 @@
                         for(int i = 0; i < Model.QuizQuestions.Count(); i++)
                         {
                             // To avoid single View for all partials, we pass needed params
-                            Model.QuizQuestions[i].Index = i;
-
                             <div class="question bg-white p-3 border-bottom @(i == 0 ? "" : "d-none")">
                                 <partial name="_QuizQuestion" model="Model.QuizQuestions[i]"/>
                             </div>
