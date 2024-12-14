@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AnimeQSystem.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> _logger) : Controller
     {
         [HttpGet]
         public IActionResult Index()
@@ -23,6 +23,8 @@ namespace AnimeQSystem.Web.Controllers
             // Get the exception details (if available)
             var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
             string exceptionMessage = exceptionDetails?.Error?.Message ?? "An unknown error occurred.";
+
+            _logger.LogError($"Unexpected error with code {status} occured: " + exceptionMessage);
 
             if (status == 400)
             {

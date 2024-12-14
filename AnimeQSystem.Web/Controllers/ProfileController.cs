@@ -8,7 +8,7 @@ using Microsoft.Security.Application;
 namespace AnimeQSystem.Web.Controllers
 {
     [Authorize]
-    public class ProfileController(IUserService _userService) : Controller
+    public class ProfileController(IUserService _userService, ILogger<ProfileController> _logger) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Details(string userId)
@@ -31,6 +31,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("Can't open the user details view: " + ex.Message);
                 return View("~/Views/Errors/404.cshtml", ex.Message);
             }
         }
@@ -70,6 +71,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("Can't save user made changes to profile: " + ex.Message);
                 return View("~/Views/Errors/404.cshtml", ex.Message);
             }
         }

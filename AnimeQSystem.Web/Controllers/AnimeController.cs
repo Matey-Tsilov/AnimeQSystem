@@ -4,7 +4,7 @@ using Microsoft.Security.Application;
 
 namespace AnimeQSystem.Web.Controllers
 {
-    public class AnimeController(IAnimeService _animeService) : Controller
+    public class AnimeController(IAnimeService _animeService, ILogger<AnimeController> _logger) : Controller
     {
         [HttpGet]
         public IActionResult Index()
@@ -23,6 +23,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("Can't open all animes dashboard" + ex.Message);
                 return View("~/Views/Errors/404.cshtml", ex.Message);
             }
         }
@@ -39,6 +40,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("Can't check the details of a specific anime" + ex.Message);
                 return View("~/Views/Errors/404.cshtml", ex.Message);
             }
         }

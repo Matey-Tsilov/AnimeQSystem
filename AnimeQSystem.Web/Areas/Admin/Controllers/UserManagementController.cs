@@ -6,7 +6,7 @@ namespace AnimeQSystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class UserManagementController(IUserService _userService) : Controller
+    public class UserManagementController(IUserService _userService, ILogger<UserManagementController> _logger) : Controller
     {
         [HttpGet]
         public IActionResult Index()
@@ -33,6 +33,7 @@ namespace AnimeQSystem.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Can't recover user with Id = {userId}, because: " + ex.Message);
                 return View("~/Views/Errors/400.cshtml", ex.Message);
             }
         }
@@ -48,6 +49,7 @@ namespace AnimeQSystem.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Can't soft delete user with Id = {userId}, because: " + ex.Message);
                 return View("~/Views/Errors/400.cshtml", ex.Message);
             }
         }

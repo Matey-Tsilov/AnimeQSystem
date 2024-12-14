@@ -12,7 +12,8 @@ namespace AnimeQSystem.Web.Controllers
     public class QuizController(
         IQuizService _quizService,
         IUserService _userService,
-        IQuizzesUsersService _quizzesUsersService) : Controller
+        IQuizzesUsersService _quizzesUsersService,
+        ILogger<QuizController> _logger) : Controller
     {
         [AllowAnonymous]
         public IActionResult Index()
@@ -38,6 +39,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("Can't see all quizzes dashboard: " + ex.Message);
                 return View("~/Views/Errors/404.cshtml", ex.Message);
             }
         }
@@ -53,7 +55,6 @@ namespace AnimeQSystem.Web.Controllers
         {
             try
             {
-
                 if (!ModelState.IsValid)
                 {
                     return View(formModel);
@@ -68,6 +69,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("Can't create a quiz because: " + ex.Message);
                 return View("~/Views/Errors/400.cshtml", ex.Message);
             }
         }
@@ -89,6 +91,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Can't begin a quiz with id: {quizId}, because: " + ex.Message);
                 return View("~/Views/Errors/400.cshtml", ex.Message);
             }
         }
@@ -110,6 +113,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Can't finish a quiz with id: {viewModel.QuizId}, because: " + ex.Message);
                 return View("~/Views/Errors/400.cshtml", ex.Message);
             }
         }
@@ -125,6 +129,7 @@ namespace AnimeQSystem.Web.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Didn't recieve feedback for quiz with id: {quizId}, because: " + ex.Message);
                 return View("~/Views/Errors/400.cshtml", ex.Message);
             }
         }

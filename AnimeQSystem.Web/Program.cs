@@ -10,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Logging to the application
+builder.Logging.AddAzureWebAppDiagnostics();
+
 // First tr to get it from the Azure environmental variables
 var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION_STRING_AZURE");
 
