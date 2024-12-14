@@ -1,6 +1,7 @@
 ﻿using AnimeQSystem.Data.Models;
 using AnimeQSystem.Web.Models.Mix;
 using AnimeQSystem.Web.Models.ViewModels.User;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace AnimeQSystem.Services.Interfaces
@@ -18,5 +19,7 @@ namespace AnimeQSystem.Services.Interfaces
         public Task<List<LeaderboardUserViewModel>> GetAllRanked();
         public Task GetByIdAndSoftDelete(Guid userId);
         public Task GetByIdAndRecover(Guid userId);
+        public Task<byte[]?> CheckAndConvertImageFormData(IFormFile? profilePicForm, Guid userId);
+        public Task<bool> CheckIfUserChangedEmail(UserDetailsVFModel formModel);
     }
 }

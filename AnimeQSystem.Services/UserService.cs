@@ -5,6 +5,7 @@ using AnimeQSystem.Services.Interfaces;
 using AnimeQSystem.Services.Mapping;
 using AnimeQSystem.Web.Models.Mix;
 using AnimeQSystem.Web.Models.ViewModels.User;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace AnimeQSystem.Services
@@ -115,6 +116,31 @@ namespace AnimeQSystem.Services
 
             user.IsDeleted = false;
             await _userRepo.SaveChangesAsync();
+        }
+
+        public async Task<byte[]?> CheckAndConvertImageFormData(IFormFile? profilePicForm, Guid userId)
+        {
+            var realUser = await _userRepo.GetByIdAsync(userId);
+
+            if (profilePicForm is not null)
+            {
+                return await MiscHelper.ConvertOrGetDefaultImage(profilePicForm, "user");
+            }
+            else
+            {
+                return realUser!.ProfilePic;
+            }
+        }
+
+        public async Task<bool> CheckIfUserChangedEmail(UserDetailsVFModel formModel)
+        {
+            var realUser = await _userRepo.GetByIdAsync(formModel.Id);
+            if (realUser!.IdentityUser.Email != formModel.Email)
+            {
+                throw new InvalidOperationException("Don't try to change user's email. It should remain the same");
+            }
+
+            return true;
         }
     }
 }

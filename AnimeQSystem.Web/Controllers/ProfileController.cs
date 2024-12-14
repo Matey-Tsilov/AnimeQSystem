@@ -1,5 +1,4 @@
-﻿using AnimeQSystem.Common;
-using AnimeQSystem.Services.Interfaces;
+﻿using AnimeQSystem.Services.Interfaces;
 using AnimeQSystem.Web.Models.Mix;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -47,21 +46,10 @@ namespace AnimeQSystem.Web.Controllers
                 }
 
                 // The email should remain unchanged
-                var realUser = await _userService.GetById(formModel.Id);
-                if (realUser!.IdentityUser.Email != formModel.Email)
-                {
-                    throw new InvalidOperationException("Don't try to change user's email. It should remain the same");
-                }
+                await _userService.CheckIfUserChangedEmail(formModel);
 
                 // If the image has changed modify it in the DB as well
-                if (formModel.ProfilePicForm is not null)
-                {
-                    formModel.ProfilePicData = await MiscHelper.ConvertOrGetDefaultImage(formModel.ProfilePicForm, "user");
-                }
-                else
-                {
-                    formModel.ProfilePicData = realUser.ProfilePic;
-                }
+                formModel.ProfilePicData = await _userService.CheckAndConvertImageFormData(formModel.ProfilePicForm, formModel.Id);
 
                 // Update the new details for the user
                 await _userService.UpdateUserDetails(formModel);
