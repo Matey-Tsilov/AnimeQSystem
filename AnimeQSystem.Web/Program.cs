@@ -14,14 +14,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddAzureWebAppDiagnostics();
 
 // First tr to get it from the Azure environmental variables
-var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION_STRING_AZURE");
+//var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION_STRING_AZURE");
 
 // Get connection string from local appsettings
-if (string.IsNullOrEmpty(connectionString))
-{
-    // Fallback to a default value from appsettings.json
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-}
+//if (string.IsNullOrEmpty(connectionString))
+//{
+// Fallback to a default value from appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+//}
 
 // This configures the application's DbContext (ApplicationDbContext) to use SQL Server and the connection string retrieved above.
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
@@ -48,6 +48,13 @@ builder.Services.RegisterServices(typeof(QuizService).Assembly);
 
 // Build the whole application
 var app = builder.Build();
+
+// Create a logger instance
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+// Log a message to indicate application startup
+logger.LogInformation("The application has started successfully!");
+logger.LogInformation("Connection string: " + connectionString);
 
 // Use a custom error handler for unhandled exceptions
 app.UseExceptionHandler("/Home/Error");
